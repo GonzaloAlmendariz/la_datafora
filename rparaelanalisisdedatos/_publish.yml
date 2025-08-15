@@ -1,0 +1,4 @@
+- source: project
+  quarto-pub:
+    - id: 14649304-67e0-4919-a6e1-112fb8505fd9
+      url: 'https://gonzaloalmendariz.quarto.pub/r-para-el-analisis-de-datos'

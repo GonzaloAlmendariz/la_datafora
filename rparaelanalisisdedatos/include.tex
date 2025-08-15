@@ -1,0 +1,65 @@
+\usepackage{pdfpages}  
+% --- Encabezado profesional para Quarto libro PDF ---
+
+% Tipografía profesional
+\usepackage{libertinus}     % Fuente principal: Libertinus Serif + Libertinus Math
+\usepackage{microtype}      % Mejora justificación y espaciado fino
+
+% Encabezados y pies de página
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{} % Limpia encabezado y pie
+
+% Encabezados
+\fancyhead[LE]{\textit{R PARA EL ANÁLISIS DE DATOS}} % Página par (izquierda): nombre del libro
+\fancyhead[RO]{\leftmark}                            % Página impar (derecha): capítulo
+
+% Pies de página: número alineado al margen
+\fancyfoot[LE]{\thepage} % Página par: número a la izquierda
+\fancyfoot[RO]{\thepage} % Página impar: número a la derecha
+
+% --- Tipografía y espaciado general ---
+
+% Interlineado ligeramente ampliado para lectura cómoda
+\usepackage{setspace}
+\setstretch{1.1}
+
+% Prevención de viudas y huérfanas
+\clubpenalty=10000
+\widowpenalty=10000
+\displaywidowpenalty=10000
+
+% Títulos de capítulos con estilo claro
+\usepackage{titlesec}
+\titleformat{\chapter}[display]
+  {\normalfont\Huge\bfseries}
+  {\chaptertitlename\ \thechapter}{20pt}{\Huge}
+
+% Espaciado de secciones
+\titleformat{\section}
+  {\normalfont\Large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}
+  {\normalfont\large\bfseries}{\thesubsection}{1em}{}
+
+% Notas al pie más limpias
+\usepackage[hang,flushmargin]{footmisc}
+\renewcommand{\footnotelayout}{\normalsize}
+
+% --- Ajustes para listas ---
+\usepackage{enumitem}
+\setlist[itemize]{topsep=3pt, partopsep=0pt, itemsep=3pt, parsep=0pt}
+\setlist[enumerate]{topsep=3pt, partopsep=0pt, itemsep=3pt, parsep=0pt}
+
+
+
+
+% Soporte manual para caracteres Unicode tipo bloque (sparklines)
+\DeclareUnicodeCharacter{2581}{\rule{1ex}{0.2ex}} % ▁
+\DeclareUnicodeCharacter{2582}{\rule{1ex}{0.4ex}} % ▂
+\DeclareUnicodeCharacter{2583}{\rule{1ex}{0.6ex}} % ▃
+\DeclareUnicodeCharacter{2584}{\rule{1ex}{0.8ex}} % ▄
+\DeclareUnicodeCharacter{2585}{\rule{1ex}{1.0ex}} % ▅
+\DeclareUnicodeCharacter{2586}{\rule{1ex}{1.2ex}} % ▆
+\DeclareUnicodeCharacter{2587}{\rule{1ex}{1.4ex}} % ▇
+\DeclareUnicodeCharacter{2588}{\rule{1ex}{1.6ex}} % █
+

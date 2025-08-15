@@ -1,0 +1,50 @@
+{
+  "fundamentos.qmd": {
+    "fundamentos.html": "caccfcac"
+  },
+  "index.qmd": {
+    "index.html": "69bf77b2"
+  },
+  "intro.qmd": {
+    "intro.html": "94351519"
+  },
+  "summary.qmd": {
+    "summary.html": "1980b05b"
+  },
+  "introducción.qmd": {
+    "introducción.html": "a0432b6a"
+  },
+  "references.qmd": {
+    "references.html": "c55365fc"
+  },
+  "fundamentosR.qmd": {
+    "fundamentosR.html": "d600faef"
+  },
+  "integración.qmd": {
+    "integración.html": "5552118d"
+  },
+  "statdesc.qmd": {
+    "statdesc.html": "5fe26207"
+  },
+  "prob.qmd": {
+    "prob.html": "6e7884ef"
+  },
+  "inf.qmd": {
+    "inf.html": "17590049"
+  },
+  "comp.qmd": {
+    "comp.html": "65114cc8"
+  },
+  "regr.qmd": {
+    "regr.html": "6f0a867b"
+  },
+  "glosariofunciones.qmd": {
+    "glosariofunciones.html": "4cc852df"
+  },
+  "solucionario.qmd": {
+    "solucionario.html": "9baf6c62"
+  },
+  "creditos.qmd": {
+    "creditos.html": "f9d29cef"
+  }
+}

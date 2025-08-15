@@ -1,0 +1,111 @@
+Nombre completo,Edad,sexo,ingreso_mensual,region,encuesta_fecha,puntaje_1,puntaje_2,puntaje_3
+Ana Perez ,29.0,femenino,1500,lima,2025-04-11,5.0,,2.0
+Sofia_Ramos,31.0,F,2.000,Lima,2025-04-11,3.0,3.0,3.0
+mario vargas,23.0,masculino,1500,Arequipa,2025/04/12,,2.0,5.0
+CARLOS DIAZ,,F,3000,Cusco,2025/04/10,,,
+M@rio V@rg@s,,masculino,3000,LIMA,10-04-2025,1.0,4.0,4.0
+ana perez,31.0,masculino,1.500,Cusco,2025/04/10,3.0,5.0,5.0
+Sofi@ R@mos,23.0,nan,2.000,LIMA,10-04-2025,,2.0,1.0
+ANA PEREZ,23.0,F,1.500,AREQUIPA,,,1.0,3.0
+LUIS GÓMEZ,40.0,F,,lima,2025-04-11,1.0,3.0,
+An@ Perez,29.0,nan,3000,Arequipa,2025/04/10,5.0,5.0,1.0
+An@ Perez,35.0,masculino,,LIMA,2025-04-11,3.0,,
+Ana Perez ,23.0,F,2.000,Lima,2025-04-11,4.0,5.0,3.0
+Mario Vargas ,40.0,nan,2.000,Lima,2025/04/10,4.0,2.0,4.0
+LUIS GÓMEZ,40.0,nan,,Lima,2025-04-11,3.0,3.0,3.0
+Luis Gómez,31.0,F,2.000,Cuzco,10-04-2025,1.0,5.0,1.0
+LUCÍA HUERTA,23.0,nan,,Cusco,2025/04/12,5.0,5.0,4.0
+lucía huerta,23.0,F,,Cusco,,4.0,2.0,2.0
+Sofi@ R@mos,40.0,masculino,2.000,AREQUIPA,,2.0,2.0,4.0
+Mario vargas,,M,,Lima,2025/04/12,,4.0,3.0
+MARIO VARGAS,31.0,masculino,,Lima,10-04-2025,4.0,2.0,2.0
+MARIO VARGAS,35.0,masculino,1.500,lima,,2.0,2.0,3.0
+luis gómez,35.0,FEMENINO,1.500,Cuzco,10-04-2025,3.0,4.0,2.0
+LUIS GÓMEZ,23.0,nan,1500,AREQUIPA,2025/04/10,5.0,,5.0
+Ana Perez ,,M,3000,AREQUIPA,2025/04/12,5.0,3.0,1.0
+LUIS GÓMEZ,40.0,femenino,1500,AREQUIPA,,2.0,,5.0
+Carlos Diaz ,23.0,nan,1500,Cusco,2025-04-11,2.0,,1.0
+MARIO VARGAS,31.0,masculino,1.500,lima,,2.0,3.0,5.0
+C@rlos Di@z,35.0,M,,AREQUIPA,2025/04/12,,2.0,2.0
+M@rio V@rg@s,35.0,M,,Lima,2025/04/12,4.0,4.0,
+lucía huerta,,masculino,3000,Cuzco,2025-04-11,,,
+Mario vargas,40.0,masculino,,AREQUIPA,10-04-2025,3.0,4.0,5.0
+M@rio V@rg@s,,FEMENINO,1500,lima,2025/04/12,2.0,4.0,3.0
+Sofia Ramos,29.0,F,,Lima,2025/04/10,3.0,3.0,4.0
+Lucí@ Huert@,35.0,masculino,1.500,Cusco,2025/04/10,1.0,5.0,4.0
+LUCÍA HUERTA,29.0,F,1500,AREQUIPA,10-04-2025,4.0,1.0,1.0
+Sofia Ramos ,31.0,nan,1500,Cusco,2025/04/12,1.0,,5.0
+Mario_Vargas,31.0,nan,3000,AREQUIPA,,2.0,1.0,3.0
+CARLOS DIAZ,29.0,femenino,,LIMA,10-04-2025,5.0,1.0,2.0
+Mario Vargas,29.0,masculino,1.500,Lima,,2.0,1.0,1.0
+Luis Gómez,40.0,masculino,2.000,Cusco,2025/04/12,1.0,1.0,3.0
+Luis gómez,40.0,femenino,1500,LIMA,10-04-2025,2.0,1.0,5.0
+Mario Vargas ,29.0,masculino,1.500,Lima,10-04-2025,1.0,3.0,2.0
+Carlos Diaz ,31.0,M,1.500,Arequipa,,5.0,5.0,5.0
+carlos diaz,31.0,nan,3000,Cusco,2025-04-11,2.0,,1.0
+Carlos diaz,35.0,nan,2.000,Cuzco,2025/04/12,3.0,1.0,
+Ana perez,40.0,FEMENINO,1.500,Arequipa,2025-04-11,3.0,1.0,3.0
+Luis Gómez ,40.0,nan,,Cuzco,2025-04-11,3.0,1.0,5.0
+Carlos_Diaz,31.0,F,3000,AREQUIPA,2025/04/12,5.0,3.0,5.0
+Carlos Diaz ,31.0,masculino,3000,lima,,4.0,3.0,3.0
+Lucía Huerta ,35.0,nan,,Arequipa,2025/04/12,2.0,5.0,5.0
+ana perez,40.0,FEMENINO,1500,Lima,,1.0,2.0,1.0
+Lucía huerta,31.0,F,,Cusco,10-04-2025,1.0,5.0,
+Mario Vargas ,23.0,nan,1.500,Lima,2025/04/12,3.0,5.0,
+Mario Vargas,23.0,femenino,1500,LIMA,2025-04-11,2.0,5.0,4.0
+Mario Vargas ,40.0,M,1500,lima,2025-04-11,5.0,1.0,5.0
+Luis Gómez ,23.0,FEMENINO,,Cusco,2025/04/10,,3.0,1.0
+Sofia Ramos ,29.0,nan,1.500,Cuzco,2025-04-11,1.0,5.0,4.0
+Carlos Diaz,23.0,masculino,1.500,lima,2025/04/12,2.0,5.0,4.0
+Luis Gómez ,35.0,masculino,3000,Arequipa,10-04-2025,1.0,5.0,5.0
+Mario vargas,40.0,FEMENINO,2.000,AREQUIPA,,,3.0,5.0
+MARIO VARGAS,40.0,masculino,2.000,LIMA,2025/04/10,4.0,1.0,3.0
+Sofia Ramos ,29.0,F,3000,LIMA,2025/04/10,5.0,2.0,1.0
+Ana_Perez,35.0,nan,1.500,Cusco,2025/04/12,3.0,3.0,2.0
+luis gómez,23.0,FEMENINO,1500,Cusco,,5.0,4.0,3.0
+luis gómez,29.0,nan,,Cusco,,4.0,1.0,3.0
+lucía huerta,40.0,FEMENINO,1.500,Cuzco,2025/04/12,2.0,1.0,
+M@rio V@rg@s,31.0,FEMENINO,1500,Cusco,2025/04/12,,3.0,4.0
+Luis Gómez,23.0,FEMENINO,,Lima,2025/04/12,2.0,4.0,4.0
+Mario vargas,,M,1.500,Lima,2025/04/10,,5.0,5.0
+ANA PEREZ,29.0,FEMENINO,,lima,2025/04/12,4.0,,4.0
+Sofia Ramos ,23.0,masculino,1.500,Arequipa,10-04-2025,5.0,3.0,5.0
+luis gómez,35.0,nan,,Cusco,10-04-2025,,2.0,3.0
+lucía huerta,31.0,femenino,1.500,Arequipa,,1.0,1.0,2.0
+lucía huerta,31.0,M,1500,LIMA,2025/04/12,4.0,5.0,1.0
+Carlos diaz,31.0,F,3000,Lima,2025-04-11,3.0,2.0,2.0
+Luis_Gómez,,F,2.000,LIMA,2025-04-11,2.0,1.0,4.0
+Lucía_Huerta,,FEMENINO,,Lima,2025-04-11,4.0,5.0,5.0
+Lucía huerta,,nan,1.500,AREQUIPA,10-04-2025,2.0,1.0,2.0
+Luis gómez,,M,,Cusco,2025/04/10,4.0,5.0,4.0
+Luis Gómez,31.0,nan,,LIMA,,4.0,,4.0
+Sofia Ramos ,,masculino,,lima,2025/04/12,,2.0,3.0
+Luis Gómez,23.0,nan,3000,LIMA,,2.0,5.0,
+MARIO VARGAS,31.0,nan,1.500,Cusco,,3.0,1.0,5.0
+luis gómez,31.0,masculino,1.500,Arequipa,10-04-2025,1.0,1.0,3.0
+Sofia_Ramos,35.0,M,1.500,lima,,1.0,,4.0
+Lucía huerta,31.0,femenino,1.500,Arequipa,2025/04/12,,,5.0
+Lucía Huerta,40.0,masculino,3000,AREQUIPA,2025/04/12,1.0,,3.0
+Mario_Vargas,35.0,masculino,2.000,Arequipa,2025-04-11,3.0,4.0,1.0
+Luis Gómez ,29.0,nan,1.500,AREQUIPA,2025/04/10,4.0,1.0,4.0
+CARLOS DIAZ,23.0,FEMENINO,3000,lima,2025-04-11,1.0,4.0,4.0
+Lucía_Huerta,23.0,nan,1500,LIMA,2025/04/12,3.0,4.0,4.0
+Carlos Diaz ,40.0,femenino,2.000,Lima,2025-04-11,5.0,3.0,5.0
+Mario vargas,35.0,F,3000,Cuzco,2025-04-11,2.0,4.0,2.0
+C@rlos Di@z,35.0,F,3000,AREQUIPA,10-04-2025,5.0,1.0,5.0
+Ana perez,31.0,nan,,Cuzco,2025-04-11,1.0,4.0,3.0
+carlos diaz,29.0,F,1500,Cuzco,10-04-2025,5.0,1.0,1.0
+Mario_Vargas,31.0,femenino,2.000,Cusco,,2.0,5.0,5.0
+M@rio V@rg@s,31.0,femenino,1500,LIMA,2025-04-11,5.0,5.0,1.0
+M@rio V@rg@s,,FEMENINO,2.000,AREQUIPA,10-04-2025,4.0,1.0,3.0
+Sofia Ramos ,40.0,femenino,,AREQUIPA,2025/04/12,2.0,1.0,4.0
+Lucía Huerta ,35.0,nan,,Arequipa,2025/04/12,2.0,5.0,5.0
+Lucía huerta,,nan,1.500,AREQUIPA,10-04-2025,2.0,1.0,2.0
+Sofia Ramos ,29.0,F,3000,LIMA,2025/04/10,5.0,2.0,1.0
+ANA PEREZ,29.0,FEMENINO,,lima,2025/04/12,4.0,,4.0
+Sofi@ R@mos,23.0,nan,2.000,LIMA,10-04-2025,,2.0,1.0
+carlos diaz,29.0,F,1500,Cuzco,10-04-2025,5.0,1.0,1.0
+Mario vargas,,M,1.500,Lima,2025/04/10,,5.0,5.0
+MARIO VARGAS,31.0,masculino,,Lima,10-04-2025,4.0,2.0,2.0
+mario vargas,23.0,masculino,1500,Arequipa,2025/04/12,,2.0,5.0
+ana perez,31.0,masculino,1.500,Cusco,2025/04/10,3.0,5.0,5.0

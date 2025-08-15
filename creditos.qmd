@@ -1,0 +1,24 @@
+---
+title: ""
+numbered: false
+toc: false
+page-break-before: true
+---
+
+# \vphantom{X} {.unnumbered}
+
+\thispagestyle{empty}
+\vspace*{\fill}
+\begin{flushleft}
+\scriptsize
+\textbf{R para el Análisis de Datos} \\[0.5em]
+Autor-Editor: © Gonzalo Almendariz Villanueva \\[0.5em]
+Calle Madrigales – La Molina \\[0.5em]
+gonzaloalmendariz@gmail.com \\[0.5em]
+Lima – Perú \\[0.5em]
+Primera edición, mayo 2025 \\[0.5em]
+Depósito Legal Nº 2024-XXXXX \\[0.5em]
+ISBN: 978-612-XXX-XXX-X
+\end{flushleft}
+\vspace*{1cm}
+\newpage

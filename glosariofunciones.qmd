@@ -1,0 +1,1412 @@
+---
+execute:
+  warning: false
+  message: false
+---
+
+# Glosario de funciones y operaciones útiles en R
+
+## Vectores
+
+Los vectores son estructuras básicas en R que almacenan datos del mismo tipo.
+
+**Funciones comunes**
+
+1.  **`append`**: Agrega elementos al final de un vector. Utiliza esta función para añadir uno o más elementos a un vector existente.
+
+```{r}
+mi_vector = c(1, 2, 3) # Vector inicial
+mi_vector = append(mi_vector, c(4, 5)) # Agrega los números 4 y 5 al final
+mi_vector
+```
+
+2.  **`c`**: Combina valores para crear un vector. Es la forma más sencilla de crear un vector.
+
+```{r}
+mi_vector = c(1, 2, 3, 4, 5) # Combina los valores 1, 2, 3, 4 y 5 en un vector
+mi_vector
+```
+
+3.  **`diff`**: Calcula las diferencias entre elementos consecutivos. Devuelve un nuevo vector con la diferencia entre cada par de elementos consecutivos.
+
+```{r}
+mi_vector = c(1, 2, 4, 8, 16, 32)
+diff(mi_vector)
+```
+
+4.  **`length`**: Obtiene la longitud de un vector. Te permite conocer cuántos elementos contiene el vector.
+
+```{r}
+mi_vector = c(1, 2, 3, 4, 5, 6)
+length(mi_vector)
+```
+
+5.  **`rev`**: Invierte el orden de los elementos de un vector. Útil si necesitas trabajar con los elementos en orden inverso.
+
+```{r}
+mi_vector = c(1, 2, 3, 4, 5)
+rev(mi_vector)
+```
+
+6.  **`seq`**: Genera una secuencia de números. Permite definir el número inicial (`from`), el número final (`to`) y el tamaño del paso (`by`).
+
+```{r}
+seq(from = 0, to = 50, by = 5)
+```
+
+7.  **`sort`**: Ordena un vector. Puedes ordenar un vector en orden ascendente (por defecto) o descendente utilizando el argumento `decreasing`.
+
+```{r}
+mi_vector = c(3, 1, 4, 2, 5)
+sort(mi_vector) # Orden ascendente
+sort(mi_vector, decreasing = TRUE) # Orden descendente
+```
+
+8.  **`unique`**: Devuelve los valores únicos de un vector. Elimina duplicados y muestra solo los valores distintos.
+
+```{r}
+mi_vector = c(1, 1, 2, 3, 3, 4)
+unique(mi_vector)
+```
+
+**Operaciones útiles**
+
+1.  **Concatenación de vectores**\
+    Se pueden combinar múltiples vectores utilizando `c`.
+
+```{r}
+vector1 = c(1, 2, 3)
+vector2 = c(4, 5)
+c(vector1, vector2)
+```
+
+2.  **Repetición de valores**\
+    Usa `rep` para repetir elementos de un vector. Hay dos opciones principales:
+
+-   `times`: Repite toda la secuencia el número de veces indicado.
+-   `each`: Repite cada elemento de la secuencia el número de veces indicado.
+
+```{r}
+rep(1:3, times = 2)  # Repite la secuencia completa 1, 2, 3 dos veces
+rep(1:3, each = 2)   # Repite cada elemento (1, 2, 3) dos veces
+```
+
+3.  **Generación de números aleatorios**\
+    Usa `sample` para obtener valores aleatorios de un vector.
+
+-   `size`: Especifica cuántos valores quieres seleccionar.
+-   `replace`: Indica si los valores pueden repetirse (`TRUE`) o no (`FALSE`).
+
+```{r}
+sample(1:10, size = 5)  # Selecciona 5 números aleatorios del 1 al 10
+sample(1:10, size = 5, replace = TRUE)  # Permite que los valores se repitan
+```
+
+4.  **Suma de vectores elemento a elemento**\
+    Si los vectores tienen la misma longitud, los elementos correspondientes se suman automáticamente.
+
+```{r}
+vector1 = c(1, 2, 3)
+vector2 = c(4, 5, 6)
+vector1 + vector2  
+```
+
+5.  **Multiplicación elemento a elemento**\
+    Similar a la suma, pero multiplica los elementos correspondientes.
+
+```{r}
+vector1 = c(2, 4, 6)
+vector2 = c(1, 3, 5)
+vector1 * vector2  
+```
+
+6.  **Operaciones lógicas**\
+    Se aplican condiciones a los elementos del vector, devolviendo un vector lógico (`TRUE` o `FALSE`) para cada elemento. Además, puedes:
+
+-   Contar cuántos elementos cumplen la condición usando `sum()`.
+-   Seleccionar elementos que cumplen la condición usando `[]`.
+
+```{r}
+mi_vector = c(10, 20, 30, 40, 50)
+
+# ¿Cuáles elementos son mayores a 25?
+mi_vector > 25  
+
+# ¿Cuántos elementos son mayores a 25?
+sum(mi_vector > 25) 
+
+# Seleccionar elementos mayores a 25
+mi_vector[mi_vector > 25]  
+```
+
+## Data.frames
+
+Los **data frames** son estructuras de datos bidimensionales en R, similares a tablas, donde cada columna puede contener un tipo diferente de datos (numéricos, caracteres, etc.).
+
+**Creación y visualización**
+
+1.  **Crear un data frame**\
+    Usa la función `data.frame()` para crear un data frame combinando vectores como columnas.
+
+```{r}
+mi_dataframe = data.frame(
+  Nombre = c("Ana", "Luis", "Pedro", "Marco", "Fernanda", "Felix", "Diego"),
+  Edad = c(23, 36, 35, 27, 34, 24, 41),
+  Ciudad = c("Ica", "Huaraz", "Cusco", "Cusco", "Lima", "Iquitos", "Huaraz")
+)
+mi_dataframe
+```
+
+2.  **Visualizar las primeras y últimas filas**
+
+-   `head()`: Muestra las primeras filas (por defecto 6).
+-   `tail()`: Muestra las últimas filas (por defecto 6).
+
+```{r}
+head(mi_dataframe)
+tail(mi_dataframe, 2)
+```
+
+3.  **Obtener la estructura del data frame**
+
+-   `str()`: Muestra la estructura del data frame.
+-   `summary()`: Proporciona estadísticas descriptivas básicas para cada columna.
+
+```{r}
+str(mi_dataframe)
+summary(mi_dataframe)
+```
+
+**Acceso y selección de datos**
+
+4.  **Acceder a una columna** Puedes acceder a una columna específica usando `$` o corchetes (`[ ]`).
+
+```{r}
+mi_dataframe$Nombre  # Accede a la columna "Nombre"
+mi_dataframe[["Edad"]]  # Otra forma de acceder a la columna "Edad"
+```
+
+5.  **Acceder a filas específicas** Usa índices de filas con corchetes (`[fila, ]`).
+
+```{r}
+# Devuelve la segunda fila
+mi_dataframe[2, ]  
+```
+
+6.  **Acceder a celdas específicas** Usa índices de filas y columnas con corchetes (`[fila, columna]`).
+
+```{r}
+# Devuelve el valor en la fila 2 y columna 3
+mi_dataframe[2, 3]  # Devuelve el valor en la fila 2 y columna 3
+```
+
+7.  **Seleccionar múltiples columnas o filas** Usa índices o nombres con corchetes.
+
+```{r}
+# Selecciona columnas por nombre
+mi_dataframe[, c("Nombre", "Ciudad")]  
+ # Selecciona las primeras dos filas
+mi_dataframe[1:2, ] 
+```
+
+**Filtrado de datos**
+
+8.  **Filtrar filas por condiciones** Puedes usar operadores lógicos para filtrar filas.
+
+```{r}
+# Filtra filas donde Edad > 25
+mi_dataframe[mi_dataframe$Edad > 25, ]  
+```
+
+9.  **Filtrar filas usando `%in%`** Filtra filas en base a si un valor pertenece a un conjunto.
+
+```{r}
+mi_dataframe[mi_dataframe$Ciudad %in% c("Cusco", "Lima"), ]
+```
+
+**Edición y manipulación**
+
+10. **Añadir una nueva columna** Crea una nueva columna asignando valores directamente.
+
+```{r}
+# Añade una columna "Salario"
+mi_dataframe$Salario = c(1200, 2340, 1300, 2250, 
+                         3000, 2600, 1850) 
+mi_dataframe
+```
+
+11. **Eliminar una columna** Usa la función `NULL` para eliminar una columna.
+
+```{r}
+# Elimina la columna "Salario"
+mi_dataframe$Salario = NULL  
+mi_dataframe
+```
+
+12. **Renombrar columnas** Modifica los nombres de las columnas utilizando `colnames()`.
+
+```{r}
+# Cambia los nombres de las columnas
+colnames(mi_dataframe) = c("Nombre", "Edad", "Vivienda")  
+mi_dataframe
+```
+
+13. **Ordenar el data frame** Usa la función `order()` para ordenar las filas según una columna.
+
+```{r}
+# Ordena por la columna "Edad"
+mi_dataframe = mi_dataframe[order(mi_dataframe$Edad), ] 
+
+mi_dataframe
+```
+
+14. **Combinar data frames**
+
+-   `rbind()`: Combina data frames por filas.
+-   `cbind()`: Combina data frames por columnas.
+
+```{r}
+# Combinar filas
+otro_dataframe = data.frame(Nombre = "Oscar", Edad = 28, Vivienda = "Lima")
+mi_dataframe = rbind(mi_dataframe, otro_dataframe)
+mi_dataframe
+
+# Combinar columnas
+nueva_columna = data.frame(Salario = c(1200, 2340, 1300, 2250, 
+                         3000, 2600, 1850, 2300))
+mi_dataframe = cbind(mi_dataframe, nueva_columna)
+mi_dataframe
+```
+
+15. **Eliminar filas** Usa índices negativos para eliminar filas.
+
+```{r}
+# Elimina la segunda fila
+mi_dataframe = mi_dataframe[-2, ] 
+
+mi_dataframe
+```
+
+**Resúmenes y cálculos**
+
+16. **Obtener valores únicos** Usa `unique()` para obtener valores únicos en una columna.
+
+```{r}
+unique(mi_dataframe$Vivienda)
+```
+
+17. **Contar filas y columnas** Usa las funciones `nrow()` y `ncol()`.
+
+```{r}
+# Número de filas
+nrow(mi_dataframe)  
+# Número de columnas
+ncol(mi_dataframe)  
+```
+
+18. **Calcular estadísticas básicas** Aplica funciones como `mean()`, `sum()`, `min()`, `max()` a columnas numéricas.
+
+```{r}
+# Edad promedio
+mean(mi_dataframe$Edad)  
+# Suma total de las edades
+sum(mi_dataframe$Edad)   
+```
+
+19. **Tablas de frecuencias** Usa `table()` para crear una tabla de frecuencias.
+
+```{r}
+table(mi_dataframe$Vivienda)  # Frecuencia de valores en la columna "Ciudad"
+```
+
+A partir de ahora trabajaremos con una encuesta ficticia diseñada para analizar la relación entre **edad, ingreso, nivel educativo y satisfacción personal**. Contiene información sobre **500 personas**.
+
+```{r}
+library(readr)
+encuesta = read_csv('glosario.csv')
+```
+
+## Limpieza y reestructuración de datos
+
+```{r, warning=FALSE}
+library(tidyverse)
+```
+
+La limpieza de datos es un paso fundamental en todo análisis cuantitativo, ya que garantiza la calidad, consistencia y fiabilidad de los resultados. Errores como nombres mal escritos, valores faltantes, codificaciones inconsistentes o estructuras duplicadas pueden distorsionar el análisis y generar conclusiones erróneas. T
+
+Tomaremos como punto de referencia un dataset con múltiples problemas intencionados, el cual servirá como ejemplo para aplicar herramientas como `janitor`, `stringr`, `naniar` y `tidyr`, de gran ayuda para transformar datos sucios en insumos analíticos ordenados y listos para modelar o visualizar.
+
+```{r}
+df = read_csv('limpieza.csv')
+```
+
+```{r}
+head(df, 12)
+```
+
+1.  Limpieza de nombre de columnas
+
+```{r}
+colnames(df)
+```
+
+```{r}
+library(janitor)
+```
+
+```{r}
+df = df %>% 
+  clean_names()
+```
+
+```{r}
+colnames(df)
+```
+
+2.  Limpieza de strings y numericos
+
+Los errores tipográficos, los formatos inconsistentes y las codificaciones irregulares son comunes en datos reales, especialmente en variables de texto como nombres o categorías como el sexo.
+
+**Limpieza de** `nombre_completo`
+
+Primero, cargamos el paquete `stringr`, un paquete dedicado a trabajar con cadenas de texto.
+
+```{r}
+library(tidyverse)
+library(stringr)
+```
+
+Luego, realizamos una transformación paso a paso de la variable `nombre_completo` para corregir errores comunes, estandarizar escritura y eliminar inconsistencias:
+
+```{r}
+df = df %>%
+  mutate(
+    # Paso 1: Pasamos todo a minúsculas para evitar duplicidades por mayúsculas
+    nombre_completo = str_to_lower(nombre_completo),
+
+    # Paso 2: Reemplazamos caracteres con tilde o especiales por sus equivalentes planos
+    nombre_completo = str_replace_all(nombre_completo, "á", "a"),
+    nombre_completo = str_replace_all(nombre_completo, "é", "e"),
+    nombre_completo = str_replace_all(nombre_completo, "í", "i"),
+    nombre_completo = str_replace_all(nombre_completo, "ó", "o"),
+    nombre_completo = str_replace_all(nombre_completo, "ú", "u"),
+    nombre_completo = str_replace_all(nombre_completo, "ñ", "n"),
+
+    # Paso 3: Eliminamos símbolos no deseados como @, guiones bajos, espacios múltiples
+    nombre_completo = str_replace_all(nombre_completo, "@", "a"),
+    nombre_completo = str_replace_all(nombre_completo, "_", " "),
+    nombre_completo = str_replace_all(nombre_completo, "[[:space:]]+", " "),
+    nombre_completo = str_trim(nombre_completo),  # elimina espacios al inicio o final
+
+    # Paso 4: Correcciones específicas a errores conocidos por observación del dataset
+    nombre_completo = case_when(
+      str_detect(nombre_completo, "sofiaramos") ~ "sofia ramos",
+      str_detect(nombre_completo, "anaperez") ~ "ana perez",
+      str_detect(nombre_completo, "luciahuerta") ~ "lucia huerta",
+      str_detect(nombre_completo, "mariovargas") ~ "mario vargas",
+      str_detect(nombre_completo, "carlosdiaz") ~ "carlos diaz",
+      str_detect(nombre_completo, "luisgomez") ~ "luis gomez",
+      TRUE ~ nombre_completo
+    ),
+
+    # Paso 5: Finalizamos capitalizando la primera letra de cada palabra 
+    nombre_completo = str_to_title(nombre_completo)
+  )
+```
+
+Con estas transformaciones, se evita que registros iguales aparezcan como diferentes por errores de digitación, acentos o diferencias en capitalización.
+
+**Homogeneización de la variable** `sexo`
+
+En variables categóricas como `sexo`, donde pueden coexistir múltiples formas de referirse a una misma categoría ("masculino", "m", "hombre", etc.), es fundamental normalizar los valores. Aplicamos una transformación similar:
+
+```{r}
+df = df %>%
+  mutate(
+    # Paso 1: Todo a minúsculas
+    sexo = tolower(sexo),
+
+    # Paso 2: Reescribimos variantes en etiquetas estándar
+    sexo = case_when(
+      sexo %in% c("masculino", "m", "hombre") ~ "masculino",
+      sexo %in% c("femenino", "f", "mujer") ~ "femenino",
+      TRUE ~ NA_character_  # valores irreconocibles se dejan como NA
+    )
+  )
+```
+
+En este punto, la base ya está considerablemente más limpia y lista para ser usada con métodos estadísticos o gráficos.
+
+```{r}
+head(df)
+```
+
+3.  Valores perdidos
+
+En el análisis de datos reales, lidiar con valores perdidos es inevitable. Ya sea por errores en la recolección, datos incompletos o fallas de ingreso, siempre es necesario diagnosticar y decidir cómo abordarlos.
+
+El paquete `naniar` facilita la visualización y exploración de patrones de `NA` en un dataset. Permite entender en qué columnas se concentran los valores faltantes y si hay patrones comunes entre ellos.
+
+```{r}
+library(naniar)
+```
+
+Una forma rápida de visualizar cuántos `NA` hay por variable es:
+
+```{r}
+gg_miss_var(df)
+```
+
+Y si deseamos identificar observaciones con múltiples valores perdidos, usamos:
+
+```{r}
+gg_miss_case(df)
+```
+
+Esto nos ayuda a decidir si queremos eliminar observaciones o columnas con muchos datos ausentes o proceder a imputarlos. A veces basta con eliminar observaciones incompletas si son pocas o si el análisis requiere datos completos. `tidyr` ofrece funciones útiles como `drop_na()`:
+
+Eliminar observaciones con `NA` **en columnas clave** (por ejemplo, nombre o sexo):
+
+```{r}
+df = df %>%
+  drop_na(nombre_completo, sexo, encuesta_fecha) 
+
+dim(df)
+```
+
+Eliminar observaciones con al menos un `NA` en **cualquier columna**:
+
+```{r}
+df %>%
+  drop_na() %>% 
+  dim()
+```
+
+Esto reduce el tamaño de la base pero garantiza integridad completa. Sin embargo, no siempre es deseable perder datos. En esos casos, se puede imputar.
+
+El paquete `mice` (*Multivariate Imputation by Chained Equations*) permite realizar una **imputación más inteligente**, modelando los valores ausentes con base en otras variables.
+
+```{r}
+library(mice)
+```
+
+Este paquete nos permite aplicar un algoritmo de imputación. Por ejemplo, para una imputación rápida:
+
+```{r, warning=FALSE}
+imputado = mice(df, m = 1, method = "pmm", seed = 123)
+```
+
+-   `m = 1`: número de datasets imputados. Se puede aumentar si se desea evaluar incertidumbre.
+-   `method = "pmm"`: *predictive mean matching*, útil para imputar variables numéricas.
+-   `seed`: asegura que los resultados sean reproducibles.
+
+Una vez realizado el proceso, se extrae el dataset completo con:
+
+```{r}
+df = complete(imputado)
+```
+
+Con esto, se preservan todas las observaciones, pero con los valores faltantes sustituidos por predicciones consistentes con la estructura de los datos. Este método es especialmente útil cuando hay varias variables correlacionadas o cuando perder datos no es una opción que podamos costear.
+
+```{r}
+gg_miss_var(df)
+```
+
+```{r}
+head(df)
+```
+
+3.  Observaciones duplicados
+
+Los duplicados pueden surgir por errores en la recolección, registros múltiples del mismo individuo o procesos de integración de bases de datos. Si no se detectan y corrigen, pueden sesgar promedios, inflar conteos y distorsionar cualquier análisis posterior.
+
+La forma más directa de detectar duplicados es verificar si existen filas exactamente iguales en todas las columnas:
+
+```{r}
+df %>% 
+  duplicated() %>% 
+  sum()
+```
+
+Si se desea ver cuáles son esos duplicados exactos:
+
+```{r}
+df %>% 
+  filter(duplicated(.))
+```
+
+Podemos eliminarlos con `distinct()`, que retiene únicamente las filas únicas:
+
+```{r}
+df = df %>% 
+  distinct()
+```
+
+Lo que nos deja con:
+
+```{r}
+df %>% 
+  duplicated() %>% 
+  sum()
+```
+
+4.  Tidyr
+
+Una vez corregidos errores en las variables categóricas y estandarizados los valores faltantes o inconsistentes, es común encontrarse con problemas estructurales. Algunas columnas pueden estar duplicando información, otras pueden combinar múltiples variables en una sola. Aquí es donde entra en juego el paquete `tidyr`.
+
+Este paquete permite reorganizar los datos sin alterar su contenido: separar, unir, pivotear, rellenar o completar estructuras incompletas. Por ejemplo:
+
+**Separar: descomponer** `nombre_completo` **en** `nombre` **y** `apellido`
+
+```{r}
+library(tidyr)
+
+# Separar nuevamente desde nombre_completo para asegurar consistencia
+df = df %>%
+  separate(nombre_completo, into = c("nombre", "apellido"), sep = " ", extra = "merge", remove = FALSE)
+```
+
+-   `sep = " "`: se separa por el primer espacio en blanco.
+-   `extra = "merge"`: en caso haya más de dos componentes (ej. "Maria del Carmen"), los combina en `apellido`.
+-   `remove = FALSE`: conservamos la columna original por trazabilidad.
+
+```{r}
+head(df)
+```
+
+**Unir: combinar** `puntaje_1`, `puntaje_2` **y** `puntaje_3` **en una sola columna**
+
+En análisis posteriores puede ser útil pivotear los puntajes para analizar cada respuesta como una fila individual. Esto facilita la creación de gráficos o modelos que trabajen sobre respuestas individuales:
+
+```{r}
+df = df %>%
+  # Sumamos todas las que empiezan con 'puntaje'
+  pivot_longer(cols = starts_with("puntaje_"),
+               names_to = "pregunta",
+               values_to = "puntaje")
+```
+
+Ahora cada persona aparece tres veces (una por pregunta), lo cual permite comparar puntuaciones medias entre preguntas o agrupar por categorías ahora que tenemos la variable categórica `pregunta`.
+
+Así quedo nuestro dataset luego de la limpieza
+
+```{r}
+head(df, 12)
+```
+
+## Dplyr para manipulacion de datos
+
+El paquete dplyr es uno de los más utilizados en R para manipulación y transformación de datos. El operador %\>% (pipe) es una herramienta central que permite encadenar funciones, pasando el resultado de una función como entrada a la siguiente.
+
+```{r, echo=FALSE, warning=FALSE, include = FALSE}
+library(dplyr)
+```
+
+1.  `filter`: Filtrar filas según una condición
+
+Esta función selecciona solo las filas que cumplen con una o más condiciones.
+
+```{r}
+# Filtrar encuestados mayores de 30 años
+encuesta %>%
+  filter(Edad > 30) %>% 
+  head(10)
+```
+
+```{r}
+# Filtrar mujeres con educación universitaria
+encuesta %>%
+  filter(Genero == "F", Educacion == "Universitaria") %>% 
+  head(10)
+```
+
+2.  `select`: Seleccionar columnas específicas
+
+Esta función te permite elegir las columnas necesarias.
+
+```{r}
+# Seleccionar columnas relevantes
+encuesta %>%
+  select(ID, Genero, Satisfaccion) %>% 
+  head(10)
+```
+
+3.  `mutate`: Crear o modificar columnas
+
+Añade nuevas columnas o modifica las existentes.
+
+```{r}
+# Crear una columna que clasifique a las personas como "Joven" o "Adulto"
+encuesta %>%
+# Personas menores o iguales a 30 como "Jovenes"
+  mutate(RangoEdad = 
+           ifelse(Edad <= 30, "Joven", "Adulto")) %>% 
+  head(10)
+```
+
+4.  `arrange`: Ordenar filas
+
+Ordena las filas del data frame según una o más columnas.
+
+```{r}
+# Ordenar por edad de menor a mayor
+encuesta %>%
+  arrange(Edad) %>% 
+  head(10)
+```
+
+```{r}
+# Ordenar por satisfacción de mayor a menor
+encuesta %>%
+  arrange(desc(Satisfaccion)) %>% 
+  head(10)
+```
+
+```{r}
+# Ordenar primero por género y luego por nivel educativo
+encuesta %>%
+  arrange(Genero, desc(Educacion)) %>% 
+  head(10)
+```
+
+5.  Resumir datos (agrupados)
+
+-   `reframe` Calcula métricas agregadas como promedios, totales o máximos en devolver cualquier número de filas por grupo.
+-   `group_by()` agrupa los datos según una o más columnas. Esto significa que las filas se organizan en grupos definidos por los valores únicos de las columnas seleccionadas sin modificar el contenido del data framepor si solo.
+
+`reframe\`: Calculamos la satisfacción promedio y el rango de edades por género, reduciendo los datos a una fila por grupo.
+
+```{r}
+# Calcular métricas resumidas por género
+encuesta %>%
+  group_by(Genero) %>% # Agrupar por género
+  reframe(
+# Promedio de satisfacción
+        SatisfaccionPromedio = mean(Satisfaccion)
+  ) 
+```
+
+`reframe` con `group_by`: Agrupar y resumir datos.
+
+```{r}
+# Calcular satisfacción promedio por género
+resumen_genero = encuesta %>%
+  group_by(Genero) %>%
+  reframe(SatisfaccionPromedio = mean(Satisfaccion))
+resumen_genero
+```
+
+```{r}
+# Calcular edad máxima y mínima por nivel educativo
+resumen_educacion = encuesta %>%
+  group_by(Educacion) %>%
+  reframe(
+    EdadMaxima = max(Edad),
+    EdadMinima = min(Edad)
+  )
+resumen_educacion
+```
+
+Puedes realizar varias operaciones en una sola secuencia. Por ejemplo:
+
+**Filtrar adultos, calcular satisfacción promedio por rango de edad y ordenar resultados.**
+
+```{r}
+# Filtrar, agrupar y ordenar
+encuesta %>%
+# Personas menores o iguales a 30 como "Jovenes"
+  mutate(RangoEdad = 
+           ifelse(Edad <= 30, "Joven", "Adulto")) %>%
+# Agrupar por género
+      group_by(RangoEdad) %>%   
+# Calcular métricas resumidas
+      summarise(             
+      SatisfaccionPromedio = mean(Satisfaccion)) %>%
+# Ordenar por satisfacción promedio
+  arrange(desc(SatisfaccionPromedio)) 
+```
+
+Sí, hay varias funciones interesantes en **`dplyr`** que podrías agregar a tu apartado para ampliar las capacidades de manipulación de datos. Aquí te dejo algunas funciones adicionales que pueden mejorar el análisis y limpieza de datos:
+
+6.  `rename()`: Renombrar columnas
+
+    Si necesitas cambiar el nombre de una columna, puedes usar `rename()`.\
+
+```{r}
+encuesta %>%
+  rename(Satisfaccion_Gestion = Satisfaccion) %>% 
+  head(3)
+```
+
+7.  `relocate()`: Reordenar columnas
+
+    Si quieres cambiar el orden de las columnas en un `data.frame`, usa `relocate()`.
+
+```{r}
+encuesta %>%
+  relocate(Satisfaccion, .before = ID) %>% 
+  head(3)
+```
+
+8.  `distinct()`: Eliminar duplicados
+
+    Si hay valores duplicados en el `data.frame`, `distinct()` los elimina y deja solo las observaciones únicas.\
+
+```{r}
+encuesta %>%
+  distinct() %>% 
+  head(3)
+```
+
+9.  `count()`: Contar frecuencias de una variable categórica
+
+    Puedes contar la cantidad de observaciones por categoría.\
+
+```{r}
+encuesta %>%
+  count(Educacion)
+```
+
+10. `slice()`: Seleccionar filas específicas
+
+    Si necesitas extraer ciertas filas según su posición:\
+
+```{r}
+# Seleccionar las primeras 3 filas
+encuesta %>%
+  slice(1:3)
+
+# Seleccionar la fila número 5
+encuesta %>%
+  slice(5)
+```
+
+11. `case_when()`: Crear variables con múltiples condiciones
+
+    Es una versión más potente de `ifelse()`, útil cuando tienes muchas condiciones.\
+
+```{r}
+# Crear una columna con niveles de satisfacción
+encuesta %>%
+  mutate(Satisfaccion_Categoria = case_when(
+    Satisfaccion >= 4 ~ "Alta",
+    Satisfaccion == 3 ~ "Media",
+    TRUE ~ "Baja"
+  )) %>% 
+  head(10)
+```
+
+## Ggplot para la elaboración de gráficos
+
+El paquete **`ggplot2`** es una herramienta poderosa para la visualización de datos en R. Se basa en **capas (`layers`)**, lo que permite personalizar gráficos de manera progresiva.
+
+```{r}
+library(ggplot2)
+```
+
+Hay algunos argumentos generales que pueden usarse en la mayoría de gráficos
+
+| **Argumento** | **Descripción**                                   |
+|---------------|---------------------------------------------------|
+| `color`       | Color del borde de elementos gráficos             |
+| `fill`        | Color de relleno en elementos como barras o áreas |
+| `alpha`       | Nivel de transparencia (0 a 1)                    |
+| `size`        | Tamaño de puntos, líneas o texto                  |
+| `shape`       | Forma de los puntos (en `geom_point()`)           |
+| `linetype`    | Tipo de línea (continua, punteada, etc.)          |
+| `stroke`      | Grosor del borde en puntos                        |
+
+1.  Gráfico de Dispersión (`geom_point()`)
+
+```{r}
+ggplot(encuesta, aes(x = Edad, y = Ingreso)) +
+  geom_point(size = 3, 
+             shape = 16, 
+             color = "blue", 
+             alpha = 0.7, 
+             stroke = 1) +
+  labs(title = "Gráfico de Dispersión", 
+       x = "Edad", 
+       y = "Ingreso") +
+  theme_minimal()
+```
+
+2.Histograma (`geom_histogram()`)
+
+```{r}
+ggplot(encuesta, aes(x = Ingreso)) +
+  geom_histogram(bins = 10, 
+                 fill = "steelblue", 
+                 color = "black", 
+                 alpha = 0.7, 
+                 boundary = 0) +
+  labs(title = "Histograma de Ingresos", 
+       x = "Ingreso", 
+       y = "Frecuencia") +
+  theme_minimal()
+```
+
+3.  Boxplot (`geom_boxplot()`)
+
+```{r}
+ggplot(encuesta, aes(x = Genero, 
+               y = Ingreso, 
+               fill = Genero)) +
+  geom_boxplot(outlier.color = "darkgreen") +
+  labs(title = "Boxplot de Ingreso por Género", 
+       x = "Género", 
+       y = "Ingreso") +
+  theme_minimal()
+```
+
+4.  Gráfico de Barras (`geom_bar()`)
+
+```{r}
+ggplot(encuesta, aes(x = Educacion, 
+               fill = Educacion)) +
+  geom_bar(width = 0.7, 
+           alpha = 0.8, 
+           color = "black") +
+  labs(title = "Frecuencia de Nivel Educativo", 
+       x = "Nivel Educativo", 
+       y = "Cantidad",
+       fill = "Niv. Ed.") +
+  theme_minimal()
+```
+
+5.  Gráfico de Líneas (`geom_line()`)
+
+```{r}
+set.seed(123)
+encuesta %>% 
+  sample_n(20) %>% 
+ggplot(aes(x = Edad, y = Ingreso)) +
+  geom_line(color = "blue", size = 1, linetype = "dashed") +
+  geom_point(size = 3, color = "red") +
+  labs(title = "Relación Edad vs Ingreso", x = "Edad", y = "Ingreso") +
+  theme_light()
+```
+
+6.  Gráfico de Densidad (`geom_density()`)
+
+```{r}
+ggplot(encuesta, aes(x = Ingreso)) +
+  geom_density(fill = "lightblue", 
+               alpha = 0.7, 
+               adjust = 1.5, 
+               linetype = "solid") +
+  labs(title = "Densidad de Ingresos", 
+       x = "Ingreso", 
+       y = "Densidad") +
+  theme_classic()
+```
+
+7.  Gráfico de Área (`geom_area()`)
+
+```{r}
+ggplot(encuesta, aes(x = Edad, 
+               y = Ingreso)) +
+  geom_area(fill = "darkgreen", 
+            alpha = 0.5, 
+            linetype = "dotted", 
+            color = "black") +
+  labs(title = "Área de Relación Edad vs Ingreso", 
+       x = "Edad", 
+       y = "Ingreso") +
+  theme_classic()
+```
+
+8.  Facetas con `facet_wrap()`
+
+```{r}
+ggplot(encuesta, aes(x = Ingreso, 
+                     fill = Genero)) +
+  geom_histogram(bins = 10, 
+                 alpha = 0.7, 
+                 color = 'black') +
+  facet_wrap(~Genero) +
+  labs(title = "Histograma de Ingresos por Género") +
+  theme_minimal()
+```
+
+9.  Gráfico de Barras Apilado (`position = "stack"`)
+
+```{r}
+ggplot(encuesta, aes(x = Educacion, 
+                     fill = Genero)) +
+  geom_bar(position = "stack", 
+           alpha = 0.8, 
+           width = 0.7) +
+  labs(title = "Distribución de Género por Nivel Educativo") +
+  theme_minimal()
+```
+
+10. Gráfico de Barras Apilado Proporcional (`position = "fill"`)
+
+```{r}
+ggplot(encuesta, aes(x = Educacion, 
+                     fill = Genero)) +
+  geom_bar(position = "fill") +
+  labs(title = "Proporción de Género por Nivel Educativo", 
+       y = "Proporción") +
+  theme_light()
+```
+
+11. Gráfico de Violin (`geom_violin()`)
+
+Un gráfico de violín combina un boxplot y una curva de densidad, mostrando la distribución de una variable numérica a lo largo de una categórica. Permite visualizar la mediana, la dispersión y la forma de la distribución.
+
+```{r}
+ggplot(encuesta, aes(x = Genero, 
+                     y = Ingreso, 
+                     fill = Genero)) +
+  geom_violin(trim = FALSE, 
+              draw_quantiles = c(0.25, 0.5, 0.75)) +
+  labs(title = "Distribución del Ingreso por Género", 
+       x = "Género", 
+       y = "Ingreso") +
+  theme_minimal()
+```
+
+12. Gráfico de Dispersión con Regresión (`geom_smooth()`)
+
+-   `method = "lm"`: Usa regresión lineal.
+-   `se = TRUE`: Muestra el intervalo de confianza.
+
+```{r}
+set.seed(123)
+encuesta %>% 
+  sample_n(50) %>% 
+ggplot(aes(x = Edad, y = Ingreso)) +
+  geom_point(size = 3, color = "blue") +
+  geom_smooth(method = "lm", se = TRUE, color = "red", linetype = "dashed") +
+  labs(title = "Regresión Lineal de Edad vs Ingreso") +
+  theme_minimal()
+```
+
+## Complementos de ggplot2
+
+El sistema de visualización de datos en R basado en `ggplot2` ofrece una gran flexibilidad y control para generar gráficos informativos. Sin embargo, siempre podemos ir un paso más allá, ya sea para mejorar la estética, destacar información clave o combinar varias visualizaciones. Para ello, existen una serie de paquetes que complementan a `ggplot2` y amplían significativamente sus capacidades.
+
+Utilicemos los datos de `gapminder` filtrados al 2007 como ejemplo:
+
+```{r}
+library(gapminder)
+gm_07 = gapminder %>% filter(year == 2007)
+```
+
+1.  `ggsci`[@ggsci]
+
+Este paquete proporciona paletas de colores inspiradas en publicaciones científicas reconocidas como *Nature*, *JAMA*, *Lancet*, *NEJM*, entre otras. Es útil cuando se busca una estética profesional y reconocible, especialmente para presentaciones o publicaciones.
+
+La funciones principales son: `scale_fill_nejm()`, `scale_fill_lancet()`, `scale_fill_jama()` permiten aplicar directamente estas paletas en gráficos con `fill`.
+
+```{r}
+library(ggsci)
+```
+
+NJEJM:
+
+```{r, fig.width=6, fig.height=4}
+ggplot(gm_07, aes(x = continent, 
+                  y = lifeExp, 
+                  fill = continent)) +
+  geom_boxplot() +
+  scale_fill_nejm() +
+  theme_minimal() +
+  ggtitle("Boxplot con paleta NEJM")
+```
+
+Lancet:
+
+```{r, fig.width=6, fig.height=4}
+ggplot(gm_07, aes(x = continent, 
+                  y = lifeExp, 
+                  fill = continent)) +
+  geom_boxplot() +
+  scale_fill_lancet() +
+  theme_minimal() +
+  ggtitle("Boxplot con paleta Lancet")
+```
+
+JAMA:
+
+```{r, fig.width=6, fig.height=4}
+ggplot(gm_07, aes(x = continent, 
+                  y = lifeExp, 
+                  fill = continent)) +
+  geom_boxplot() +
+  scale_fill_jama() +
+  theme_minimal() +
+  ggtitle("Boxplot con paleta JAMA")
+```
+
+2.  `viridis`
+
+`viridis` ofrece escalas de color perceptualmente uniformes, es decir, los colores cambian de manera coherente incluso para personas con discapacidad visual o en impresión en blanco y negro. Estas paletas fueron desarrolladas originalmente para Python y se adaptaron a R.
+
+-   Las funciones principales son: `scale_fill_viridis_d()` para variables categóricas y `scale_fill_viridis_c()` para variables continuas.
+-   Los argumentos más importantes son:
+    -   `option` permite seleccionar entre variantes ("A", "B", "C", "D", "E").
+    -   `direction` para invertir el orden de los colores.
+    -   `guide = 'none'` oculta la leyenda, útil en gráficos facetados.
+
+```{r}
+library(viridis)
+```
+
+Tema 'plasma':
+
+```{r, fig.width=6, fig.height=4}
+ggplot(gm_07, aes(x = lifeExp, 
+                  fill = continent)) +
+  geom_histogram(binwidth = 3, 
+                 color = "black", 
+                 alpha = 0.8) +
+  scale_fill_viridis_d(guide = 'none', 
+                       option = 'C') +
+  facet_wrap(~ continent) +
+  theme_minimal() +
+  ggtitle("Histograma de esperanza de vida por continente")
+```
+
+Tema 'cividis':
+
+```{r, fig.width=6, fig.height=4}
+ggplot(gm_07, aes(x = lifeExp, 
+                  fill = continent)) +
+  geom_histogram(binwidth = 3, 
+                 color = "black", 
+                 alpha = 0.8) +
+  scale_fill_viridis_d(guide = 'none', 
+                       option = 'E') +
+  facet_wrap(~ continent) +
+  theme_minimal() +
+  ggtitle("Histograma de esperanza de vida por continente")
+```
+
+Puede consultar las paletas usando `?scale_fill_viridis`
+
+3.  `patchwork` [@patchwork]
+
+Este paquete permite combinar múltiples gráficos generados con `ggplot2` de forma intuitiva mediante operadores aritméticos. Es especialmente útil para mostrar comparaciones o construir narrativas visuales. - Los gráficos se combinan con `/` (vertical), `|` (horizontal), y `+` para anotaciones conjuntas. - No requiere transformar los gráficos en objetos de grid. Basta con construir gráficos individuales y luego combinarlos directamente.
+
+```{r, fig.width=6, fig.height=4}
+library(patchwork)
+```
+
+```{r, fig.width=6, fig.height=4}
+# Boxplot de lifeExp 
+p1 = ggplot(gm_07, aes(x = lifeExp, 
+                       y = '')) +
+  geom_boxplot(fill = "darkgreen", 
+               width = 0.4) +
+  theme_minimal() +
+  labs(title = "Boxplot de esperanza de vida", 
+       x = NULL, 
+       y = "lifeExp")
+
+# Densidad de lifeExp
+p2 = ggplot(gm_07, aes(x = lifeExp)) +
+  geom_density(fill = "darkgreen", 
+               alpha = 0.6) +
+  theme_minimal() +
+  labs(title = "Densidad de esperanza de vida", 
+       x = "lifeExp", 
+       y = "Densidad")
+
+# Histograma de lifeExp
+p3 = ggplot(gm_07, aes(x = lifeExp)) +
+  geom_histogram(binwidth = 3, 
+                 fill = "darkgreen", 
+                 color = "black", 
+                 alpha = 0.7) +
+  theme_minimal() +
+  labs(title = "Histograma de esperanza de vida", 
+       x = "lifeExp", 
+       y = "Frecuencia")
+
+# Gráficos apilados verticalmente
+(p1 / p2 / p3)
+```
+
+4.  `ggthemes` [@ggthemes]
+
+Proporciona temas visuales inspirados en medios de comunicación como *The Economist*, *Wall Street Journal* o *FiveThirtyEight*. Estos temas cambian fondo, ejes, tipografía y estilo general del gráfico. Son ideales para producir gráficos estilizados sin necesidad de personalizar manualmente cada elemento gráfico.
+
+```{r}
+library(ggthemes)
+```
+
+The Economist:
+
+```{r, fig.width=7, fig.height=4}
+ggplot(gm_07, aes(x = continent, 
+                  y = lifeExp, 
+                  fill = continent)) +
+  geom_boxplot() +
+  theme_economist() +
+  scale_fill_economist() +
+  labs(fill = 'Continente') +
+  ggtitle("Estilo The Economist")
+```
+
+Wall Street Journal:
+
+```{r, fig.width=7, fig.height=4}
+ggplot(gm_07, aes(x = continent, 
+                  y = lifeExp, 
+                  fill = continent)) +
+  geom_boxplot() +
+  theme_wsj() +
+  scale_fill_economist() +
+  labs(fill = 'Continente') +
+  ggtitle("Estilo Wall Street Journal")
+```
+
+5.  `ggtext` [@ggtext]
+
+Este paquete permite utilizar etiquetas enriquecidas con HTML y Markdown dentro de `ggplot2`. Esto incluye títulos con colores, negritas, saltos de línea y estilos diferenciados por palabra.
+
+-   Funciones clave:
+    -   `element_markdown()` reemplaza a `element_text()` en `theme()` para permitir etiquetas enriquecidas.
+-   Requiere que las etiquetas sean pasadas a `ggtitle()` o `labs()` como texto procesable por `glue::glue()` o expresiones con HTML/Markdown.
+
+```{r}
+library(ggtext)
+```
+
+Establecemos la relación entre color y continente:
+
+```{r, fig.width=6, fig.height=4}
+# Colores personalizados para cada continente
+colores_continente = c(
+  Africa = "#E63946",
+  Americas = "#457B9D",
+  Asia = "#2A9D8F",
+  Europe = "#F4A261",
+  Oceania = "#A17DB2"
+)
+
+# Creamos el título con etiquetas coloreadas en HTML
+titulo_color = glue::glue(
+  "Esperanza de vida en 2007 por continente<br>",
+  "<span style='color:{colores_continente['Africa']}'>**África**</span>, ",
+  "<span style='color:{colores_continente['Americas']}'>**Américas**</span>, ",
+  "<span style='color:{colores_continente['Asia']}'>**Asia**</span>, ",
+  "<span style='color:{colores_continente['Europe']}'>**Europa**</span>, ",
+  "<span style='color:{colores_continente['Oceania']}'>**Oceanía**</span>"
+)
+```
+
+Graficamos:
+
+```{r}
+# Gráfico final
+ggplot(gm_07, aes(x = continent, 
+                  y = lifeExp, 
+                  fill = continent)) +
+  geom_boxplot() +
+  scale_fill_manual(values = colores_continente) +
+  labs(y = 'Esperanza de vida') +
+  theme_minimal() +
+  theme(
+    axis.title.x = element_blank(),
+    axis.text.x = element_blank(),
+    axis.ticks.x = element_blank(),
+    plot.title = element_markdown(size = 14, 
+                                  lineheight = 1.2),
+    legend.position = "none"
+  ) +
+  ggtitle(titulo_color)
+```
+
+6.  `scales` [@scales]
+
+Ofrece herramientas para transformar y dar formato a valores numéricos en los ejes o leyendas de `ggplot2`. Muy útil para mostrar cifras monetarias, porcentajes o unidades más legibles.
+
+-   Existen funciones muy comunes como: `dollar_format()`, `percent_format()`, `comma_format()`, entre otras.
+-   Algunos argumentos importantes son: `prefix` o `suffix` permiten añadir símbolos o unidades y `accuracy` controla el número de decimales.
+
+```{r}
+library(scales)
+```
+
+Podemos utilizarlo para monedas:
+
+```{r, fig.width=6, fig.height=4}
+ggplot(gm_07, aes(x = gdpPercap,
+                  y = lifeExp)) +
+  geom_point(color = "steelblue", 
+             size = 3, 
+             alpha = 0.8) +
+  scale_x_continuous(labels = dollar_format(prefix = "US$")) +
+  theme_minimal() +
+  ggtitle("Relación entre PIB per cápita y esperanza de vida (USD, 2007)") +
+  labs(x = "PIB per cápita (US$)", 
+       y = "Esperanza de vida (años)")
+
+```
+
+O para porcentajes:
+
+```{r, fig.width=6, fig.height=4}
+# Clasificamos esperanza de vida
+gm_07 = gm_07 %>%
+  mutate(nivel = cut(lifeExp, breaks = c(0, 60, 75, Inf), 
+                     labels = c("Baja", "Media", "Alta")))
+
+# Gráfico debarra horizontal dividida por proporción y continente
+ggplot(gm_07, aes(y = continent, 
+                  fill = nivel)) +
+  geom_bar(position = "fill", 
+           color = "black") +
+  scale_x_continuous(labels = percent_format(accuracy = 1), 
+                     trans = "reverse") +
+  labs(title = "Distribución proporcional de esperanza de vida por continente (2007)",
+       x = "Porcentaje",
+       y = NULL,
+       fill = "Esperanza de vida") +
+  theme_minimal()
+```
+
+7.  `gghighlight` [@gghighlight]
+
+Facilita la tarea de destacar subconjuntos de datos directamente en los gráficos sin tener que filtrar manualmente. Ideal para llamar la atención sobre casos atípicos, valores extremos o categorías específicas. - `gghighlight()` se añade como capa dentro del `ggplot` y permite condicionar el resaltado a una expresión lógica. - Argumentos útiles: - `label_key` permite mostrar etiquetas automáticas para los datos resaltados. - `use_direct_label = TRUE` mejora la legibilidad de gráficos con muchos elementos.
+
+```{r}
+library(gghighlight)
+```
+
+```{r, fig.width=6, fig.height=4}
+ggplot(gm_07, aes(x = log(gdpPercap), 
+                  y = lifeExp, 
+                  label = country)) +
+  geom_point(size = 3, 
+             alpha = 0.8) +
+  gghighlight(lifeExp > 82, 
+              label_key = country) +
+  theme_minimal() +
+  ggtitle("Países con esperanza de vida mayor a 82 en 2007")
+
+```
+
+## Dlookr para análisis exploratorio
+
+El análisis exploratorio de datos (EDA) es una etapa crucial antes de aplicar cualquier modelo o técnica inferencial. Permite comprender la estructura de los datos, detectar valores atípicos, evaluar supuestos y descubrir patrones relevantes. El paquete `dlookr` fue diseñado específicamente para facilitar esta etapa.
+
+```{r}
+library(dlookr)
+```
+
+1.  Resumen de Datos y Diagnóstico con `dlookr`
+
+El paquete `dlookr` permite realizar diagnósticos detallados sobrela información en cada una de las variables en un `data.frame`.
+
+-   Número de observaciones
+
+-   Cantidad de valores perdidos por variable
+
+-   Número de valores únicos
+
+-   Tipo de dato de cada variable
+
+```{r}
+diagnose(encuesta)
+```
+
+2.  Resumen de Variables Numéricas con `dlookr`
+
+Para obtener un **resumen detallado de las variables numéricas**, usamos `diagnose_numeric()`.
+
+-   Media, mediana, desviación estándar y varianza
+
+-   Valores mínimo y máximo
+
+-   Coeficiente de asimetría (Skewness) y curtosis
+
+-   Valores atípicos detectados
+
+```{r}
+diagnose_numeric(encuesta)
+```
+
+3.  Resumen de Variables Categóricas con `dlookr`
+
+Para describir las **variables categóricas**, usamos `diagnose_category()`.
+
+```{r}
+# Diagnóstico de variables categóricas
+diagnose_category(encuesta)
+```
+
+Este diagnóstico proporciona:
+
+Frecuencias absolutas y relativas de cada categoría Cantidad de valores únicos en cada variable categórica
+
+Si queremos visualizar mejor la distribución de una variable categórica, podemos utilizar `count()`:
+
+```{r}
+count(encuesta, Educacion)
+```
+
+4.  Identificación de Valores Atípicos con `dlookr`
+
+`dlookr` también nos permite detectar **valores atípicos** en las variables numéricas.
+
+Esto mostrará:
+
+-   Cuántos valores atípicos existen
+
+-   Cuáles son esos valores extremos
+
+```{r}
+diagnose_outlier(encuesta)
+```
+
+5.  Gráficos Descriptivos con `dlookr`\*
+
+Podemos graficar la **distribución de nuestras variable numérica** con `plot_hist_numeric()`.
+
+```{r}
+plot_hist_numeric(encuesta)
+```
+
+Podemos usar también `plot_box_numeric()` para ver **valores atípicos** y la distribución de la variables numéricas.
+
+```{r}
+
+plot_box_numeric(encuesta)
+```
+
+Podemos usar también `plot_normality` para evaluar la normalidad de cada variable numérica y sus tranformaciones.
+
+```{r}
+plot_normality(encuesta)
+```
+
+Podemos visualizar la frecuencia del variables categóricas con `plot_bar_category()`.
+
+```{r}
+plot_bar_category(encuesta)
+```
+
+6.  Análisis Exploratorio de Correlaciones con `correlate`
+
+Para examinar relaciones entre variables numéricas, podemos usar `correlate()`.
+
+```{r}
+# Matriz de correlaciones
+encuesta %>% 
+  select(Edad, Ingreso, Satisfaccion) %>% 
+  correlate()
+```
+
+Para visualizar las correlaciones, utilizamos `plot_correlate()`:
+
+```{r, warning=FALSE}
+# Gráfico de correlaciones
+encuesta %>% 
+  select(Edad, Ingreso, Satisfaccion) %>% 
+  plot_correlate()
+```

@@ -1,0 +1,6 @@
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\thepage}
+\fancyhead[RE]{R para el Análisis de Datos}
+\fancyhead[LO]{\leftmark}

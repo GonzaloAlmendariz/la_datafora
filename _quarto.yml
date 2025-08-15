@@ -18,6 +18,35 @@ website:
             file: sesion3.qmd
           - text: "Sesión 4"
             file: sesion4.qmd
+      - text: "Libro"
+        menu:
+          - text: "Introducción"
+            file: intro.qmd
+          - text: "Resumen"
+            file: summary.qmd
+          - text: "Fundamentos"
+            file: fundamentos.qmd
+          - text: "Fundamentos de R"
+            file: fundamentosR.qmd
+          - text: "Integración"
+            file: integración.qmd
+          - text: "Estadística descriptiva"
+            file: statdesc.qmd
+          - text: "Probabilidades"
+            file: prob.qmd
+          - text: "Inferencia"
+            file: inf.qmd
+          - text: "Comparaciones"
+            file: comp.qmd
+          - text: "Regresión"
+            file: regr.qmd
+          - text: "Glosario de funciones"
+            file: glosariofunciones.qmd
+          - text: "Solucionario"
+            file: solucionario.qmd
+          - text: "Referencias"
+            file: references.qmd
+
 
 format:
   html:

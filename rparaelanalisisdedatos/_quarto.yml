@@ -1,0 +1,50 @@
+project:
+  type: book
+  output-dir: _site
+
+
+lang: es  
+
+book:
+  title: "R para el análisis de datos"
+  author: "Gonzalo Almendariz Villanueva"
+  chapters:
+    - index.qmd
+    - intro.qmd
+    - summary.qmd
+    - fundamentos.qmd
+    - fundamentosR.qmd
+    - integración.qmd
+    - statdesc.qmd
+    - prob.qmd
+    - inf.qmd
+    - comp.qmd
+    - regr.qmd
+    - glosariofunciones.qmd
+    - solucionario.qmd
+    - references.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+    html:
+    theme: cosmo
+    toc: true
+    include-after-body: _boton_pdf.html
+  pdf:
+    documentclass: scrreprt
+    toc: true
+    number-sections: true
+    classoption: ["twoside"]
+    geometry: inner=3.2cm, outer=2.5cm, top=2.5cm, bottom=2.8cm, includeheadfoot
+    include-in-header: include.tex
+    pdf-engine: pdflatex
+    
+  epub:
+    toc: true
+    number-sections: true
+    cover-image: portada.jpg
+
+editor: visual
