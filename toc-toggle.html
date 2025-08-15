@@ -1,0 +1,13 @@
+document.addEventListener("DOMContentLoaded", function() {
+  const toc = document.getElementById("TOC");
+  if (!toc) return;
+
+  const btn = document.createElement("button");
+  btn.id = "toc-toggle";
+  btn.textContent = "Mostrar/Ocultar índice";
+  toc.parentNode.insertBefore(btn, toc);
+
+  btn.addEventListener("click", () => {
+    toc.classList.toggle("hidden");
+  });
+});

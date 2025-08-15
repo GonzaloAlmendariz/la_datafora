@@ -106,7 +106,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="floating nav-fixed">
+<body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -219,8 +219,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="-1">
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">En esta página</h2>
    
   <ul>
@@ -229,13 +230,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#base-de-datos-world-development-indicators-wdi" id="toc-base-de-datos-world-development-indicators-wdi" class="nav-link" data-scroll-target="#base-de-datos-world-development-indicators-wdi">Base de datos: World Development Indicators (WDI)</a></li>
   <li><a href="#manipulación-con-dplyr" id="toc-manipulación-con-dplyr" class="nav-link" data-scroll-target="#manipulación-con-dplyr">Manipulación con dplyr</a></li>
   <li><a href="#descripción-de-variables" id="toc-descripción-de-variables" class="nav-link" data-scroll-target="#descripción-de-variables">Descripción de variables</a></li>
-  <li><a href="#eso-fue-todo-por-esta-sesión-gracias-por-su-atención" id="toc-eso-fue-todo-por-esta-sesión-gracias-por-su-atención" class="nav-link" data-scroll-target="#eso-fue-todo-por-esta-sesión-gracias-por-su-atención">Eso fue todo por esta sesión ¡Gracias por su atención!</a></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Otros formatos</h2><ul><li><a href="sesion2.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -287,8 +283,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>La base descargada contiene diversas variables. Para este análisis introductorio, nos centraremos en las siguientes:</p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
+<col style="width: 36%">
+<col style="width: 63%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -907,9 +903,6 @@ poblacion    0.37     0.95      0.00
 <span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>                             <span class="st">"Alta"</span>, <span class="st">"Baja o media"</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">with</span>(<span class="fu">ctable</span>(region, grupo_vida))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="eso-fue-todo-por-esta-sesión-gracias-por-su-atención" class="level1">
-<h1>Eso fue todo por esta sesión ¡Gracias por su atención!</h1>
 
 
 </section>
