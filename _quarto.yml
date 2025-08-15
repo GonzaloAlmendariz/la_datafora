@@ -8,7 +8,7 @@ website:
     left:
       - text: "Inicio"
         file: about.qmd
-      - text: "Curso R"
+      - text: "Curso en R"
         menu:
           - text: "Sesión 1"
             file: sesion1.qmd
@@ -18,25 +18,25 @@ website:
             file: sesion3.qmd
           - text: "Sesión 4"
             file: sesion4.qmd
-      - text: "Libro"
+      - text: "Libro de Estadística"
         menu:
           - text: "Introducción"
             file: intro.qmd
-          - text: "Resumen"
+          - text: "Resumen general"
             file: summary.qmd
-          - text: "Fundamentos"
+          - text: "Fundamentos teóricos"
             file: fundamentos.qmd
           - text: "Fundamentos en R"
             file: fundamentosR.qmd
-          - text: "Integración"
+          - text: "Integración conceptual"
             file: integración.qmd
           - text: "Estadística descriptiva"
             file: statdesc.qmd
           - text: "Probabilidad"
             file: prob.qmd
-          - text: "Inferencia"
+          - text: "Inferencia estadística"
             file: inf.qmd
-          - text: "Computación"
+          - text: "Computación aplicada"
             file: comp.qmd
           - text: "Regresión"
             file: regr.qmd
@@ -44,16 +44,15 @@ website:
             file: glosariofunciones.qmd
           - text: "Solucionario"
             file: solucionario.qmd
-          - text: "Referencias"
+          - text: "Referencias bibliográficas"
             file: references.qmd
-
-
 
 format:
   html:
     theme: cosmo
     css: styles.css
     toc: true
+    toc-location: left
+    toc-expand: false
 
 editor: visual
-
