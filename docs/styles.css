@@ -1,10 +1,66 @@
 /* =========================
+   Submenús con barra elegante y animación smooth
+   ========================= */
+
+/* Asegurar que los submenús tengan posición relativa para animar */
+.navbar-nav .dropdown-menu {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Mostrar submenu al hover del li padre */
+.navbar-nav .nav-item.dropdown:hover > .dropdown-menu,
+.navbar-nav .nav-item.dropdown.show > .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Subitems */
+.navbar-nav .dropdown-item {
+  position: relative; /* para el ::before */
+  padding-left: 1.5rem; /* espacio para la barra */
+  transition: all 0.3s ease;
+}
+
+/* Barra pequeña al inicio del subitem */
+.navbar-nav .dropdown-item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;           /* grosor de la barra */
+  height: 60%;          /* altura relativa al texto */
+  background-color: var(--secondary-color);
+  border-radius: 2px;
+  opacity: 0.6;
+  transition: all 0.3s ease;
+}
+
+/* Hover en subitem: barra más visible y subitem se eleva ligeramente */
+.navbar-nav .dropdown-item:hover {
+  transform: translateX(3px);
+  background-color: rgba(0,92,197,0.05);
+}
+
+.navbar-nav .dropdown-item:hover::before {
+  width: 6px;
+  height: 80%;
+  opacity: 1;
+  background-color: var(--accent-color);
+}
+
+
+/* =========================
    Paleta de colores y variables globales
    ========================= */
 :root {
   --primary-color: #2C3E50;     /* Azul oscuro elegante para títulos y enlaces importantes */
-  --secondary-color: #005cc5;   /* Azul resaltante para links y acentos */
-  --accent-color: #22863a;      /* Verde sutil para resaltar elementos */
+  --secondary-color: #808034;   /* Azul resaltante para links y acentos */
+  --accent-color: #723480;      /* Verde sutil para resaltar elementos */
   --bg-color: #fefefe;          /* Fondo general */
   --text-color: #24292e;        /* Color principal del texto */
 }
@@ -43,6 +99,16 @@ h3 { font-weight: 500; }
   color: var(--primary-color);  /* Color principal */
   margin-bottom: 1rem;          /* Espacio debajo del título */
 }
+
+/* Niveles de subcapítulos */
+#quarto-margin-sidebar #TOC .toc-level-2 {
+  padding-left: 1.2rem;  /* un pequeño espacio al inicio */
+}
+
+#quarto-margin-sidebar #TOC .toc-level-3 {
+  padding-left: 1.6rem;
+}
+
 
 /* =========================
    Título principal del documento (YAML `title:`)
@@ -97,70 +163,67 @@ a:hover {
 }
 
 /* =========================
-   Tabla de contenidos minimalista
+   TOC - Estilo uniforme y hover
    ========================= */
 #quarto-margin-sidebar #TOC {
   font-size: 0.95rem;
-  background: var(--bg-color);       /* mismo fondo que el body */
+  background: var(--bg-color);
   border-radius: 0.5rem;
   padding: 1rem;
   line-height: 1.6;
   margin-bottom: 1.5rem;
-  box-shadow: none;                  /* sin sombra general */
-  border-left: none;                 /* quitar línea lateral */
-  position: fixed;        /* fijo al hacer scroll */
-  top: 1rem;              /* separación superior */
-  left: 1rem;             /* separación izquierda */
-  width: 220px;           /* ancho de la TOC */
-  max-height: 90vh;       /* no ocupar toda la altura */
-  overflow-y: auto;       /* scroll si excede la altura */
-  z-index: 100;           /* por encima del contenido */
-}
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  width: 220px;
+  max-height: 90vh;
+  overflow-y: auto;
+  z-index: 100;
+  box-shadow: none;
 }
 
-/* Enlaces dentro del TOC */
+/* Enlaces de todos los niveles */
 #quarto-margin-sidebar #TOC a {
-  display: block;           
-  padding: 0.3rem 0;        
-  color: var(--primary-color);
+  display: block;
+  padding: 0.3rem 0;
+  color: var(--primary-color) !important; /* fuerza color */
   text-decoration: none;
-  transition: color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
   border-radius: 0.25rem;
-  background-color: transparent;       /* sin fondo */
-  box-shadow: none;                     /* sin sombra por defecto */
+  background-color: transparent;
+  box-shadow: none;
+  transition: color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease, padding-left 0.3s ease;
 }
 
-/* Hover sobre enlaces individuales: solo el enlace se eleva */
+/* Hover: todos los enlaces se elevan y cambian de color */
 #quarto-margin-sidebar #TOC a:hover {
   transform: translateY(-2px);
-  color: var(--secondary-color);
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08); /* sombra ligera solo en hover */
+  color: var(--secondary-color) !important;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
 }
 
-/* Enlace activo en TOC */
+/* Enlace activo */
 #quarto-margin-sidebar #TOC a.active {
-  background-color: rgba(0,92,197,0.05); /* leve azul */
+  background-color: rgba(0,92,197,0.05);
   transform: translateY(-1px);
   box-shadow: 0 2px 6px rgba(0,0,0,0.08);
 }
 
-/* Quitar cualquier sombra extra al final del TOC */
-#quarto-margin-sidebar #TOC::after {
-  content: none;
+/* Padding progresivo según nivel */
+#quarto-margin-sidebar #TOC .toc-level-1 { padding-left: 0.5rem; }
+#quarto-margin-sidebar #TOC .toc-level-2 { padding-left: 1rem; }
+#quarto-margin-sidebar #TOC .toc-level-3 { padding-left: 1.5rem; }
+#quarto-margin-sidebar #TOC .toc-level-4 { padding-left: 2rem; }
+#quarto-margin-sidebar #TOC .toc-level-5 { padding-left: 2.5rem; }
+
+/* Quitar iconos de ancla de los encabezados en TOC */
+#quarto-margin-sidebar #TOC .header-anchor {
+  display: none !important;
 }
 
-.chapter.visible {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-
-/* =========================
-   Margen inicial para todos los niveles del TOC
-   ========================= */
+/* Para evitar conflictos, forzamos visibilidad de todos los enlaces */
 #quarto-margin-sidebar #TOC a {
-  padding-left: 0.5rem;   /* ajusta según el espacio que quieras */
+  opacity: 1 !important;
+  display: block !important;
 }
 
 

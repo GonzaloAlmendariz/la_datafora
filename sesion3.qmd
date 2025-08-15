@@ -29,8 +29,6 @@ execute:
 
 Dominar la lógica de la gramática de gráficos implementada en ggplot2. Construir gráficos claros, funcionales y personalizables para la exploración de variables numéricas y categóricas. Componer visualizaciones múltiples y utilizar recursos de diseño.
 
-
-
 Poder visualizar la información no solo nos ayuda a a anticipar ciertos patrones y comportamientos, sino que también facilita la comunicación de estos hallazgos a otros. Es importante reconocer que tendemos a dejarnos llevar más por los gráficos que por los resúmenes numéricos, aunque ambos sean igualmente importantes.
 
 # Principios de ggplot2
@@ -40,8 +38,6 @@ Poder visualizar la información no solo nos ayuda a a anticipar ciertos patrone
 ```{r}
 library(ggplot2)
 ```
-
-
 
 La creación de gráficos con `ggplot2` se basa en la gramática de los gráficos (Grammar of Graphics). Esta gramática define una serie de componentes que forman parte de un gráfico:
 
@@ -53,15 +49,11 @@ La creación de gráficos con `ggplot2` se basa en la gramática de los gráfico
 6.  **Coordenadas**: El sistema de coordenadas usado (cartesiano, polar, etc.).
 7.  **Tema**: Elementos de diseño y formato del gráfico.
 
-
-
 Piensa en cada uno de ellos como una capa que va encima. Para construir un gráfico en `ggplot2`, concatenamos diferentes capas usando el operador `+`. Cada capa añade un nuevo componente al gráfico.
 
------
+------------------------------------------------------------------------
 
 ![Extraído de: https://cristoichkov.github.io](images/clipboard-1644515835.png){width="220"}
-
-
 
 ```{r}
 df = WDI::WDI(
@@ -82,8 +74,6 @@ df_22 = df %>%
   select(-year)
 ```
 
-
-
 Vamos a empezar con un gráfico de dispersión básico utilizando el conjunto de datos `df_22`. Este conjunto contiene datos sobre el Producto Interno Bruto (PIB) per cápita, la esperanza de vida y otros indicadores para varios países a lo largo del tiempo.
 
 Empezamos agregando la primera capa, los datos. Para comenzar, creamos la base del gráfico con la función ggplot(), y como argumento el conjunto de datos `df_22`.
@@ -92,13 +82,9 @@ Empezamos agregando la primera capa, los datos. Para comenzar, creamos la base d
 ggplot(df_22)
 ```
 
-
-
 ```{r, fig.width=10, fig.height=5.625, echo=FALSE}
 ggplot(df_22)
 ```
-
-
 
 Como ves, los datos por sí solos únicamente nos dan un recuadro en blanco; debemos añadir el resto de capas. Definimos las estéticas del gráfico con la función `aes()`, asignando el PIB per cápita al eje x (`pib_capita`) y la esperanza de vida al eje y (`esp_vida`).
 
@@ -106,17 +92,11 @@ Como ves, los datos por sí solos únicamente nos dan un recuadro en blanco; deb
 ggplot(df_22, aes(x = pib_capita, y = esp_vida))
 ```
 
-
-
 ```{r, fig.width=10, fig.height=5.625, echo=FALSE}
 ggplot(df_22, aes(x = pib_capita, y = esp_vida))
 ```
 
-
-
 Ahora que R sabe qué datos vamos a utilizar y qué variables tomar como coordenadas, necesitamos especificar qué tipo de gráfico queremos crear. En `ggplot2`, hay muchas `geoms` (geometrías), y cada una proporciona un tipo de visualización distinta. Por ejemplo, `geom_bar` crea un gráfico de barras y `geom_line` genera uno de líneas.
-
-
 
 En nuestro caso, como ambas variables (el PIB per cápita y la esperanza de vida) son numéricas, lo ideal es usar un gráfico de dispersión. Este tipo de visualización nos permite explorar visualmente si existe algún tipo de relación entre ambas.
 
@@ -127,22 +107,14 @@ ggplot(df_22, aes(x = pib_capita, y = esp_vida)) +
   geom_point()
 ```
 
-
-
 ```{r, warning=FALSE, echo = FALSE, fig.width=10, fig.height=5.625}
 ggplot(df_22, aes(x = pib_capita, y = esp_vida)) +
   geom_point()
 ```
 
-
-
 En este ejemplo, aes(x = `pib_capita`, y = `esp_vida`) define la estética del gráfico, es decir, qué variable irá en cada eje. Luego, `geom_point()` le indica a R que queremos un gráfico de puntos (dispersión).
 
-
-
 Una vez que ejecutamos este código, ya podemos empezar a observar patrones generales en los datos. Sin embargo, probablemente notes que los puntos están bastante agrupados hacia la izquierda del gráfico. Esto ocurre porque el rango del PIB per cápita varía mucho entre países: algunos tienen valores muy altos y otros muy bajos, lo que comprime los datos en un extremo del eje.
-
-
 
 Para mejorar la visualización, podemos transformar la escala del eje x utilizando una escala logarítmica. Esto nos permite “expandir” las diferencias entre países con bajo PIB y comprimir un poco los valores más altos, facilitando así la comparación visual.
 
@@ -154,19 +126,13 @@ ggplot(df_22, aes(x = pib_capita, y = esp_vida)) +
   scale_x_log10()
 ```
 
-
-
 ```{r, fig.width=10, fig.height=5.625, echo = FALSE}
 ggplot(df_22, aes(x = pib_capita, y = esp_vida)) +
   geom_point() +
   scale_x_log10()
 ```
 
-
-
 Solo recuerda: aplicar una escala logarítmica cambia la forma en que leemos los datos. No estamos viendo el valor bruto del PIB per cápita, sino su logaritmo. Aun así, esta transformación es muy útil para interpretar mejor patrones cuando hay mucha dispersión entre valores bajos y altos.
-
-
 
 También podemos incluir una dimensión adicional de información visual usando la región de cada país como color. Para hacerlo, dentro de `aes()` agregamos el argumento `color = region`, lo que permite que cada punto se coloree según la región correspondiente.
 
@@ -178,8 +144,6 @@ ggplot(df_22, aes(x = pib_capita,
   scale_x_log10()
 ```
 
-
-
 ```{r, fig.width=10, fig.height=5.625, echo = FALSE}
 ggplot(df_22, aes(x = pib_capita, 
                   y = esp_vida, 
@@ -188,11 +152,7 @@ ggplot(df_22, aes(x = pib_capita,
   scale_x_log10()
 ```
 
-
-
 Esto permite explorar visualmente si ciertos patrones se agrupan por región. Por ejemplo, si hay regiones donde los países tienen una esperanza de vida similar a pesar de tener diferentes niveles de ingreso.
-
-
 
 Para que el gráfico sea más claro, añadimos etiquetas con `labs()`. Esto incluye un título para el gráfico, nombres para los ejes y una leyenda para el color.
 
@@ -208,8 +168,6 @@ ggplot(df_22, aes(x = pib_capita,
        color = "Región")
 ```
 
-
-
 ```{r, fig.width=10, fig.height=5.625, echo=FALSE}
 ggplot(df_22, aes(x = pib_capita, 
                   y = esp_vida, 
@@ -222,15 +180,9 @@ ggplot(df_22, aes(x = pib_capita,
        color = "Región")
 ```
 
-
-
 Con esto obtenemos un gráfico claro, donde cada capa cumple una función específica: `geom_point()`dibuja los puntos, `scale_x_log10()` transforma el eje x, `color = region` añade una variable categórica como color, y `labs()` da contexto e interpretación.
 
-
-
 Otra capa opcional que podemos agregar es `facet_wrap()`. El facetado permite dividir el gráfico en paneles separados según una variable categórica. En este caso, podemos crear un gráfico por cada región.
-
-
 
 Usamos `facet_wrap(~ region)` para crear un panel por región. Esto facilita comparar patrones dentro y entre regiones.
 
@@ -248,8 +200,6 @@ ggplot(df_22, aes(x = pib_capita,
   theme(legend.position = "none")  # Esta línea oculta la leyenda
 ```
 
-
-
 ```{r, fig.width=10, fig.height=5.625, echo=FALSE}
 ggplot(df_22, aes(x = pib_capita, 
                   y = esp_vida, 
@@ -264,17 +214,11 @@ ggplot(df_22, aes(x = pib_capita,
   theme(legend.position = "none")  # Esta línea oculta la leyenda
 ```
 
-
-
 Al usar `facet_wrap()`, cada gráfico mantiene la misma escala, pero muestra solo los países de una región. Esto permite observar variaciones internas que podrían quedar ocultas en un gráfico global.
-
-
 
 La última capa que veremos es la de `theme()`. Esta capa permite modificar con precisión la apariencia del gráfico: tamaños, posiciones, colores, fuentes, márgenes, etc. Por ejemplo, en el gráfico anterior eliminamos la leyenda usando un `theme(legend.position = "none")`.
 
 `ggplot2` tiene varios temas predeterminados que permiten cambiar la apariencia del gráfico sin complicarse demasiado. No exploraremos toda la personalización posible, sino solo algunos de los themes básicos.
-
-
 
 ¿Recuerdas el gráfico que generamos antes del facet? Podemos usarlo nuevamente. No hace falta reescribirlo completo: los gráficos también son objetos en R, por lo que se pueden guardar en una variable.
 
@@ -288,8 +232,6 @@ grafico = ggplot(df_22, aes(x = pib_capita, y = esp_vida,
        y = "Esperanza de Vida",
        color = "Región")
 ```
-
-
 
 Para mostrarlo, solo hay que llamarlo:
 
@@ -305,15 +247,11 @@ grafico
 grafico + theme_minimal()
 ```
 
-
-
 `theme_gray()` es el tema por defecto de ggplot2: fondo gris claro y cuadrícula blanca.
 
 ```{r, fig.width=10, fig.height=5.625}
 grafico + theme_gray()
 ```
-
-
 
 `theme_bw()` tiene fondo blanco y líneas más marcadas. Es útil si se imprimirá el gráfico en blanco y negro.
 
@@ -321,15 +259,11 @@ grafico + theme_gray()
 grafico + theme_bw()
 ```
 
-
-
 `theme_classic()` imita el estilo clásico de los gráficos base de R.
 
 ```{r, fig.width=10, fig.height=5.625}
 grafico + theme_classic()
 ```
-
-
 
 `theme_void()` elimina todos los elementos del gráfico, dejando solo los datos.
 
@@ -337,19 +271,13 @@ grafico + theme_classic()
 grafico + theme_void()
 ```
 
-
-
 `theme_dark()` aplica un fondo oscuro con líneas claras.
 
 ```{r, fig.width=10, fig.height=5.625}
 grafico + theme_dark()
 ```
 
-
-
 Todos estos temas pueden ser personalizados si necesitas ajustes más detallados. En esta sesión usaremos `theme_minimal()` por preferencia, pero puedes elegir el que mejor se adapte a tu estilo o propósito.
-
-
 
 # Gráficos para variables continuas
 
@@ -366,8 +294,6 @@ ggplot(df_22, aes(x = esp_vida)) +
   theme_minimal()
 ```
 
-
-
 ```{r, fig.width=10, fig.height=5.625, echo=FALSE}
 ggplot(df_22, aes(x = esp_vida)) +
   geom_histogram(binwidth = 5, fill = "skyblue", color = "black") +
@@ -381,11 +307,7 @@ ggplot(df_22, aes(x = esp_vida)) +
 
 Un gráfico de líneas es útil para ver cómo cambia una variable a lo largo del tiempo. Si tuvieras datos de varios años, podrías agrupar por año.
 
-
-
 Podemos combinar dplyr con ggplot2 utilizando el operador pipe (`%>%`) para encadenar directamente una transformación de datos con una visualización. Esto nos permite filtrar, agrupar o resumir datos con `dplyr`, y luego pasar el resultado directamente a `ggplot()` para graficarlo, sin necesidad de guardar objetos intermedios.
-
-
 
 ```{r, eval=FALSE}
 df %>%
@@ -401,8 +323,6 @@ df %>%
   theme_minimal() +
   theme(legend.position = "top")
 ```
-
-
 
 ```{r, fig.width=10, fig.height=5.625, echo=FALSE}
 df %>%
@@ -433,8 +353,6 @@ df_22 %>%
   theme_minimal() +
   theme(legend.position = "none")
 ```
-
-
 
 ```{r, fig.width=10, fig.height=5.625, echo=FALSE}
 df_22 %>% 
@@ -467,8 +385,6 @@ df_22 %>%
   coord_flip()
 ```
 
-
-
 ```{r, fig.width=10, fig.height=5.625, echo=FALSE}
 df_22 %>%
   ggplot(aes(x = region, fill = region)) +
@@ -487,8 +403,6 @@ df_22 %>%
 
 Si ya tienes una tabla resumida con frecuencias, o quieres mostrar un valor calculado como la esperanza de vida promedio por región, usamos geom_col(). También podemos usar `reorder()` para ordenar las barras de menor a mayor vida promedio.
 
-
-
 ```{r, eval=FALSE}
 df_22 %>%
   group_by(region) %>%
@@ -503,8 +417,6 @@ df_22 %>%
   theme(legend.position = "none") +
   coord_flip()
 ```
-
-
 
 ```{r, fig.width=10, fig.height=5.625, echo=FALSE}
 df_22 %>%
@@ -536,8 +448,6 @@ df_22 %>%
   scale_y_continuous(labels = scales::percent)
 ```
 
-
-
 ```{r, fig.width=10, fig.height=5.625, echo=FALSE}
 df_22 %>%
   ggplot(aes(x = region, fill = income)) +
@@ -550,8 +460,6 @@ df_22 %>%
   scale_y_continuous(labels = scales::percent)
 ```
 
-
-
 `df_22$income` no tiene un orden factorizado, ggplot2 lo tratará como categorías sin orden, lo cual puede resultar en un orden de los niveles arbitrario. Podemos ordenar explícitamente los niveles de income usando `forcats::fct_relevel()`. En este caso, estamos trabajando con categorías como:
 
 -   Low income
@@ -562,9 +470,8 @@ df_22 %>%
 
 -   High income
 
-
-
 Factorizamos y establecemos orden entre los niveles:
+
 ```{r}
 df_22 <- df_22 %>%
   filter(income != "Not classified") %>%
@@ -574,8 +481,6 @@ df_22 <- df_22 %>%
                                        "Upper middle income",
                                        "High income"))
 ```
-
-
 
 ```{r, eval=FALSE}
 df_22 %>% 
@@ -588,8 +493,6 @@ df_22 %>%
   theme_minimal() +
   scale_y_continuous(labels = scales::percent)
 ```
-
-
 
 ```{r, fig.width=10, fig.height=5.625, echo=FALSE}
 df_22 %>% 
@@ -605,8 +508,7 @@ df_22 %>%
 
 # Gráficos bivariados
 
-**Numérica vs categórica**
-Supongamos que queremos entender cómo varía la esperanza de vida (`esp_vida`) según el tipo de ingreso (`income`). Como `income` es una variable categórica y `esp_vida` es numérica, hay varias formas visuales de explorar esta relación.
+**Numérica vs categórica** Supongamos que queremos entender cómo varía la esperanza de vida (`esp_vida`) según el tipo de ingreso (`income`). Como `income` es una variable categórica y `esp_vida` es numérica, hay varias formas visuales de explorar esta relación.
 
 ## Boxplot: comparando distribuciones
 
@@ -623,7 +525,7 @@ df_22 %>%
   theme(legend.position = "none")
 ```
 
-------
+------------------------------------------------------------------------
 
 ```{r, fig.width=10, fig.height=5.625, echo=FALSE}
 df_22 %>%
@@ -651,8 +553,7 @@ df_22 %>%
   theme(legend.position = "none")
 ```
 
-
-----
+------------------------------------------------------------------------
 
 ```{r, fig.width=10, fig.height=5.625, echo=FALSE}
 df_22 %>%
@@ -665,12 +566,12 @@ df_22 %>%
   theme(legend.position = "none")
 ```
 
-
-----
+------------------------------------------------------------------------
 
 **Numérica vs numérica**
 
 ## Gráfico de dispersión (scatter plot)
+
 Ideal para ver relaciones, correlaciones o agrupamientos.
 
 ```{r, eval=FALSE}
@@ -681,7 +582,7 @@ ggplot(df_22, aes(x = pib_capita, y = esp_vida)) +
   theme_minimal()
 ```
 
-----
+------------------------------------------------------------------------
 
 ```{r, fig.width=10, fig.height=5.625, echo=FALSE}
 ggplot(df_22, aes(x = pib_capita, y = esp_vida)) +
@@ -691,11 +592,10 @@ ggplot(df_22, aes(x = pib_capita, y = esp_vida)) +
   theme_minimal()
 ```
 
-
------
-
+------------------------------------------------------------------------
 
 También puedes agregar una línea de tendencia con `geom_smooth()` si te interesa mostrar una relación.
+
 ```{r, eval=FALSE}
 ggplot(df_22, aes(x = pib_capita, y = esp_vida)) +
   geom_point(alpha = 0.6) +
@@ -705,8 +605,7 @@ ggplot(df_22, aes(x = pib_capita, y = esp_vida)) +
   theme_minimal()
 ```
 
-
------
+------------------------------------------------------------------------
 
 ```{r, fig.width=10, fig.height=5.625, echo=FALSE}
 ggplot(df_22, aes(x = pib_capita, y = esp_vida)) +
@@ -717,7 +616,7 @@ ggplot(df_22, aes(x = pib_capita, y = esp_vida)) +
   theme_minimal()
 ```
 
----
+------------------------------------------------------------------------
 
 **Categórica vs. categórica**
 
@@ -732,7 +631,7 @@ ggplot(df_22, aes(x = income, fill = region)) +
   theme_minimal()
 ```
 
----
+------------------------------------------------------------------------
 
 ```{r, fig.width=10, fig.height=5.625, echo=FALSE}
 ggplot(df_22, aes(x = income, fill = region)) +
@@ -745,7 +644,7 @@ ggplot(df_22, aes(x = income, fill = region)) +
 
 A partir del conjunto `df_22`, podemos explorar distintas herramientas que amplían las capacidades de `ggplot2`, tanto en términos de estética como de funcionalidad.
 
----
+------------------------------------------------------------------------
 
 ## 1. `ggsci`: paletas inspiradas en publicaciones científicas
 
@@ -763,10 +662,7 @@ ggplot(df_22, aes(x = region, y = esp_vida, fill = region)) +
   labs(title = "Boxplot por región con paleta NEJM")
 ```
 
-
-
-----
-
+------------------------------------------------------------------------
 
 ```{r, fig.width=10, fig.height=5.625, echo=FALSE}
 ggplot(df_22, aes(x = region, y = esp_vida, fill = region)) +
@@ -776,11 +672,11 @@ ggplot(df_22, aes(x = region, y = esp_vida, fill = region)) +
   labs(title = "Boxplot por región con paleta NEJM")
 ```
 
-----
+------------------------------------------------------------------------
 
 También puedes probar con `scale_fill_lancet()`, `scale_fill_jama()`, etc.
 
----
+------------------------------------------------------------------------
 
 ```{r, eval=FALSE}
 ggplot(df_22, aes(x = region, y = esp_vida, fill = region)) +
@@ -790,7 +686,7 @@ ggplot(df_22, aes(x = region, y = esp_vida, fill = region)) +
   labs(title = "Boxplot por región con paleta Lancet")
 ```
 
------
+------------------------------------------------------------------------
 
 ```{r, fig.width=10, fig.height=5.625, echo=FALSE}
 ggplot(df_22, aes(x = region, y = esp_vida, fill = region)) +
@@ -800,9 +696,7 @@ ggplot(df_22, aes(x = region, y = esp_vida, fill = region)) +
   labs(title = "Boxplot por región con paleta Lancet")
 ```
 
-
-----
-
+------------------------------------------------------------------------
 
 ```{r, eval=FALSE}
 ggplot(df_22, aes(x = region, y = esp_vida, fill = region)) +
@@ -812,7 +706,7 @@ ggplot(df_22, aes(x = region, y = esp_vida, fill = region)) +
   labs(title = "Boxplot por región con paleta Jama")
 ```
 
-----
+------------------------------------------------------------------------
 
 ```{r, fig.width=10, fig.height=5.625, echo=FALSE}
 ggplot(df_22, aes(x = region, y = esp_vida, fill = region)) +
@@ -821,7 +715,6 @@ ggplot(df_22, aes(x = region, y = esp_vida, fill = region)) +
   theme_minimal() +
   labs(title = "Boxplot por región con paleta Jama")
 ```
-
 
 ## 2. `viridis`: paletas perceptualmente uniformes
 
@@ -842,7 +735,7 @@ ggplot(df_22, aes(x = esp_vida, fill = region)) +
   theme(legend.position = 'none')
 ```
 
----
+------------------------------------------------------------------------
 
 ```{r, fig.width=10, fig.height=5.625, echo=FALSE}
 ggplot(df_22, aes(x = esp_vida, fill = region)) +
@@ -854,6 +747,7 @@ ggplot(df_22, aes(x = esp_vida, fill = region)) +
        x = '', y = '') +
   theme(legend.position = 'none')
 ```
+
 ## 3. `patchwork`: combinar múltiples gráficos
 
 Permite apilar gráficos horizontal o verticalmente de forma muy intuitiva.
@@ -862,8 +756,8 @@ Permite apilar gráficos horizontal o verticalmente de forma muy intuitiva.
 library(patchwork)
 ```
 
-
 Primer gráfico: distribución general
+
 ```{r}
 p1 = ggplot(df_22, aes(x = esp_vida)) + 
   geom_density(fill = "darkgreen", alpha = 0.7) +
@@ -871,7 +765,7 @@ p1 = ggplot(df_22, aes(x = esp_vida)) +
   theme_minimal()
 ```
 
----
+------------------------------------------------------------------------
 
 ```{r, fig.width=10, fig.height=5.625, echo=FALSE}
 # Primer gráfico: distribución general
@@ -881,9 +775,10 @@ ggplot(df_22, aes(x = esp_vida)) +
   theme_minimal()
 ```
 
----
+------------------------------------------------------------------------
 
 Segundo gráfico: boxplot por región
+
 ```{r}
 p2 = ggplot(df_22, aes(x = region, y = esp_vida)) + 
   geom_boxplot(fill = "darkgreen", alpha = 0.7) +
@@ -891,7 +786,7 @@ p2 = ggplot(df_22, aes(x = region, y = esp_vida)) +
   theme_minimal()
 ```
 
----
+------------------------------------------------------------------------
 
 ```{r, fig.width=10, fig.height=5.625, echo=FALSE}
 ggplot(df_22, aes(x = region, y = esp_vida)) + 
@@ -900,9 +795,10 @@ ggplot(df_22, aes(x = region, y = esp_vida)) +
   theme_minimal()
 ```
 
-----
+------------------------------------------------------------------------
 
 Tercer gráfico: violín por nivel de ingreso
+
 ```{r}
 
 p3 = df_22 %>%
@@ -913,7 +809,7 @@ p3 = df_22 %>%
   theme_minimal()
 ```
 
-----
+------------------------------------------------------------------------
 
 ```{r, fig.width=10, fig.height=5.625, echo=FALSE}
 df_22 %>%
@@ -924,19 +820,19 @@ df_22 %>%
   theme_minimal()
 ```
 
----
+------------------------------------------------------------------------
 
 Combinamos todos
+
 ```{r, eval=FALSE}
 (p1 | p2) / p3
 ```
 
----
+------------------------------------------------------------------------
 
 ```{r, fig.width=10, fig.height=5.625, echo=FALSE}
 (p1 | p2) / p3
 ```
-
 
 ## 4. `ggthemes`: estilos inspirados en medios
 
@@ -946,7 +842,7 @@ Proporciona temas como los de *The Economist* o *Wall Street Journal*.
 library(ggthemes)
 ```
 
------
+------------------------------------------------------------------------
 
 ```{r, eval=FALSE}
 ggplot(df_22, aes(x = region, y = esp_vida, fill = region)) +
@@ -956,7 +852,7 @@ ggplot(df_22, aes(x = region, y = esp_vida, fill = region)) +
   labs(title = "Estilo The Economist")
 ```
 
----
+------------------------------------------------------------------------
 
 ```{r, fig.width=10, fig.height=5.625, echo=FALSE}
 ggplot(df_22, aes(x = region, y = esp_vida, fill = region)) +
@@ -966,8 +862,7 @@ ggplot(df_22, aes(x = region, y = esp_vida, fill = region)) +
   labs(title = "Estilo The Economist")
 ```
 
-
----
+------------------------------------------------------------------------
 
 ## 5. `ggtext`: etiquetas enriquecidas con HTML/Markdown
 
@@ -978,16 +873,18 @@ library(ggtext)
 library(glue)
 ```
 
-----
+------------------------------------------------------------------------
 
 ```{r}
 unique(df_22$region)
 ```
+
 Entonces...
 
----
+------------------------------------------------------------------------
 
 Definimos un vector colores que coincida exactamente con esos nombres:
+
 ```{r}
 colores = c(
   "Sub-Saharan Africa" = "#E63946",
@@ -1000,9 +897,10 @@ colores = c(
 )
 ```
 
----
+------------------------------------------------------------------------
 
 Usamos glue() con HTML y los nombres reales de las regiones:
+
 ```{r}
 titulo = glue(
   "Esperanza de vida por región:<br>",
@@ -1016,8 +914,7 @@ titulo = glue(
 )
 ```
 
-
-----
+------------------------------------------------------------------------
 
 ```{r, eval=FALSE}
 # Reordenamos la variable region según el vector de colores
@@ -1036,7 +933,7 @@ ggplot(df_22, aes(x = region, y = esp_vida, fill = region)) +
   ggtitle(titulo)
 ```
 
-----
+------------------------------------------------------------------------
 
 ```{r, fig.width=10, fig.height=5.625, echo=FALSE}
 # Reordenamos la variable region según el vector de colores
@@ -1072,7 +969,7 @@ ggplot(df_22, aes(x = pib_capita, y = esp_vida)) +
        x = "", y = "Esperanza de vida")
 ```
 
----
+------------------------------------------------------------------------
 
 ```{r, fig.width=10, fig.height=5.625, echo=FALSE}
 ggplot(df_22, aes(x = pib_capita, y = esp_vida)) +
@@ -1091,15 +988,14 @@ Sirve para resaltar observaciones relevantes en un gráfico.
 library(gghighlight)
 ```
 
----
-
+------------------------------------------------------------------------
 
 ```{r}
 paises_vecinos = c("Peru", "Brasil", "Colombia", 
                    "Ecuador", "Chile", "Argentina")
 ```
 
----
+------------------------------------------------------------------------
 
 ```{r, eval=FALSE}
 df_22 %>%
@@ -1117,7 +1013,7 @@ df_22 %>%
   )
 ```
 
----
+------------------------------------------------------------------------
 
 ```{r, fig.width=10, fig.height=5.625, echo=FALSE}
 df_22 %>%
@@ -1135,13 +1031,11 @@ df_22 %>%
   )
 ```
 
-
 # Exportación
 
-
 Una vez que hemos creado un gráfico con ggplot2, muchas veces queremos guardarlo como imagen para usarlo en presentaciones, informes o publicaciones. Para ello, usamos la función `ggsave()`.
+
 ```{r, eval=FALSE}
 ggsave("nombre_del_archivo.png", plot = objeto_del_gráfico, 
        width = 8, height = 6, dpi = 300)
 ```
-
