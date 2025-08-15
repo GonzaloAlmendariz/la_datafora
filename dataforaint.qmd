@@ -1,0 +1,47 @@
+---
+title: "La Datáfira Intervativa"
+format: html
+editor: visual
+execute:
+  echo: false
+  eval: true
+---
+
+<style>
+/* Reset total de margen/padding */
+html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    overflow: hidden !important;
+}
+
+/* Contenedores internos de Quarto Cosmo */
+.q-container, .main-content, .page-body, .site-main, .site-content {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+}
+</style>
+
+<div style="
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #f8f8f8;
+    z-index: 999;
+">
+  <iframe 
+    src="https://np6xsv-gonzalo-almendariz.shinyapps.io/dinstats/" 
+    style="
+        width: 100vw;
+        height: 100vh;
+        border: none;
+    ">
+  </iframe>
+</div>

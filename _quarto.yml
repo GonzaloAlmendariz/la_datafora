@@ -46,6 +46,9 @@ website:
             file: solucionario.qmd
           - text: "Referencias bibliográficas"
             file: references.qmd
+      - text: "La Datáfora Interactiva"
+        file: dataforaint.qmd
+      
 
 format:
   html:
