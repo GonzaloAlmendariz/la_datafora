@@ -1,0 +1,331 @@
+/* =========================
+   Paleta de colores y variables globales
+   ========================= */
+:root {
+  --primary-color: #2C3E50;     /* Azul oscuro elegante para títulos y enlaces importantes */
+  --secondary-color: #005cc5;   /* Azul resaltante para links y acentos */
+  --accent-color: #22863a;      /* Verde sutil para resaltar elementos */
+  --bg-color: #fefefe;          /* Fondo general */
+  --text-color: #24292e;        /* Color principal del texto */
+}
+
+/* =========================
+   Estilos generales del body y tipografía
+   ========================= */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.6;
+}
+
+/* Títulos */
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Roboto Slab", "Georgia", serif;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  margin-left: 0.5rem; /* margen a la izquierda para no chocar con la tarjeta */
+}
+
+h1 { font-weight: 700; }
+h2 { font-weight: 600; }
+h3 { font-weight: 500; }
+
+/* =========================
+   Título del TOC
+   ========================= */
+#quarto-margin-sidebar #TOC h2#toc-title {
+  text-align: center;           /* Centrado horizontal */
+  font-size: 1rem;            /* Tamaño grande */
+  font-weight: 700;             /* Negrita */
+  color: var(--primary-color);  /* Color principal */
+  margin-bottom: 1rem;          /* Espacio debajo del título */
+}
+
+/* =========================
+   Título principal del documento (YAML `title:`)
+   ========================= */
+.quarto-title {
+  text-align: center;           /* Centrado del contenedor */
+  margin-top: 2.5rem;           /* Espacio desde el inicio del documento */
+  margin-bottom: 4rem;          /* Separación antes del primer capítulo */
+}
+
+.quarto-title h1.title {
+  font-size: 3rem;              /* Grande y destacado */
+  font-weight: 800;             /* Muy negrita */
+  color: var(--primary-color);  /* Color principal de tu paleta */
+  line-height: 1.2;             /* Ajusta altura de línea si quieres */
+  margin: 0;                     /* El contenedor maneja márgenes */
+}
+
+/* =========================
+   Hover y línea solo para H1
+   ========================= */
+h1 {
+  border-bottom: 2px solid rgba(0,0,0,0.08); /* línea sutil */
+  padding-bottom: 0.3rem;                   
+  margin-bottom: 1.5rem;                    
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+
+/* =========================
+   Quitar ícono de enlace que aparece al pasar sobre subtítulos
+   ========================= */
+h2 .header-anchor,
+h3 .header-anchor,
+h4 .header-anchor,
+h5 .header-anchor,
+h6 .header-anchor {
+  display: none; /* elimina el icono de ancla */
+}
+
+/* =========================
+   Enlaces
+   ========================= */
+a {
+  color: var(--secondary-color);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--primary-color);
+}
+
+/* =========================
+   Tabla de contenidos minimalista
+   ========================= */
+#quarto-margin-sidebar #TOC {
+  font-size: 0.95rem;
+  background: var(--bg-color);       /* mismo fondo que el body */
+  border-radius: 0.5rem;
+  padding: 1rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  box-shadow: none;                  /* sin sombra general */
+  border-left: none;                 /* quitar línea lateral */
+  position: fixed;        /* fijo al hacer scroll */
+  top: 1rem;              /* separación superior */
+  left: 1rem;             /* separación izquierda */
+  width: 220px;           /* ancho de la TOC */
+  max-height: 90vh;       /* no ocupar toda la altura */
+  overflow-y: auto;       /* scroll si excede la altura */
+  z-index: 100;           /* por encima del contenido */
+}
+}
+
+/* Enlaces dentro del TOC */
+#quarto-margin-sidebar #TOC a {
+  display: block;           
+  padding: 0.3rem 0;        
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  border-radius: 0.25rem;
+  background-color: transparent;       /* sin fondo */
+  box-shadow: none;                     /* sin sombra por defecto */
+}
+
+/* Hover sobre enlaces individuales: solo el enlace se eleva */
+#quarto-margin-sidebar #TOC a:hover {
+  transform: translateY(-2px);
+  color: var(--secondary-color);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08); /* sombra ligera solo en hover */
+}
+
+/* Enlace activo en TOC */
+#quarto-margin-sidebar #TOC a.active {
+  background-color: rgba(0,92,197,0.05); /* leve azul */
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+/* Quitar cualquier sombra extra al final del TOC */
+#quarto-margin-sidebar #TOC::after {
+  content: none;
+}
+
+.chapter.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+
+/* =========================
+   Margen inicial para todos los niveles del TOC
+   ========================= */
+#quarto-margin-sidebar #TOC a {
+  padding-left: 0.5rem;   /* ajusta según el espacio que quieras */
+}
+
+
+/* =========================
+   Imágenes centradas con pie de foto
+   ========================= */
+.quarto-figure {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.quarto-figure img {
+  display: inline-block;
+  border-radius: 6px; /* esquinas suavizadas */
+  max-width: 100%;
+  height: auto;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.quarto-figure img:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+}
+
+
+.quarto-figure figcaption {
+  text-align: center;
+  font-size: 0.85em;
+  color: #6a737d;
+  margin-top: 0.3rem;
+  font-style: italic;
+}
+
+/* Ajuste general de imágenes en Quarto */
+.quarto-figure img,
+img {
+  display: block;          /* Para poder centrar */
+  margin-left: auto;       /* Centrado horizontal */
+  margin-right: auto;
+  max-width: 100%;          /* Escala al 85% del contenedor */
+  height: auto;            /* Mantiene proporciones */
+  transition: transform 0.3s ease, opacity 0.3s ease; /* Animación suave */
+}
+
+/* Efecto hover: ligero zoom y opacidad */
+.quarto-figure img:hover,
+img:hover {
+  transform: scale(1.05);
+  opacity: 0.95;
+}
+
+
+/* =========================
+   Bloques de código
+   ========================= */
+pre.sourceCode {
+  font-family: "Fira Code", monospace; /* ligaduras opcionales */
+  font-variant-ligatures: contextual;
+  line-height: 1.5;
+  background: #f8f9fa;
+  border: none;                  /* quitar borde gris */
+  border-radius: 0.5rem;
+  padding: 1em;
+  overflow-x: auto;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08); /* sombra ligera */
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+/* Hover: elevación limitada, borde sube junto con el bloque */
+pre.sourceCode:hover {
+  transform: translateY(-2px); /* eleva todo el bloque */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.10); /* sombra más visible */
+}
+
+/* Contenedor para efecto 3D real */
+div.sourceCode {
+  position: relative;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.08); /* sombra ligera */
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  overflow: visible; /* que la sombra no se corte */
+}
+
+/* Hover: contenedor completo sube */
+div.sourceCode:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+}
+
+/* Bloque interno */
+div.sourceCode pre.sourceCode {
+  background: #f8f9fa;
+  border: none;                   /* quitar borde gris */
+  border-radius: 0.5rem;
+  padding: 1em;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  overflow-x: auto;
+  margin: 0; /* quitar márgenes duplicados */
+}
+
+/* Botón de copiar código */
+.code-copy-button {
+  opacity: 0;
+  transform: scale(0.8);         
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  top: 4px !important;           
+  right: 4px !important;         
+  background-color: transparent;
+  border: none;
+  color: #6a737d;
+  font-size: 0.85rem;
+  cursor: pointer;
+  position: absolute;
+}
+
+div.sourceCode:hover .code-copy-button {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* =========================
+   Tarjetas de contenido
+   ========================= */
+.card-style {
+  background: #fff;
+  border-radius: 0.5rem;
+  border-top: 1px solid #000;
+  border-bottom: 1px solid #000;
+  border-left: none;
+  border-right: none;
+  padding: 1rem;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.08); /* sombra solo hacia abajo */
+  margin-bottom: 1.5rem;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.card-style:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+}
+
+/* =========================
+   Sombras reutilizables
+   ========================= */
+.box-shadow-light {
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.box-shadow-hover:hover {
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+}
+
+/* extra
+*/
+
+pre.sourceCode {
+  font-feature-settings: "liga" 1; /* ligaduras */
+  font-variant-ligatures: contextual;
+}
+
+#quarto-margin-sidebar #TOC .toc-level-1 { padding-left: 0.5rem; transition: padding-left 0.3s ease; }
+#quarto-margin-sidebar #TOC .toc-level-2 { padding-left: 1rem; transition: padding-left 0.3s ease; }
+#quarto-margin-sidebar #TOC .toc-level-3 { padding-left: 1.5rem; transition: padding-left 0.3s ease; }
+
+

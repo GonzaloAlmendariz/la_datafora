@@ -1,0 +1,29 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "La Datafora"
+  navbar:
+    left:
+      - text: "Inicio"
+        file: about.qmd
+      - text: "Curso R"
+        menu:
+          - text: "Sesión 1"
+            file: sesion1.qmd
+          - text: "Sesión 2"
+            file: sesion2.qmd
+          - text: "Sesión 3"
+            file: sesion3.qmd
+          - text: "Sesión 4"
+            file: sesion4.qmd
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+
+editor: visual
+

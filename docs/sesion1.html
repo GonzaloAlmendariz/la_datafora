@@ -1,0 +1,1939 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Sesión 1: Introducción – La Datafora</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Sin resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">La Datafora</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Buscar"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Navegación de palanca" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./about.html"> 
+<span class="menu-text">Inicio</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-curso-r" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Curso R</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-curso-r">    
+        <li>
+    <a class="dropdown-item" href="./sesion1.html">
+ <span class="dropdown-text">Sesión 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./sesion2.html">
+ <span class="dropdown-text">Sesión 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./sesion3.html">
+ <span class="dropdown-text">Sesión 3</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./sesion4.html">
+ <span class="dropdown-text">Sesión 4</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">En esta página</h2>
+   
+  <ul>
+  <li><a href="#objetivos-de-la-sesión-de-hoy" id="toc-objetivos-de-la-sesión-de-hoy" class="nav-link active" data-scroll-target="#objetivos-de-la-sesión-de-hoy">Objetivos de la sesión de hoy</a></li>
+  <li><a href="#interfaz" id="toc-interfaz" class="nav-link" data-scroll-target="#interfaz">Interfaz</a>
+  <ul class="collapse">
+  <li><a href="#crear-un-archivo-de-script" id="toc-crear-un-archivo-de-script" class="nav-link" data-scroll-target="#crear-un-archivo-de-script">Crear un archivo de script</a></li>
+  </ul></li>
+  <li><a href="#elementos" id="toc-elementos" class="nav-link" data-scroll-target="#elementos">Elementos</a>
+  <ul class="collapse">
+  <li><a href="#operaciones-básicas-con-elementos" id="toc-operaciones-básicas-con-elementos" class="nav-link" data-scroll-target="#operaciones-básicas-con-elementos">Operaciones básicas con elementos</a>
+  <ul class="collapse">
+  <li><a href="#operadores-matemáticos" id="toc-operadores-matemáticos" class="nav-link" data-scroll-target="#operadores-matemáticos">Operadores matemáticos:</a></li>
+  <li><a href="#operadores-de-comparación" id="toc-operadores-de-comparación" class="nav-link" data-scroll-target="#operadores-de-comparación">Operadores de comparación</a></li>
+  <li><a href="#operadores-lógicos" id="toc-operadores-lógicos" class="nav-link" data-scroll-target="#operadores-lógicos">Operadores lógicos</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#objetos" id="toc-objetos" class="nav-link" data-scroll-target="#objetos">Objetos</a>
+  <ul class="collapse">
+  <li><a href="#tipos-de-objetos-en-r" id="toc-tipos-de-objetos-en-r" class="nav-link" data-scroll-target="#tipos-de-objetos-en-r">Tipos de objetos en R</a>
+  <ul class="collapse">
+  <li><a href="#los-principales-tipos-de-objetos-son" id="toc-los-principales-tipos-de-objetos-son" class="nav-link" data-scroll-target="#los-principales-tipos-de-objetos-son">Los principales tipos de objetos son:</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#funciones" id="toc-funciones" class="nav-link" data-scroll-target="#funciones">Funciones</a></li>
+  <li><a href="#data-frames" id="toc-data-frames" class="nav-link" data-scroll-target="#data-frames">Data Frames</a>
+  <ul class="collapse">
+  <li><a href="#funciones-estructurales" id="toc-funciones-estructurales" class="nav-link" data-scroll-target="#funciones-estructurales">Funciones estructurales</a></li>
+  <li><a href="#funciones-analíticas" id="toc-funciones-analíticas" class="nav-link" data-scroll-target="#funciones-analíticas">Funciones analíticas</a></li>
+  </ul></li>
+  <li><a href="#paquetes" id="toc-paquetes" class="nav-link" data-scroll-target="#paquetes">Paquetes</a>
+  <ul class="collapse">
+  <li><a href="#instalar-un-paquete" id="toc-instalar-un-paquete" class="nav-link" data-scroll-target="#instalar-un-paquete">Instalar un paquete</a></li>
+  <li><a href="#cargar-un-paquete" id="toc-cargar-un-paquete" class="nav-link" data-scroll-target="#cargar-un-paquete">Cargar un paquete</a></li>
+  </ul></li>
+  <li><a href="#importación" id="toc-importación" class="nav-link" data-scroll-target="#importación">Importación</a></li>
+  <li><a href="#limpieza" id="toc-limpieza" class="nav-link" data-scroll-target="#limpieza">Limpieza</a>
+  <ul class="collapse">
+  <li><a href="#manejo-de-valores-faltantes" id="toc-manejo-de-valores-faltantes" class="nav-link" data-scroll-target="#manejo-de-valores-faltantes">Manejo de valores faltantes</a></li>
+  <li><a href="#estandarización-de-nombres-de-columnas" id="toc-estandarización-de-nombres-de-columnas" class="nav-link" data-scroll-target="#estandarización-de-nombres-de-columnas">Estandarización de nombres de columnas</a></li>
+  <li><a href="#eliminación-de-duplicados" id="toc-eliminación-de-duplicados" class="nav-link" data-scroll-target="#eliminación-de-duplicados">Eliminación de duplicados</a></li>
+  </ul></li>
+  <li><a href="#guardado-y-exportación-de-objetos-de-trabajo" id="toc-guardado-y-exportación-de-objetos-de-trabajo" class="nav-link" data-scroll-target="#guardado-y-exportación-de-objetos-de-trabajo">Guardado y exportación de objetos de trabajo</a>
+  <ul class="collapse">
+  <li><a href="#guardar-como-archivo-.rds" id="toc-guardar-como-archivo-.rds" class="nav-link" data-scroll-target="#guardar-como-archivo-.rds">Guardar como archivo <code>.RDS</code></a></li>
+  <li><a href="#exportar-como-archivo-.csv" id="toc-exportar-como-archivo-.csv" class="nav-link" data-scroll-target="#exportar-como-archivo-.csv">Exportar como archivo <code>.csv</code></a></li>
+  <li><a href="#guardar-todo-el-entorno-de-trabajo" id="toc-guardar-todo-el-entorno-de-trabajo" class="nav-link" data-scroll-target="#guardar-todo-el-entorno-de-trabajo">Guardar todo el entorno de trabajo</a></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Otros formatos</h2><ul><li><a href="sesion1.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Sesión 1: Introducción</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div style="page-break-after: always;"></div>
+<section id="objetivos-de-la-sesión-de-hoy" class="level2">
+<h2 class="anchored" data-anchor-id="objetivos-de-la-sesión-de-hoy">Objetivos de la sesión de hoy</h2>
+<p>Familiarizarse con el entorno R y RStudio, comprender la estructura básica del lenguaje, instalar y cargar paquetes, e importar bases de datos en diversos formatos. Primer contacto con la exploración estructural de datos.</p>
+</section>
+<section id="interfaz" class="level1">
+<h1>Interfaz</h1>
+<div style="page-break-after: always;"></div>
+<p>Para empezar, vamos a utilizar RStudio por ello, lo primero que debemos hacer es familiarizarnos con la interfaz. Al abrirlo, probablemente lo primero que veas es lo siguiente.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/clipboard-2730531706.png" class="img-fluid figure-img" width="492"></p>
+<figcaption>Extraído de RStudio User Guide</figcaption>
+</figure>
+</div>
+<p>Hay cuatro paneles, cada uno indispensable y con un conjunto de funcionalidades:</p>
+<ol type="1">
+<li><p><strong>Source</strong>: Todo el código que escribes en R se realiza en el panel Source. El código R es simplemente tu conjunto de instrucciones en el lenguaje R para que la computadora complete las tareas dadas.</p></li>
+<li><p><strong>Consola</strong>: La consola es la consola interactiva R. Aquí es donde la mayoría de las funciones se ejecutan al instante. Aquí es donde aparecen los resultados de los cálculos y procedimientos que hemos solicitado al programa. Se utiliza principalmente para una verificación rápida y también para ver el resultado de tus scripts.</p></li>
+<li><p><strong>Entorno</strong>: La pestaña Entorno es la lista de todos los objetos que has creado en tu trabajo. Algunos ejemplos de objetos son vectores, matrices, data frames, listas, gráficos y funciones.</p></li>
+<li><p><strong>Archivos/Gráficos/Paquetes/Ayuda</strong>:</p>
+<ul>
+<li><strong>Archivos</strong>: Son para navegar por el sistema de archivos de tu computadora directamente desde RStudio.</li>
+<li><strong>Gráficos</strong>: Después de ejecutar el código R, puedes ver las imágenes creadas por el código R.</li>
+<li><strong>Paquetes</strong>: La herramienta gestiona los paquetes que has instalado.</li>
+<li><strong>Ayuda</strong>: El equivalente de Google para R. Puedes buscar cualquier información sobre las funciones e incluso encontrar el tutorial necesario.</li>
+</ul></li>
+</ol>
+<p>La ventaja original del panel <strong>Source</strong> es la <strong>capacidad de editar rápidamente tu código</strong>, el cual puedes volver a ejecutar. Este aspecto incluye tanto la reproductividad como la eficiencia; por ejemplo, podemos ajustar nuestro código sin rehacerlo desde cero. Además, podemos guardar nuestro trabajo como un archivo, podemos almacenar nuestros scripts en un editor de computadora, podemos distribuirlo, podemos editarlo o publicar este archivo nuevamente. Pero para trabajar de manera organizada, también es importante tener una buena estructura para almacenar todo lo relacionado con el proyecto.</p>
+<p>Cuando trabajamos en proyectos de análisis de datos, es común manejar varios archivos relacionados: tus scripts (donde escribirás el código), los datos que analizarás y los resultados generados. Tener una carpeta específica para cada proyecto te ayuda a mantener todo organizado en un solo lugar. Además, R necesita saber dónde buscar y guardar los archivos, y eso se define mediante el&nbsp;<strong>directorio de trabajo</strong>, que es simplemente la carpeta donde R guardará y buscará archivos automáticamente para el proyecto en específico.</p>
+<section id="crear-un-archivo-de-script" class="level2">
+<h2 class="anchored" data-anchor-id="crear-un-archivo-de-script">Crear un archivo de script</h2>
+<p>Cuando trabajamos en R, utilizamos diferentes tipos de archivos para organizar y guardar nuestro trabajo. Dos formatos comunes son el <strong>archivo R Script</strong> y el <strong>documento Quarto</strong>. Ambos se utilizan para escribir código, pero cumplen propósitos diferentes que es importante entender.</p>
+<p>Un <strong>archivo R Script</strong> es un archivo simple donde escribimos y guardamos nuestras instrucciones de código. Sirve como un registro de los comandos que ejecutamos, permitiendo reutilizarlos o ajustarlos más adelante. Sin embargo, este tipo de archivo no incluye espacio para explicaciones extensas ni muestra los resultados directamente junto al código.</p>
+<p>En cambio, un <strong>documento Quarto</strong> va más allá al permitir combinar texto explicativo, bloques de código y los resultados generados (como tablas y gráficos) en un solo archivo. Además, es posible exportar el archivo final en formatos como HTML, PDF o Word, haciéndolo ideal para documentar y compartir análisis de manera profesional (de hecho, este libro esta hecho en Quarto). Esta capacidad de integrar explicación, análisis y presentación en un mismo lugar hace que Quarto sea particularmente útil para aprender y comunicar análisis de datos. En nuestras clases, vamos a utilizar <strong>documentos Quarto</strong>.</p>
+<ol type="1">
+<li><p><strong>Accede a la ventana Files</strong>:</p>
+<ul>
+<li>En RStudio, localiza el panel <strong>Files</strong>. Este panel muestra el contenido de la carpeta de trabajo que configuraste previamente.</li>
+</ul></li>
+<li><p><strong>Crea un nuevo documento Quarto</strong>:</p>
+<ul>
+<li>En el panel <strong>Files</strong>, haz clic en el botón <strong>New File</strong> y selecciona <strong>Quarto Document</strong>.</li>
+</ul>
+<p><img src="images/9.png" class="img-fluid" width="646"></p>
+<ul>
+<li>Aparecerá un cuadro de diálogo donde puedes configurar el título del documento, tu nombre y el formato de salida inicial (HTML es una buena opción para empezar). Haz clic en <strong>Create</strong>.</li>
+</ul></li>
+<li><p><strong>Guarda automáticamente en la carpeta de trabajo</strong>:</p>
+<ul>
+<li>Cuando crees el documento desde la ventana <strong>Files</strong>, este se guardará automáticamente en tu carpeta de trabajo configurada. No necesitas realizar pasos adicionales para seleccionar la ubicación.</li>
+</ul></li>
+</ol>
+<p>En un archivo Quarto puedes combinar texto explicativo (en formato Markdown) con bloques (chunks) de código en R. Los bloques de código son las secciones donde escribirás las instrucciones que deseas ejecutar, y están delimitados por tres backticks (```) seguidos del lenguaje que estás utilizando (en este caso, <code>r</code>). Para agregar un bloque de código de manera rápida, puedes utilizar el atajo de teclado:</p>
+<ul>
+<li><strong>Ctrl + Alt + I</strong> en Windows y Linux.</li>
+<li><strong>Cmd + Option + I</strong> en Mac.</li>
+</ul>
+<p>Este atajo insertará automáticamente un nuevo chunk en tu documento, con la estructura básica para que puedas empezar a escribir tu código. Un chunk de código tiene este formato:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Aquí escribes tu código en R</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Dentro del chunk, puedes incluir cualquier instrucción que se ejecutará cuando proceses el documento. Esto permite mantener el texto explicativo y el código separados pero integrados en el mismo archivo.</p>
+<div class="callout callout-style-default callout-important callout-titled" title="Importante">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Importante
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Es primordial que trabajes directamente desde tu carpeta de trabajo, asegurando que todos los archivos relacionados con el proyecto estén organizados en una carpeta.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="elementos" class="level1">
+<h1>Elementos</h1>
+<p>Los elementos son la unidad mínima de información. Puede representar un valor numérico, una palabra, o una afirmación. Cuando usamos R, escribimos estos elementos directamente en la consola o los usamos dentro de otros objetos más grandes.</p>
+<p>Saber reconocer qué tipo de elemento estamos usando es fundamental para entender cómo se comporta en el código y qué operaciones podemos hacer con él.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Dato">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Dato
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>En R existen varios tipos de datos, pero podemos empezar por los tres tipos básicos que se usan todo el tiempo:</p>
+<ul>
+<li><p><strong>Numéricos</strong>, para representar cantidades.</p></li>
+<li><p><strong>Texto</strong>, para representar palabras o frases.</p></li>
+<li><p><strong>Lógicos</strong>, para representar afirmaciones verdaderas o falsas.</p></li>
+</ul>
+</div>
+</div>
+<p>Numérico</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(<span class="dv">5</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "numeric"</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span><span class="dv">3</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -3</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fl">3.5</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.5</code></pre>
+</div>
+</div>
+<p>Texto</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(<span class="st">"Hola"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "character"</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="st">"Perú"</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Perú"</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="st">"El servicio fue ineficiente"</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "El servicio fue ineficiente"</code></pre>
+</div>
+</div>
+<p>Lógico (verdadero/falso)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(T)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "logical"</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>F</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+</div>
+<section id="operaciones-básicas-con-elementos" class="level2">
+<h2 class="anchored" data-anchor-id="operaciones-básicas-con-elementos">Operaciones básicas con elementos</h2>
+<p>En R, al igual que en otros lenguajes de programación, es fundamental comprender cómo manipular distintos tipos de datos mediante operaciones básicas.</p>
+<section id="operadores-matemáticos" class="level3">
+<h3 class="anchored" data-anchor-id="operadores-matemáticos">Operadores matemáticos:</h3>
+<p>Permiten realizar cálculos aritméticos entre valores.</p>
+<ul>
+<li><span class="math inline">\(a + b\)</span> → <code>a + b</code><br>
+</li>
+<li><span class="math inline">\(a - b\)</span> → <code>a - b</code><br>
+</li>
+<li><span class="math inline">\(a \times b\)</span> → <code>a * b</code><br>
+</li>
+<li><span class="math inline">\(\frac{a}{b}\)</span> → <code>a / b</code><br>
+</li>
+<li><span class="math inline">\(a^b\)</span> → <code>a ^ b</code><br>
+</li>
+<li><span class="math inline">\(\sqrt{a}\)</span> → <code>sqrt(a)</code></li>
+</ul>
+<p>Suma</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">+</span> <span class="dv">3</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 8</code></pre>
+</div>
+</div>
+<p>Resta</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span> <span class="sc">-</span> <span class="dv">4</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6</code></pre>
+</div>
+</div>
+<p>Multiplicación</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span><span class="sc">*</span><span class="dv">6</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 30</code></pre>
+</div>
+</div>
+<p>División</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="dv">30</span><span class="sc">/</span><span class="dv">5</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6</code></pre>
+</div>
+</div>
+<p>Potencia:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span><span class="sc">^</span><span class="dv">2</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 25</code></pre>
+</div>
+</div>
+<p>Operaciones en paréntesis</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>(<span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span>) <span class="sc">*</span> <span class="dv">10</span> </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 50</code></pre>
+</div>
+</div>
+<p>Los elementos lógicos son tratados como 0 y 1</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="cn">FALSE</span> <span class="sc">+</span> <span class="cn">FALSE</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="cn">TRUE</span> <span class="sc">+</span> <span class="cn">TRUE</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="cn">TRUE</span> <span class="sc">+</span> <span class="cn">FALSE</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled" title="Cuidado">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Cuidado
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Los <strong>elementos de texto</strong> no están diseñados para realizar operaciones aritméticas como suma o multiplicación. Si intentas hacerlo, obtendrás un error. Esto se debe a que, a diferencia de los números, el texto no representa cantidades numéricas sobre las que se pueda operar.</p>
+</div>
+</div>
+<p>Error:</p>
+<pre><code>"Hola" + "Que tal"</code></pre>
+<p>Error in “Hola” + “Que tal” : non-numeric argument to binary operator</p>
+</section>
+<section id="operadores-de-comparación" class="level3">
+<h3 class="anchored" data-anchor-id="operadores-de-comparación">Operadores de comparación</h3>
+<p>Permiten evaluar relaciones entre valores. Devuelven siempre un valor lógico: <code>TRUE</code> o <code>FALSE</code>.</p>
+<ul>
+<li><span class="math inline">\(x = y\)</span> → <code>x == y</code>: Igualdad</li>
+<li><span class="math inline">\(x \neq y\)</span> → <code>x != y</code>: Desigualdad</li>
+<li><span class="math inline">\(x &lt; y\)</span>: Menor que</li>
+<li><span class="math inline">\(x \leq y\)</span> → <code>x &lt;= y</code>: Menor o igual que</li>
+<li><span class="math inline">\(x &gt; y\)</span>: Mayor que</li>
+<li><span class="math inline">\(x \geq y\)</span> → <code>x &gt;= y</code>: Mayor o igual que</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">==</span> <span class="dv">5</span>   </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span> <span class="sc">!=</span> <span class="dv">2</span>    </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span> <span class="sc">&lt;</span> <span class="dv">8</span>    </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span> <span class="sc">&gt;=</span> <span class="dv">4</span>     </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+</section>
+<section id="operadores-lógicos" class="level3">
+<h3 class="anchored" data-anchor-id="operadores-lógicos">Operadores lógicos</h3>
+<p>Permiten combinar condiciones. Estas expresiones también devuelven <code>TRUE</code> o <code>FALSE</code>.</p>
+<ul>
+<li><p><strong>Negación lógica</strong>: <span class="math inline">\(\lnot x\)</span> → <code>!x</code> Invierte el valor lógico de <code>x</code>.</p></li>
+<li><p><strong>Conjunción lógica (Y)</strong>: <span class="math inline">\(x \land y\)</span> → <code>x &amp; y</code> Devuelve <code>TRUE</code> solo si <strong>ambas</strong> condiciones son verdaderas.</p></li>
+<li><p><strong>Disyunción lógica (O)</strong>: <span class="math inline">\(x \lor y\)</span> → <code>x | y</code> Devuelve <code>TRUE</code> si <strong>al menos una</strong> condición es verdadera.</p></li>
+</ul>
+<p><strong>Negación lógica</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="sc">!</span><span class="cn">TRUE</span>    </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="sc">!</span><span class="cn">FALSE</span>    </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<p><strong>Conjunción lógica (Y)</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>  (<span class="dv">5</span> <span class="sc">&gt;</span> <span class="dv">3</span>) <span class="sc">&amp;</span> (<span class="dv">2</span> <span class="sc">&lt;</span> <span class="dv">4</span>)   </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>  (<span class="dv">10</span> <span class="sc">&gt;</span> <span class="dv">3</span>) <span class="sc">&amp;</span> (<span class="dv">1</span> <span class="sc">&gt;</span> <span class="dv">5</span>)  </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+</div>
+<p><strong>Disyunción lógica (O)</strong>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>  (<span class="dv">4</span> <span class="sc">&lt;</span> <span class="dv">2</span>) <span class="sc">|</span> (<span class="dv">7</span> <span class="sc">&gt;</span> <span class="dv">1</span>)   </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>  (<span class="dv">3</span> <span class="sc">==</span> <span class="dv">5</span>) <span class="sc">|</span> (<span class="dv">2</span> <span class="sc">&gt;</span> <span class="dv">10</span>) </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="objetos" class="level1">
+<h1>Objetos</h1>
+<p>Los objetos son estructuras donde guardamos información para poder reutilizarla, manipularla o transformarla más adelante.</p>
+<p>Crear un objeto es como ponerle nombre a un dato o conjunto de datos. Una vez creado, ese nombre puede usarse para hacer cálculos, funciones, gráficos y más.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Dato">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Dato
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>En R, los objetos se crean con el operador <code>&lt;-</code> o el <code>=</code>, que se lee como “le asigno”.</p>
+<p>Por ejemplo:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="dv">5</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Aquí estamos diciendo: crea un objeto llamado x y asígnale el número 5.</p>
+</div>
+</div>
+<p><strong>¿Qué puedo guardar en un objeto?</strong></p>
+<p>Prácticamente todo, puedes guardar:</p>
+<ul>
+<li>Un número: <code>x = 10</code></li>
+<li>Una palabra: <code>nombre = "Gonzalo"</code></li>
+<li>Un valor lógico: <code>es_mayor = TRUE</code></li>
+</ul>
+<p>Una vez creado el objeto, puedes <strong>llamarlo por su nombre</strong>:</p>
+<p>Si</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="dv">10</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Entonces…</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>x</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 10</code></pre>
+</div>
+</div>
+<p>Y también <strong>usarlo en operaciones</strong>:</p>
+<p>Siendo <span class="math inline">\(x = 10\)</span>…</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>x <span class="sc">+</span> <span class="dv">2</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 12</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Consejo">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Consejo
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Un buen nombre para un objeto debe ser claro, sin espacios ni tildes. Puedes usar guiones bajos (_) para separar palabras: por ejemplo, <code>edad_promedio</code> es mucho mejor que <code>ep</code> o <code>e.p.</code>.</p>
+</div>
+</div>
+<section id="tipos-de-objetos-en-r" class="level2">
+<h2 class="anchored" data-anchor-id="tipos-de-objetos-en-r">Tipos de objetos en R</h2>
+<p>En R, no todo es solo un número o una palabra. Muchas veces necesitamos guardar varios elementos juntos, y para eso usamos diferentes tipos de objetos. Cada uno tiene su propia estructura y sirve para distintos propósitos.</p>
+<section id="los-principales-tipos-de-objetos-son" class="level3">
+<h3 class="anchored" data-anchor-id="los-principales-tipos-de-objetos-son">Los principales tipos de objetos son:</h3>
+<p><strong>Vectores</strong></p>
+<p>Conjunto de elementos del <em>mismo tipo</em> (todos números, o todos textos, o todos lógicos).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>edades <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">18</span>, <span class="dv">21</span>, <span class="dv">25</span>)</span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>nombres <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Ana"</span>, <span class="st">"Luis"</span>, <span class="st">"María"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>edades</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 18 21 25</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>nombres</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Ana"   "Luis"  "María"</code></pre>
+</div>
+</div>
+<p><strong>Matrices</strong></p>
+<p>Como una tabla, pero con <strong>solo un tipo de dato</strong> (por ejemplo, solo números).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>matriz <span class="ot">=</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">nrow =</span> <span class="dv">2</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>matriz</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3]
+[1,]    1    3    5
+[2,]    2    4    6</code></pre>
+</div>
+</div>
+<p><strong>Listas</strong></p>
+<p>Conjunto de elementos que <strong>pueden ser de distintos tipos y formas</strong>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>mi_lista <span class="ot">=</span> <span class="fu">list</span>(<span class="at">nombre =</span> <span class="st">"Andrés"</span>, edades, <span class="at">aprobado =</span> <span class="cn">TRUE</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>mi_lista</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$nombre
+[1] "Andrés"
+
+[[2]]
+[1] 18 21 25
+
+$aprobado
+[1] TRUE</code></pre>
+</div>
+</div>
+<p><strong>Data frames</strong></p>
+<p>La estructura más usada para bases de datos. Cada columna es un vector y puede tener un tipo diferente (números, textos, etc.).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">nombre =</span> <span class="fu">c</span>(<span class="st">"Ana"</span>, <span class="st">"Luis"</span>), <span class="at">edad =</span> <span class="fu">c</span>(<span class="dv">18</span>, <span class="dv">21</span>),</span>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">aprobado =</span> <span class="fu">c</span>(T, F), <span class="at">horas_estudio =</span> <span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">9</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>datos</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  nombre edad aprobado horas_estudio
+1    Ana   18     TRUE            15
+2   Luis   21    FALSE             9</code></pre>
+</div>
+</div>
+<p>Al trabajar con datos en R, no solo importa tener la información: también importa cómo está organizada. Los objetos nos permiten guardar, transformar y analizar datos de formas muy distintas. Por eso, conocer sus tipos es esencial.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Dato">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Dato
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Cada tipo de objeto cumple un rol distinto:</p>
+<ul>
+<li><p>Un <strong>vector</strong> te permite guardar variables como edad, ingresos o respuestas a una encuesta.</p></li>
+<li><p>Un <strong>data frame</strong> organiza esas variables como columnas, ideal para trabajar con bases de datos reales.</p></li>
+<li><p>Una <strong>lista</strong> puede guardar resultados de modelos, gráficos o varios tipos de objetos juntos.</p></li>
+</ul>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="funciones" class="level1">
+<h1>Funciones</h1>
+<p>Hasta ahora hemos usado expresiones como <code>c()</code>, <code>matrix()</code>, <code>list()</code> o <code>data.frame()</code> para crear objetos. Todas estas expresiones tienen algo en común: <strong>son funciones</strong>.</p>
+<p>Una función en R es una herramienta que realiza una tarea específica. Tiene un nombre (como <code>sum()</code> o <code>mean()</code>), y entre paréntesis le damos la información que necesita para trabajar: estos son los <strong>argumentos</strong> de la función.</p>
+<p>Piensa en la funciones como pequeñas máquinas: tú pones algo dentro, la función lo procesa y te devuelve un resultado.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/clipboard-1257493817.png" class="img-fluid figure-img" width="485"></p>
+<figcaption>Extraído de: https://mathinsight.org/function_machine</figcaption>
+</figure>
+</div>
+<p>En R <strong>todo se hace con funciones</strong>: importar datos, limpiar variables, calcular estadísticas, hacer gráficos o modelos,todo eso se logra llamando a funciones específicas.</p>
+<p>Saber cómo usar una función y cómo entender lo que devuelve, es uno de los pasos más importantes para poder avanzar en análisis de datos con R. <strong>Por ejemplo:</strong></p>
+<p><code>c()</code>: Esta función <strong>combina elementos</strong> para volverlos vectores. Si le das <code>1</code>, <code>2</code> y <code>3</code>, te devuelve un solo objeto que los contiene:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>) </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 2 3</code></pre>
+</div>
+</div>
+<p><code>sum()</code>: Esta función <strong>suma</strong> los números que le das. Si metes <code>5</code>, <code>10</code> y <code>15</code>, te devuelve <code>30</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">15</span>)  </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 30</code></pre>
+</div>
+</div>
+<p>Algunas funciones permiten no solo darles valores, sino también ajustar cómo se comportan usando otros argumentos. Por ejemplo, la función mean() puede recibir instrucciones adicionales como trim o na.rm.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Consejo">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Consejo
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Cuando una función necesita varios valores como insumo (por ejemplo, varios números), estos deben ir agrupados dentro de un vector, usando <code>c()</code>. Así, le estás dando a la función un solo bloque de datos, y evita confsuión con otros argumentos.</p>
+</div>
+</div>
+<p><code>mean()</code>: Esta función <strong>calcula la media aritmética</strong> de los valores que pongas dentro:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>)) </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 20</code></pre>
+</div>
+</div>
+<p>Aunque parezca que solo le estamos pasando tres números, en realidad estamos entregándole <strong>un solo objeto</strong>: un <strong>vector</strong> que contiene esos valores.</p>
+<p>Pero también podemos darle más indicaciones a través de otros argumentos</p>
+<p>Este promedio elimina los datos faltantes (NA) antes de hacer el cálculo:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">20</span>, <span class="cn">NA</span>, <span class="dv">30</span>), <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 20</code></pre>
+</div>
+</div>
+<p>Aquí calculamos el promedio después de eliminar un 20% de los valores extremos (en total, un 10% abajo y un 10% arriba). Esto es útil cuando hay valores atípicos que podrían distorsionar el promedio.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">c</span>(<span class="fl">0.5</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">100</span>), <span class="at">trim =</span> <span class="fl">0.2</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 30</code></pre>
+</div>
+</div>
+<p>Así como puedes darle un bloque de datos a una función, también puedes pedirle que <strong>cuente cuántos elementos hay en un detemrinado objeto</strong>. Para eso usamos la función <code>length()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">8</span>, <span class="dv">10</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+</div>
+<p>Este código le pide a R que diga cuántos elementos hay dentro del vector. En este caso, la respuesta será <code>3</code> porque el vector tiene tres números.</p>
+<p><code>length()</code> no se limita a vectores numéricos. También puedes usarlo con vectores de texto, lógicos, o listas. Es una función muy útil para <strong>entender el tamaño de un objeto</strong>, especialmente cuando estás explorando o limpiando datos.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">c</span>(<span class="st">"perro"</span>, <span class="st">"gato"</span>, <span class="st">"ratón"</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="A tomar en cuenta">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+A tomar en cuenta
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>El análisis de datos se construye <strong>función por función</strong>. Cada paso, desde importar los datos hasta graficarlos, implica aplicar una función distinta. Aquí algunos ejemplos:</p>
+<ul>
+<li><code>read.csv("datos.csv")</code> → <strong>Leer datos</strong> desde un archivo <code>.csv</code>.</li>
+<li><code>mean(ingresos)</code> → <strong>Calcular el promedio</strong> de una variable numérica.</li>
+<li><code>table(sexo)</code> → <strong>Contar frecuencias</strong> de una variable categórica.</li>
+<li><code>plot(edad, ingresos)</code> → <strong>Graficar</strong> la relación entre dos variables.</li>
+<li><code>summary(datos)</code> → <strong>Resumir</strong> un conjunto de datos.</li>
+</ul>
+</div>
+</div>
+<p><strong>Aprender funciones en R es como aprender vocabulario en un idioma</strong>: cada función es como una palabra con un uso y una forma particular. Algunas hacen algo con lo que les das (como <code>mean()</code>), otras simplemente te devuelven información (como <code>length()</code>). Saber cómo se usan es lo que te permite construir sentencias útiles en lenguaje R.</p>
+</section>
+<section id="data-frames" class="level1">
+<h1>Data Frames</h1>
+<p>Cuando recolectamos o hacemos uso de conjuntos de datos, estos suelen estar almacenados en <strong>estructuras tabulares</strong>, lo que facilita su comprensión y análisis. Una <strong>estructura tabular</strong> se refiere a una organización de los datos donde cada columna representa una <strong>variable</strong> (es decir, una característica o atributo que estamos observando), y cada fila corresponde a una <strong>observación</strong> (un registro individual de los datos, como un caso o instancia). En R, la forma más común de trabajar con este tipo de estructuras es a través de <strong>objetos denominados</strong> <code>data.frames</code>.</p>
+<p>Un <code>data.frame</code> es una estructura que nos permite <strong>agrupar varios vectores</strong> bajo un mismo objeto.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a>nombres <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Ana"</span>, <span class="st">"Luis"</span>, <span class="st">"María"</span>)</span>
+<span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a>edades <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">23</span>, <span class="dv">35</span>, <span class="dv">29</span>)</span>
+<span id="cb91-3"><a href="#cb91-3" aria-hidden="true" tabindex="-1"></a>ingresos <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1500</span>, <span class="dv">2100</span>, <span class="dv">1800</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled" title="Cuidado">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Cuidado
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Todos los vectores <strong>deben tener el mismo largo</strong> porque cada fila u observación representa una unidad de análisis completa.</p>
+</div>
+</div>
+<p>Podemos generarlo con <code>data.frame</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">=</span> <span class="fu">data.frame</span>(nombres, edades, ingresos)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled" title="Importante">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Importante
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Aunque esta es una forma de generar un <strong>data.frame</strong>, en la práctica, la mayoría de los conjuntos de datos no se crean desde cero. Normalmente, los datos provienen de otras fuentes, como archivos de texto, hojas de cálculo o bases de datos.</p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a>datos</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  nombres edades ingresos
+1     Ana     23     1500
+2    Luis     35     2100
+3   María     29     1800</code></pre>
+</div>
+</div>
+<p>Podemos acceder a las columnas con el signo <code>$</code>, por ejemplo:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a>datos<span class="sc">$</span>edades</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 23 35 29</code></pre>
+</div>
+</div>
+<p>Si estás familiarizado con Excel puede pensar en un <code>data.frame</code> como una hoja de cálculo: tiene columnas que agrupan distintos tipos de información (números, texto, categorías). Lo interesante es que en R podemos analizar y transformar esa tabla aplicando <strong>funciones específicas</strong> sobre sus columnas.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Observación-01.png" class="img-fluid figure-img" width="465"></p>
+<figcaption>Elaboración propia</figcaption>
+</figure>
+</div>
+<p>Para observar el data.frame de manera visual, RStudio ofrece herramientas muy convenientes. Podemos localizar el nombre del <strong>data.frame</strong> en el panel “Entorno” (Environment) y hacer clic en el ícono de la tabla que aparece al lado. Esto abrirá una vista interactiva en forma de hoja de cálculo, donde podrás explorar las filas y columnas de tu conjunto de datos.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Observación-6.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="505"></p>
+</figure>
+</div>
+<p>Otra forma, desde la consola, es usar la función <code>View()</code>. Por ejemplo, si tu <strong>data.frame</strong> se llama <code>encuesta</code>, simplemente escribe el siguiente código en la consola:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(encuesta)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Recuerda que una función en R sigue esta forma básica:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a>nombre_función(argumento_1, argumento_2)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>A veces necesita un solo argumento, otras veces más. Algunas funciones nos piden datos para calcular algo, otras simplemente nos dicen algo sobre esos datos.</p>
+<p><strong>Partamos de un ejemplo</strong></p>
+<p>El conjunto de datos <code>iris</code> con R y contiene mediciones de 150 flores de iris, divididas en tres especies distintas. Cada fila representa una flor, y las columnas son medidas de sus pétalos y sépalos:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(iris, <span class="dv">4</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+1          5.1         3.5          1.4         0.2  setosa
+2          4.9         3.0          1.4         0.2  setosa
+3          4.7         3.2          1.3         0.2  setosa
+4          4.6         3.1          1.5         0.2  setosa</code></pre>
+</div>
+</div>
+<p>Su variables son:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 21%">
+<col style="width: 78%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>Sepal.Length</code></td>
+<td>Largo del sépalo (en cm)</td>
+</tr>
+<tr class="even">
+<td><code>Sepal.Width</code></td>
+<td>Ancho del sépalo (en cm)</td>
+</tr>
+<tr class="odd">
+<td><code>Petal.Length</code></td>
+<td>Largo del pétalo (en cm)</td>
+</tr>
+<tr class="even">
+<td><code>Petal.Width</code></td>
+<td>Ancho del pétalo (en cm)</td>
+</tr>
+<tr class="odd">
+<td><code>Species</code></td>
+<td>Especie de la flor (<code>setosa</code>, <code>versicolor</code>, <code>virginica</code>)</td>
+</tr>
+</tbody>
+</table>
+<section id="funciones-estructurales" class="level2">
+<h2 class="anchored" data-anchor-id="funciones-estructurales">Funciones estructurales</h2>
+<p>Las <strong>funciones estructurales</strong> te dicen cómo está armado un objeto. No transforman los datos, sino que te dan información sobre su forma interna.</p>
+<p><code>str()</code>: estructura interna</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(iris) </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   150 obs. of  5 variables:
+ $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
+ $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...
+ $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
+ $ Petal.Width : num  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...
+ $ Species     : Factor w/ 3 levels "setosa","versicolor",..: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
+</div>
+</div>
+<p>Muestra <strong>la estructura del objeto</strong>: cuántas filas tiene, qué variables contiene, qué tipo de datos hay en cada columna, y un vistazo a los primeros valores.</p>
+<p><code>head()</code> y <code>tail()</code>: primeras o últimas filas</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb103"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(iris)   <span class="co"># Muestra las primeras 6 filas</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+1          5.1         3.5          1.4         0.2  setosa
+2          4.9         3.0          1.4         0.2  setosa
+3          4.7         3.2          1.3         0.2  setosa
+4          4.6         3.1          1.5         0.2  setosa
+5          5.0         3.6          1.4         0.2  setosa
+6          5.4         3.9          1.7         0.4  setosa</code></pre>
+</div>
+</div>
+<p>También puedes pedir un número específico:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(iris, <span class="dv">3</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+1          5.1         3.5          1.4         0.2  setosa
+2          4.9         3.0          1.4         0.2  setosa
+3          4.7         3.2          1.3         0.2  setosa</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(iris)   <span class="co"># Muestra las últimas 6 filas</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Sepal.Length Sepal.Width Petal.Length Petal.Width   Species
+145          6.7         3.3          5.7         2.5 virginica
+146          6.7         3.0          5.2         2.3 virginica
+147          6.3         2.5          5.0         1.9 virginica
+148          6.5         3.0          5.2         2.0 virginica
+149          6.2         3.4          5.4         2.3 virginica
+150          5.9         3.0          5.1         1.8 virginica</code></pre>
+</div>
+</div>
+<p>De la misma forma con <code>tail()</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb109"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(iris, <span class="dv">3</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+1          5.1         3.5          1.4         0.2  setosa
+2          4.9         3.0          1.4         0.2  setosa
+3          4.7         3.2          1.3         0.2  setosa</code></pre>
+</div>
+</div>
+<p><code>nrow()</code> y <code>ncol()</code>: número de filas y columnas</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb111"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a href="#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(iris)   <span class="co"># Cuántas filas hay (observaciones)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 150</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb113"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb113-1"><a href="#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ncol</span>(iris)   <span class="co"># Cuántas columnas tiene (variables)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5</code></pre>
+</div>
+</div>
+<p><code>colnames()</code>: nombres de columnas</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb115"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb115-1"><a href="#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(iris)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Sepal.Length" "Sepal.Width"  "Petal.Length" "Petal.Width"  "Species"     </code></pre>
+</div>
+</div>
+<p>Devuelve un vector con los nombres de todas las columnas.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Importante">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Importante
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Estas funciones te permiten <strong>entender rápidamente con qué tipo de objeto estás trabajando</strong>, qué tiene dentro y cómo interactuar con él. Son como las funciones de “reconocimiento” antes de empezar a transformar o analizar.</p>
+</div>
+</div>
+</section>
+<section id="funciones-analíticas" class="level2">
+<h2 class="anchored" data-anchor-id="funciones-analíticas">Funciones analíticas</h2>
+<p>La <strong>funciones analíticas</strong> procesan los datos y te dan un resultado: una media, una tabla, un resumen, una visualización, etc.</p>
+<p><code>mean()</code>: calcular el promedio</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb117"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb117-1"><a href="#cb117-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(iris<span class="sc">$</span>Petal.Length)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.758</code></pre>
+</div>
+</div>
+<p>Nos da el promedio de la longitud de los pétalos. Como <code>mean()</code> espera un <strong>vector numérico</strong>, le pasamos solo una <strong>columna</strong> del <code>data.frame</code>: <code>iris$Petal.Length</code>.</p>
+<p><code>summary()</code>: resumen numérico del <code>data.frame</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb119"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb119-1"><a href="#cb119-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(iris)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Sepal.Length   Sepal.Width    Petal.Length   Petal.Width        Species  
+ Min.   :4.30   Min.   :2.00   Min.   :1.00   Min.   :0.1   setosa    :50  
+ 1st Qu.:5.10   1st Qu.:2.80   1st Qu.:1.60   1st Qu.:0.3   versicolor:50  
+ Median :5.80   Median :3.00   Median :4.35   Median :1.3   virginica :50  
+ Mean   :5.84   Mean   :3.06   Mean   :3.76   Mean   :1.2                  
+ 3rd Qu.:6.40   3rd Qu.:3.30   3rd Qu.:5.10   3rd Qu.:1.8                  
+ Max.   :7.90   Max.   :4.40   Max.   :6.90   Max.   :2.5                  </code></pre>
+</div>
+</div>
+<p>Aplica una función a <strong>todas las columnas del data.frame</strong>. Muestra medias, medianas y rangos para columnas numéricas, y conteos para las categóricas.</p>
+<p><code>table()</code>: resumen de frecuencias</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb121"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb121-1"><a href="#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(iris<span class="sc">$</span>Species)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    setosa versicolor  virginica 
+        50         50         50 </code></pre>
+</div>
+</div>
+<p><code>plot</code> nos permite crear una visualización de forma sencilla</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb123"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb123-1"><a href="#cb123-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(iris<span class="sc">$</span>Petal.Length, iris<span class="sc">$</span>Petal.Width,</span>
+<span id="cb123-2"><a href="#cb123-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> iris<span class="sc">$</span>Species,</span>
+<span id="cb123-3"><a href="#cb123-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">19</span>,</span>
+<span id="cb123-4"><a href="#cb123-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Largo del pétalo"</span>,</span>
+<span id="cb123-5"><a href="#cb123-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Ancho del pétalo"</span>,</span>
+<span id="cb123-6"><a href="#cb123-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Pétalo: largo vs ancho por especie"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="sesion1_files/figure-html/unnamed-chunk-63-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="paquetes" class="level1">
+<h1>Paquetes</h1>
+<p>En R, muchas de las cosas que queremos hacer se pueden realizar con <em>paquetes</em>. En R, un paquete es generalmente un conjunto de herramientas con funciones específicas para realizar tareas específicas. Para casi todo hay paquetes.</p>
+<p>Por ejemplo, el paquete <code>dplyr</code> es un paquete ampliamente utilizado para la manipulación de datos como filtrar valores o crear nuevas columnas. Pero antes, necesitamos entender la diferencia entre instalar un paquete y cargar un paquete en R.</p>
+<section id="instalar-un-paquete" class="level2">
+<h2 class="anchored" data-anchor-id="instalar-un-paquete">Instalar un paquete</h2>
+<p>Me gusta pensar que instalar un paquete en R es similar a ir a la tienda y comprar una caja de herramientas. Después de comprarla, la mueves a tu propio almacén para asegurarte de que la tendrás cuando la necesites. Esto solo necesita hacerse una vez por paquete, a menos que quieras actualizarlo (tener la última versión).</p>
+<p>Con R, instalamos un paquete con una función llamada <code>install.packages()</code> seguida del nombre del paquete entre comillas.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb124"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb124-1"><a href="#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">'dplyr'</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="cargar-un-paquete" class="level2">
+<h2 class="anchored" data-anchor-id="cargar-un-paquete">Cargar un paquete</h2>
+<p>Cuando cargas un paquete en R, es como si sacaras la caja de herramientas del almacén y la pusieras en tu mesa de trabajo. Solo entonces las herramientas dentro de la caja te son accesibles para tus proyectos. Haces esto cada vez que comienzas un nuevo documento o una sesión de R.</p>
+<p>Para hacerlo, usamos la función <code>library()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb125"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb125-1"><a href="#cb125-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>También puedes lograr esto con&nbsp;<code>::</code>&nbsp;si quieres usar una función completa de otro paquete, pero no quieres cargar el paquete completo. Esto es como sacar una herramienta específica de la caja, pero no poner toda la caja en tu mesa de trabajo.</p>
+<p>Por ejemplo, el paquete&nbsp;<code>psych</code>&nbsp;tiene una función&nbsp;<code>describe</code>&nbsp;que produce un resumen estadístico detallado de un conjunto de datos dado. Si queremos aplicarlo en un conjunto de datos predeterminado en R como&nbsp;<code>iris</code>, podemos hacerlo sin cargar todo&nbsp;<code>psych</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb126"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb126-1"><a href="#cb126-1" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">describe</span>(iris)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Proporciona un resumen estadístico de los datos: media, desviación estándar, mínimo, máximo, etc., todo sin tener que cargar todo el paquete&nbsp;<code>psych</code>.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>               n mean   sd median min max   se
+Sepal.Length 150 5.84 0.83   5.80 4.3 7.9 0.07
+Sepal.Width  150 3.06 0.44   3.00 2.0 4.4 0.04
+Petal.Length 150 3.76 1.77   4.35 1.0 6.9 0.14
+Petal.Width  150 1.20 0.76   1.30 0.1 2.5 0.06
+Species*     150 2.00 0.82   2.00 1.0 3.0 0.07</code></pre>
+</div>
+</div>
+<p><code>glimpse()</code> es una función de <code>dplyr</code> que proporciona una vista compacta del dataframe, mostrando los nombres de las variables, sus tipos de datos y una muestra de valores.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb128"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb128-1"><a href="#cb128-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(iris)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 150
+Columns: 5
+$ Sepal.Length &lt;dbl&gt; 5.1, 4.9, 4.7, 4.6, 5.0, 5.4, 4.6, 5.0, 4.4, 4.9, 5.4, 4.…
+$ Sepal.Width  &lt;dbl&gt; 3.5, 3.0, 3.2, 3.1, 3.6, 3.9, 3.4, 3.4, 2.9, 3.1, 3.7, 3.…
+$ Petal.Length &lt;dbl&gt; 1.4, 1.4, 1.3, 1.5, 1.4, 1.7, 1.4, 1.5, 1.4, 1.5, 1.5, 1.…
+$ Petal.Width  &lt;dbl&gt; 0.2, 0.2, 0.2, 0.2, 0.2, 0.4, 0.3, 0.2, 0.2, 0.1, 0.2, 0.…
+$ Species      &lt;fct&gt; setosa, setosa, setosa, setosa, setosa, setosa, setosa, s…</code></pre>
+</div>
+</div>
+<p><strong>Recuerda:</strong></p>
+<ul>
+<li><p>Cuando <strong>instalas un paquete</strong>, estás tomando la caja de herramientas y asegurándola en tu propio almacén.</p></li>
+<li><p><strong>Cargar un paquete</strong>, entonces, es poner esa caja de herramientas en tu mesa de trabajo para que puedas usar sus herramientas.</p></li>
+<li><p><strong>Importar una función del paquete</strong> es como sacar una herramienta de la caja.</p></li>
+</ul>
+</section>
+</section>
+<section id="importación" class="level1">
+<h1>Importación</h1>
+<p>El primer paso al analizar datos generalmente conociste en <strong>importar los datos desde fuentes externas</strong> al entorno de R. Por ejemplo, en las ciencias sociales, los investigadores suelen trabajar con bases de datos provenientes de encuestas, experimentos o datos recolectados en plataformas como hojas de cálculo de Excel, herramientas de encuestas en línea o programas de análisis estadístico como SPSS o Stata.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Dato">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Dato
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Aunque R incluye funciones base (viene por defecto y no necesitan cargar algún paquete) para la importación de datos, como&nbsp;<code>read.csv()</code>, nos enfocaremos en los paquetes especializados como&nbsp;<strong><code>readr</code></strong>,&nbsp;<strong><code>readxl</code></strong>&nbsp;y&nbsp;<strong><code>haven</code></strong>, que son más actuales y generan&nbsp;<strong><code>tibbles</code></strong>, una versión mejorada de los <code>data.frames</code>.</p>
+</div>
+</div>
+<p>Los archivos que utilizaremos a lo largo de este libro están disponibles en la&nbsp;<strong>carpeta de archivos del libro</strong>, la cual se recomienda descargar y guardar en una&nbsp;<strong>carpeta de trabajo</strong>&nbsp;en tu computadora. Para seguir los ejemplos en este capítulo, asegúrate de tener los archivos en tu carpeta de trabajo y configurar tu directorio de trabajo en RStudio.</p>
+<p>El formato&nbsp;<strong>CSV</strong>&nbsp;(Comma-Separated Values) es uno de los más utilizados debido a su simplicidad y compatibilidad. Cada fila en un archivo CSV representa una observación, y los valores dentro de cada fila están separados por comas.</p>
+<p>Un ejemplo de cómo podría lucir un archivo CSV:</p>
+<pre><code>ID,Edad,Género,Ingreso
+1,25,Femenino,1500
+2,30,Masculino,2000
+3,45,Femenino,2500</code></pre>
+<p>El paquete <strong><code>readr</code></strong> es parte del tidyverse y está diseñado para leer archivos CSV.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb131"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb131-1"><a href="#cb131-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cargamos el paquete readr</span></span>
+<span id="cb131-2"><a href="#cb131-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Al importar un conjunto de datos debemos nombrarlo.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb132"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb132-1"><a href="#cb132-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Importamos el archivo CSV y lo asignamos a un objeto</span></span>
+<span id="cb132-2"><a href="#cb132-2" aria-hidden="true" tabindex="-1"></a>encuesta_csv <span class="ot">=</span> <span class="fu">read_csv</span>(<span class="st">"encuesta.csv"</span>)</span>
+<span id="cb132-3"><a href="#cb132-3" aria-hidden="true" tabindex="-1"></a>encuesta_csv</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 8 × 3
+  genero    medio_comunicación  edad
+  &lt;chr&gt;     &lt;chr&gt;              &lt;dbl&gt;
+1 Masculino Televisión            34
+2 Femenino  Redes sociales        25
+3 Femenino  Redes sociales        55
+4 Otro      Radio                 63
+5 Femenino  Televisión            47
+6 Masculino Redes sociales        19
+# ℹ 2 more rows</code></pre>
+</div>
+</div>
+<p>Los archivos de Excel son comunes en las ciencias sociales debido a su facilidad de uso y capacidad para almacenar datos tabulares en varias hojas. El paquete <strong><code>readxl</code></strong> permite importar estos archivos, ya sea en formato&nbsp;<code>.xls</code>&nbsp;o&nbsp;<code>.xlsx</code>, sin necesidad de tener Excel instalado.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb134"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb134-1"><a href="#cb134-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cargamos el paquete readxl</span></span>
+<span id="cb134-2"><a href="#cb134-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb135"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb135-1"><a href="#cb135-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Importamos los datos desde un archivo Excel</span></span>
+<span id="cb135-2"><a href="#cb135-2" aria-hidden="true" tabindex="-1"></a>encuesta_excel <span class="ot">=</span> <span class="fu">read_excel</span>(<span class="st">"encuesta.xlsx"</span>)</span>
+<span id="cb135-3"><a href="#cb135-3" aria-hidden="true" tabindex="-1"></a>encuesta_excel</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 3
+  genero    medio_comunicación  edad
+  &lt;chr&gt;     &lt;chr&gt;              &lt;dbl&gt;
+1 Masculino Televisión            34
+2 Femenino  Redes sociales        NA
+3 Femenino  Redes sociales        55
+4 Otro      Radio                 63
+5 Femenino  Televisión            NA
+6 Masculino Redes sociales        19
+# ℹ 4 more rows</code></pre>
+</div>
+</div>
+<p>Si el archivo contiene múltiples hojas, podemos especificar cuál importar utilizando el argumento&nbsp;<code>sheet</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb137"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb137-1"><a href="#cb137-1" aria-hidden="true" tabindex="-1"></a>encuesta_excel_hoja <span class="ot">=</span> <span class="fu">read_excel</span>(<span class="st">"encuesta.xlsx"</span>, </span>
+<span id="cb137-2"><a href="#cb137-2" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">sheet =</span> <span class="st">"Resultados"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="limpieza" class="level1">
+<h1>Limpieza</h1>
+<p>Una vez que hemos importado los datos, el siguiente paso es limpiarlos. Este proceso consiste en identificar y corregir problemas comunes como valores faltantes, nombres de columnas inconsistentes, duplicados y tipos de datos incorrectos. La limpieza asegura que los datos estén en un estado coherente y listo para ser transformado o analizado.</p>
+<section id="manejo-de-valores-faltantes" class="level2">
+<h2 class="anchored" data-anchor-id="manejo-de-valores-faltantes">Manejo de valores faltantes</h2>
+<p>El <strong>manejo de valores faltantes</strong> es uno de los aspectos más complejos en la limpieza de datos, y un tema importante a considerar al trabajar con conjuntos de datos. Un <strong>valor perdido</strong> o <strong>NA</strong> en R no es lo mismo que un <strong>0</strong> o un espacio vacío. Un valor perdido (o <strong>NA</strong>, que significa “Not Available”) es una celda que no contiene información en absoluto, lo que puede ocurrir por diversas razones, como un error en la recolección de los datos, una respuesta no proporcionada en una encuesta o una omisión involuntaria al momento de ingresar los datos.</p>
+<p>Por ejemplo:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb138"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb138-1"><a href="#cb138-1" aria-hidden="true" tabindex="-1"></a>encuesta_excel</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 3
+  genero    medio_comunicación  edad
+  &lt;chr&gt;     &lt;chr&gt;              &lt;dbl&gt;
+1 Masculino Televisión            34
+2 Femenino  Redes sociales        NA
+3 Femenino  Redes sociales        55
+4 Otro      Radio                 63
+5 Femenino  Televisión            NA
+6 Masculino Redes sociales        19
+# ℹ 4 more rows</code></pre>
+</div>
+</div>
+<p>Puedes detectar estos valores la función como <code>is.na()</code>, que devuelve un valor lógico (<code>TRUE</code> o <code>FALSE</code>) indicando si un valor es <code>NA</code>. Seleccionamos la columna.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb140"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb140-1"><a href="#cb140-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.na</span>(encuesta_excel<span class="sc">$</span>edad)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] FALSE  TRUE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE</code></pre>
+</div>
+</div>
+<p>Recuerda que puedes sumar un vector lógico para contar los TRUE. En este caso los valores perdidos.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb142"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb142-1"><a href="#cb142-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cantidad de valores perdidos </span></span>
+<span id="cb142-2"><a href="#cb142-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(encuesta_excel<span class="sc">$</span>edad)) </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2</code></pre>
+</div>
+</div>
+<p>Una de las formas más simples de manejar valores faltantes es eliminarlos por completo. Esto puede hacerse utilizando la función&nbsp;<code>drop_na()</code>&nbsp;del paquete&nbsp;<code>tidyr</code>, que elimina las filas que contienen al menos un valor NA en cualquier columna. Esta es una solución rápida, pero es importante ser cauteloso, ya que puede resultar en la pérdida de información valiosa si hay muchos datos faltantes.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb144"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb144-1"><a href="#cb144-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cargamos tidyr</span></span>
+<span id="cb144-2"><a href="#cb144-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb145"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb145-1"><a href="#cb145-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Eliminamos filas con valores faltantes</span></span>
+<span id="cb145-2"><a href="#cb145-2" aria-hidden="true" tabindex="-1"></a><span class="fu">drop_na</span>(encuesta_excel)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 7 × 3
+  genero    medio_comunicación  edad
+  &lt;chr&gt;     &lt;chr&gt;              &lt;dbl&gt;
+1 Masculino Televisión            34
+2 Femenino  Redes sociales        55
+3 Otro      Radio                 63
+4 Masculino Redes sociales        19
+5 Masculino Periódico             75
+6 Femenino  Redes sociales        55
+# ℹ 1 more row</code></pre>
+</div>
+</div>
+<p>Comparemos</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb147"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb147-1"><a href="#cb147-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Podemos nombrarlo</span></span>
+<span id="cb147-2"><a href="#cb147-2" aria-hidden="true" tabindex="-1"></a>encuesta_sin_na <span class="ot">=</span> <span class="fu">drop_na</span>(encuesta_excel)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Presta atención a las dimensiones del tibble original y del tibble sin <code>NA</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb148"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb148-1"><a href="#cb148-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(encuesta_excel)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 10  3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb150"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb150-1"><a href="#cb150-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(encuesta_sin_na)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 7 3</code></pre>
+</div>
+</div>
+<p>Si queremos ser más específicos y eliminar valores faltantes solo en una columna particular, podemos usar:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb152"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb152-1"><a href="#cb152-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Eliminamos filas donde la columna 'edad' tiene NA</span></span>
+<span id="cb152-2"><a href="#cb152-2" aria-hidden="true" tabindex="-1"></a>encuesta_sin_na <span class="ot">=</span> <span class="fu">drop_na</span>(encuesta_excel, edad)</span>
+<span id="cb152-3"><a href="#cb152-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb152-4"><a href="#cb152-4" aria-hidden="true" tabindex="-1"></a>encuesta_sin_na</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 8 × 3
+  genero    medio_comunicación  edad
+  &lt;chr&gt;     &lt;chr&gt;              &lt;dbl&gt;
+1 Masculino Televisión            34
+2 Femenino  Redes sociales        55
+3 Otro      Radio                 63
+4 Masculino Redes sociales        19
+5 Masculino &lt;NA&gt;                  29
+6 Masculino Periódico             75
+# ℹ 2 more rows</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled" title="Cuidado">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Cuidado
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Aunque eliminar valores faltantes puede ser un enfoque válido en algunos casos, <strong>no siempre es ideal</strong>. Si eliminamos demasiadas filas, podemos perder una cantidad significativa de información, lo que podría alterar los resultados de nuestro análisis. Por eso, en lugar de eliminar, muchas veces es preferible <strong>imputar los valores faltantes</strong>, es decir, reemplazarlos con un valor estimado. Por ejemplo, algunas estrategias comunes para imputar valores incluyen <strong>reemplazar por el promedio</strong> en el caso de variables numéricas o <strong>reemplazar por la moda</strong> en variables categóricas donde los valores faltantes pueden ser reemplazados por el valor más frecuente (la moda).</p>
+</div>
+</div>
+<p>Para las siguentes técnicas de limpieza utilizaremos el conjunto de datos <code>encuesta_problematica</code>. Te animo a que puedas identificar que posible problemas tiene antes de seguir adelante.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb154"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb154-1"><a href="#cb154-1" aria-hidden="true" tabindex="-1"></a>datos_problema <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">'encuesta_problematica.csv'</span>)</span>
+<span id="cb154-2"><a href="#cb154-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb154-3"><a href="#cb154-3" aria-hidden="true" tabindex="-1"></a>datos_problema</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  ID Nombre.PARTICIPANTE EDAD..años. Ingreso.Mensual género
+1  1         Luis Bartra          23            1500      F
+2  2        Carlos Gómez          27            2000      M
+3  2        Carlos Gómez          27            2000      M
+4  3         María López          45            2500      F
+5  4       Javier Muller          35            3800      M
+6  5          Liz García          29            1800      M</code></pre>
+</div>
+</div>
+</section>
+<section id="estandarización-de-nombres-de-columnas" class="level2">
+<h2 class="anchored" data-anchor-id="estandarización-de-nombres-de-columnas">Estandarización de nombres de columnas</h2>
+<p>Los nombres de las columnas en los conjuntos de datos pueden ser inconsistentes, incluir caracteres especiales o espacios que dificulten el manejo en R.</p>
+<p>Primero, identificamos los nombres originales del conjunto de datos utilizando la función base names():</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb156"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb156-1"><a href="#cb156-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(datos_problema)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "ID"                  "Nombre.PARTICIPANTE" "EDAD..años."        
+[4] "Ingreso.Mensual"     "género"             </code></pre>
+</div>
+</div>
+<p>Para resolver esto, utilizamos la función <code>clean_names()</code> del paquete <code>janitor</code>. Esta función transforma automáticamente los nombres de las columnas en un formato limpio y consistente:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb158"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb158-1"><a href="#cb158-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cargar el paquete janitor</span></span>
+<span id="cb158-2"><a href="#cb158-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span>
+<span id="cb158-3"><a href="#cb158-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb158-4"><a href="#cb158-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Estandarizar los nombres de las columnas</span></span>
+<span id="cb158-5"><a href="#cb158-5" aria-hidden="true" tabindex="-1"></a>datos_problema <span class="ot">=</span> <span class="fu">clean_names</span>(datos_problema)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb159"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb159-1"><a href="#cb159-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(datos_problema)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "id"                  "nombre_participante" "edad_anos"          
+[4] "ingreso_mensual"     "genero"             </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb161"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb161-1"><a href="#cb161-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(datos_problema, <span class="dv">3</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  id nombre_participante edad_anos ingreso_mensual genero
+1  1         Luis Bartra        23            1500      F
+2  2        Carlos Gómez        27            2000      M
+3  2        Carlos Gómez        27            2000      M</code></pre>
+</div>
+</div>
+</section>
+<section id="eliminación-de-duplicados" class="level2">
+<h2 class="anchored" data-anchor-id="eliminación-de-duplicados">Eliminación de duplicados</h2>
+<p>En algunos casos, los datos pueden contener filas duplicadas que distorsionan el análisis. Podemos identificar y eliminar estas filas utilizando la función <code>distinct()</code> de <code>dplyr</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb163"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb163-1"><a href="#cb163-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Vemos el problema</span></span>
+<span id="cb163-2"><a href="#cb163-2" aria-hidden="true" tabindex="-1"></a>datos_problema</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  id nombre_participante edad_anos ingreso_mensual genero
+1  1         Luis Bartra        23            1500      F
+2  2        Carlos Gómez        27            2000      M
+3  2        Carlos Gómez        27            2000      M
+4  3         María López        45            2500      F
+5  4       Javier Muller        35            3800      M
+6  5          Liz García        29            1800      M</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb165"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb165-1"><a href="#cb165-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Eliminamos filas duplicadas</span></span>
+<span id="cb165-2"><a href="#cb165-2" aria-hidden="true" tabindex="-1"></a>datos_limpios <span class="ot">=</span> <span class="fu">distinct</span>(datos_problema)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb166"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb166-1"><a href="#cb166-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(datos_problema)     <span class="co"># Antes: 7 filas</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb168"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb168-1"><a href="#cb168-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(datos_limpios) </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5</code></pre>
+</div>
+</div>
+<p>Mostramos:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb170"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb170-1"><a href="#cb170-1" aria-hidden="true" tabindex="-1"></a>datos_limpios</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  id nombre_participante edad_anos ingreso_mensual genero
+1  1         Luis Bartra        23            1500      F
+2  2        Carlos Gómez        27            2000      M
+3  3         María López        45            2500      F
+4  4       Javier Muller        35            3800      M
+5  5          Liz García        29            1800      M</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="guardado-y-exportación-de-objetos-de-trabajo" class="level1">
+<h1>Guardado y exportación de objetos de trabajo</h1>
+<p>Una vez que hemos creado, limpiado o transformado nuestros datos, es importante <strong>guardar</strong> el resultado para no perder el trabajo realizado. R permite guardar objetos de trabajo en distintos formatos, tanto para <strong>volver a usarlos dentro de R</strong> como para <strong>compartirlos con otras personas</strong> (por ejemplo, en formato Excel o CSV).</p>
+<section id="guardar-como-archivo-.rds" class="level2">
+<h2 class="anchored" data-anchor-id="guardar-como-archivo-.rds">Guardar como archivo <code>.RDS</code></h2>
+<p>El formato <code>.RDS</code> es propio de R. Guarda <strong>un solo objeto</strong>, como un <code>data.frame</code>, conservando su estructura interna.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb172"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb172-1"><a href="#cb172-1" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(datos_limpios, <span class="at">file =</span> <span class="st">"datos_limpios.rds"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Luego, puedes volver a cargarlo con:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb173"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb173-1"><a href="#cb173-1" aria-hidden="true" tabindex="-1"></a>datos_limpios <span class="ot">=</span> <span class="fu">readRDS</span>(<span class="st">"datos_limpios.rds"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Dato">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Dato
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Esto es ideal cuando trabajas con datos procesados dentro de R y quieres retomarlos luego <strong>sin tener que rehacer todo el procesamiento</strong>.</p>
+</div>
+</div>
+</section>
+<section id="exportar-como-archivo-.csv" class="level2">
+<h2 class="anchored" data-anchor-id="exportar-como-archivo-.csv">Exportar como archivo <code>.csv</code></h2>
+<p>Para compartir o abrir en Excel u otros programas, lo más común es exportar a CSV.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb174"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb174-1"><a href="#cb174-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(datos_limpios, </span>
+<span id="cb174-2"><a href="#cb174-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">file =</span> <span class="st">"datos_limpios.csv"</span>, </span>
+<span id="cb174-3"><a href="#cb174-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><code>row.names = FALSE</code> evita que R agregue una columna extra con los números de fila.</li>
+</ul>
+</section>
+<section id="guardar-todo-el-entorno-de-trabajo" class="level2">
+<h2 class="anchored" data-anchor-id="guardar-todo-el-entorno-de-trabajo">Guardar todo el entorno de trabajo</h2>
+<p>Si deseas guardar <strong>todos los objetos que tienes cargados</strong> en tu sesión (variables, data frames, modelos, etc.):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb175"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb175-1"><a href="#cb175-1" aria-hidden="true" tabindex="-1"></a><span class="fu">save.image</span>(<span class="at">file =</span> <span class="st">"mi_entorno.RData"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Y para volver a cargarlo en otra sesión de R:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb176"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb176-1"><a href="#cb176-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"mi_entorno.RData"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled" title="Importante">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Importante
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Es buena práctica guardar tus objetos <strong>con nombres claros</strong> y organizarlos en carpetas por cada proyecto a realizar. Esto no solo garantiza el orden entre disntintos proyectos, sino que mejora la reproducibilidad y facilita compartir tu análisis con otras personas o retomarlo en el futuro.</p>
+</div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copiado");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copiado");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

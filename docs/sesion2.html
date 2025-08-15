@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Gonzalo Almendariz Villanueva">
+
+<title>Sesión 2: Manipulación de datos, transformación de variables y resúmenes estadísticos – La Datafora</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Sin resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">La Datafora</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Buscar"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Navegación de palanca" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./about.html"> 
+<span class="menu-text">Inicio</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-curso-r" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Curso R</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-curso-r">    
+        <li>
+    <a class="dropdown-item" href="./sesion1.html">
+ <span class="dropdown-text">Sesión 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./sesion2.html">
+ <span class="dropdown-text">Sesión 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./sesion3.html">
+ <span class="dropdown-text">Sesión 3</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./sesion4.html">
+ <span class="dropdown-text">Sesión 4</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">En esta página</h2>
+   
+  <ul>
+  <li><a href="#objetivos-de-la-sesión-de-hoy" id="toc-objetivos-de-la-sesión-de-hoy" class="nav-link active" data-scroll-target="#objetivos-de-la-sesión-de-hoy">Objetivos de la sesión de hoy</a></li>
+  <li><a href="#el-tidyverse" id="toc-el-tidyverse" class="nav-link" data-scroll-target="#el-tidyverse">El Tidyverse</a></li>
+  <li><a href="#base-de-datos-world-development-indicators-wdi" id="toc-base-de-datos-world-development-indicators-wdi" class="nav-link" data-scroll-target="#base-de-datos-world-development-indicators-wdi">Base de datos: World Development Indicators (WDI)</a></li>
+  <li><a href="#manipulación-con-dplyr" id="toc-manipulación-con-dplyr" class="nav-link" data-scroll-target="#manipulación-con-dplyr">Manipulación con dplyr</a></li>
+  <li><a href="#descripción-de-variables" id="toc-descripción-de-variables" class="nav-link" data-scroll-target="#descripción-de-variables">Descripción de variables</a></li>
+  <li><a href="#eso-fue-todo-por-esta-sesión-gracias-por-su-atención" id="toc-eso-fue-todo-por-esta-sesión-gracias-por-su-atención" class="nav-link" data-scroll-target="#eso-fue-todo-por-esta-sesión-gracias-por-su-atención">Eso fue todo por esta sesión ¡Gracias por su atención!</a></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Otros formatos</h2><ul><li><a href="sesion2.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Sesión 2: Manipulación de datos, transformación de variables y resúmenes estadísticos</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Autor/a</div>
+    <div class="quarto-title-meta-contents">
+             <p>Gonzalo Almendariz Villanueva </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="objetivos-de-la-sesión-de-hoy" class="level2">
+<h2 class="anchored" data-anchor-id="objetivos-de-la-sesión-de-hoy">Objetivos de la sesión de hoy</h2>
+<p>Aprender a transformar, organizar y resumir datos utilizando las herramientas del paquete <code>dplyr</code>. Incorporar principios estadísticos básicos para la descripción de variables. Reconocer patrones, errores y estructuras dentro de los datos.</p>
+</section>
+<section id="el-tidyverse" class="level1">
+<h1>El Tidyverse</h1>
+</section>
+<section id="base-de-datos-world-development-indicators-wdi" class="level1">
+<h1>Base de datos: World Development Indicators (WDI)</h1>
+<p>El análisis de datos en ciencias sociales requiere acceder a fuentes confiables, comparables y actualizadas. Una de las más utilizadas a nivel global es la <strong>World Development Indicators (WDI)</strong> del Banco Mundial. Gracias al paquete <code>WDI</code> en R, podemos acceder directamente a esta base de forma automatizada.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(WDI)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>En este ejemplo trabajaremos con tres indicadores esenciales para describir y comparar el desarrollo de distintos países:</p>
+<ul>
+<li><p>PIB per cápita (NY.GDP.PCAP.CD)</p></li>
+<li><p>Esperanza de vida (SP.DYN.LE00.IN)</p></li>
+<li><p>Población total (SP.POP.TOTL)</p></li>
+</ul>
+<p>La base descargada contiene diversas variables. Para este análisis introductorio, nos centraremos en las siguientes:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 36%">
+<col style="width: 63%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>country</code></td>
+<td>Nombre del país</td>
+</tr>
+<tr class="even">
+<td><code>iso2c</code> / <code>iso3c</code></td>
+<td>Códigos de país (ISO 2 y 3 letras)</td>
+</tr>
+<tr class="odd">
+<td><code>pib_per_capita</code></td>
+<td>PIB per cápita en dólares actuales (indicador económico)</td>
+</tr>
+<tr class="even">
+<td><code>esperanza_vida</code></td>
+<td>Esperanza de vida al nacer (indicador de salud)</td>
+</tr>
+<tr class="odd">
+<td><code>poblacion_total</code></td>
+<td>Población total (indicador demográfico)</td>
+</tr>
+<tr class="even">
+<td><code>region</code></td>
+<td>Región del país según clasificación del Banco Mundial</td>
+</tr>
+<tr class="odd">
+<td><code>income</code></td>
+<td>Nivel de ingreso del país (bajo, medio, alto, etc.)</td>
+</tr>
+</tbody>
+</table>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">WDI</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">country =</span> <span class="st">"all"</span>,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">indicator =</span> <span class="fu">c</span>(</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">pib_capita =</span> <span class="st">"NY.GDP.PCAP.CD"</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">esp_vida =</span> <span class="st">"SP.DYN.LE00.IN"</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">poblacion =</span> <span class="st">"SP.POP.TOTL"</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">start =</span> <span class="dv">2014</span>, <span class="at">end =</span> <span class="dv">2024</span>, <span class="at">extra =</span> T</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Carga de la base de datos">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Carga de la base de datos
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Para acceder a los datos, usamos la función <code>WDI()</code> especificando los indicadores deseados:</p>
+</div>
+</div>
+</section>
+<section id="manipulación-con-dplyr" class="level1">
+<h1>Manipulación con dplyr</h1>
+<p>La manipulación de datos consiste en transformar y preparar los datos para su análisis, lo que puede incluir la creación de nuevas variables, el filtrado de observaciones o la omisión de alguna variable. Para ello, usaremos el paquete <code>dplyr</code> del tidyverse.</p>
+<p><code>dplyr</code> es un paquete del tidyverse diseñado específicamente para la manipulación de datos. Proporciona un conjunto de funciones que permiten seleccionar, filtrar, ordenar, resumir y transformar datos en <code>data.frames</code>.</p>
+<p>Una de las características más importantes de <code>dplyr</code> es su uso del <em>pipe operator</em> (<code>%&gt;%</code>), que permite encadenar múltiples operaciones de manera secuencial, pasando el resultado de una función directamente como entrada a la siguiente. Esto hace que el código sea más fácil de leer y mantener.</p>
+<p>El atajo del teclado para el pipe operator (<code>%&gt;%</code>) es:</p>
+<ul>
+<li><p>Ctrl + Shift + M (Windows)</p></li>
+<li><p>Cmd + Shift + M (Mac)</p></li>
+</ul>
+<p><strong>Un sistema de tuberías</strong></p>
+<p>Para poder realizar múltiples acciones en secuencia conectando cada acción con la siguiente a través de “tuberías” debemos utilizar lo que se llama el <em>pipe operator</em> (<code>%&gt;%</code>).</p>
+<p><img src="images/clipboard-3784925606.png" class="img-fluid"></p>
+<div class="callout callout-style-default callout-note callout-titled" title="Dato">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Dato
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Para poder sacarle el máximo provecho a <code>dplyr</code> debemos conocer las principales funciones:</p>
+<ul>
+<li><code>filter()</code>: Filtra filas de un dataframe según una condición específica.</li>
+<li><code>select()</code>: Selecciona columnas específicas de un dataframe.</li>
+<li><code>mutate()</code>: Crea nuevas columnas o modifica las existentes en un dataframe.</li>
+<li><code>summarize()</code>: Resumen estadístico de las columnas de un dataframe.</li>
+<li><code>arrange()</code>: Ordena las filas de un dataframe según una o más variables.</li>
+<li><code>group_by()</code>: Agrupa un dataframe por una o más variables, preparándolo para operaciones de resumen.</li>
+</ul>
+</div>
+</div>
+<p>Para empezar a trabajar con <code>dplyr</code> recuerda primero cargarlo:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># En caso no esté instalado aún</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">'dplyr'</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>A continuación vemos la data completa con todas sus variable usando <code>glimpse()</code></p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 2,926
+Columns: 15
+$ country     &lt;chr&gt; "Afghanistan", "Afghanistan", "Afghanistan", "Afghanistan"…
+$ iso2c       &lt;chr&gt; "AF", "AF", "AF", "AF", "AF", "AF", "AF", "AF", "AF", "AF"…
+$ iso3c       &lt;chr&gt; "AFG", "AFG", "AFG", "AFG", "AFG", "AFG", "AFG", "AFG", "A…
+$ year        &lt;int&gt; 2018, 2015, 2017, 2023, 2021, 2016, 2024, 2020, 2022, 2014…
+$ status      &lt;chr&gt; "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""…
+$ lastupdated &lt;chr&gt; "2025-07-01", "2025-07-01", "2025-07-01", "2025-07-01", "2…
+$ pib_capita  &lt;dbl&gt; 491, 566, 525, 414, 356, 522, NA, 511, 357, 625, 497, 1522…
+$ esp_vida    &lt;dbl&gt; 62.4, 62.3, 62.4, 66.0, 60.4, 62.6, NA, 61.5, 65.6, 62.3, …
+$ poblacion   &lt;dbl&gt; 36743039, 33831764, 35688935, 41454761, 40000412, 34700612…
+$ region      &lt;chr&gt; "South Asia", "South Asia", "South Asia", "South Asia", "S…
+$ capital     &lt;chr&gt; "Kabul", "Kabul", "Kabul", "Kabul", "Kabul", "Kabul", "Kab…
+$ longitude   &lt;chr&gt; "69.1761", "69.1761", "69.1761", "69.1761", "69.1761", "69…
+$ latitude    &lt;chr&gt; "34.5228", "34.5228", "34.5228", "34.5228", "34.5228", "34…
+$ income      &lt;chr&gt; "Low income", "Low income", "Low income", "Low income", "L…
+$ lending     &lt;chr&gt; "IDA", "IDA", "IDA", "IDA", "IDA", "IDA", "IDA", "IDA", "I…</code></pre>
+</div>
+</div>
+<p>Como puedes ver, el conjunto de dato tiene mas variables de las que necesitamos, pero eso tiene solución…</p>
+<p>Utilizamos la función <code>select()</code> para filtrar por las columnas que son de nuestro interés.</p>
+<p><img src="images/clipboard-4017595068.png" class="img-fluid"></p>
+<p>Seleccionamos únicamente las variables requeridas para nuestro análisis, sobreescribimos el objeto para modificar el original.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> df <span class="sc">%&gt;%</span> </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(country, year, pib_capita, </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>         esp_vida, poblacion, region, income)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Esto selecciona solo las variables que hemos especificado</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(df)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 2,926
+Columns: 7
+$ country    &lt;chr&gt; "Afghanistan", "Afghanistan", "Afghanistan", "Afghanistan",…
+$ year       &lt;int&gt; 2018, 2015, 2017, 2023, 2021, 2016, 2024, 2020, 2022, 2014,…
+$ pib_capita &lt;dbl&gt; 491, 566, 525, 414, 356, 522, NA, 511, 357, 625, 497, 1522,…
+$ esp_vida   &lt;dbl&gt; 62.4, 62.3, 62.4, 66.0, 60.4, 62.6, NA, 61.5, 65.6, 62.3, 6…
+$ poblacion  &lt;dbl&gt; 36743039, 33831764, 35688935, 41454761, 40000412, 34700612,…
+$ region     &lt;chr&gt; "South Asia", "South Asia", "South Asia", "South Asia", "So…
+$ income     &lt;chr&gt; "Low income", "Low income", "Low income", "Low income", "Lo…</code></pre>
+</div>
+</div>
+<p>Echemos un vistazo a la variable <code>$country</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">unique</span>(df<span class="sc">$</span>country), <span class="dv">10</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="¿Qué hace este código?">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+¿Qué hace este código?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><p><code>unique()</code> nos permite obtener los valores únicos de una variable, eliminando los repetidos. En este caso, los nombres de países sin duplicados.</p></li>
+<li><p><code>head()</code> ya la conoces, nos muestra los primeros valores de un vector o tabla. Si le decimos <code>n = 15</code>, nos devuelve solo los primeros 15 (lo limitamos a 15 únicamente por estética de la presentación, lo ideal es que revises todas las categorías posibles)</p></li>
+</ul>
+<p>Al combinarlas, estamos diciendo: <em>Muéstrame los primeros 15 países distintos que aparecen en la columna country</em>.</p>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "Afghanistan"                 "Africa Eastern and Southern"
+ [3] "Africa Western and Central"  "Albania"                    
+ [5] "Algeria"                     "American Samoa"             
+ [7] "Andorra"                     "Angola"                     
+ [9] "Antigua and Barbuda"         "Arab World"                 
+[11] "Argentina"                   "Armenia"                    
+[13] "Aruba"                       "Australia"                  
+[15] "Austria"                    </code></pre>
+</div>
+</div>
+<p>Notaremos que algunos de los “países” listados no son países en sentido estricto, sino&nbsp;<strong>regiones agregadas</strong>, como “East Asia &amp; Pacific” o “Sub-Saharan Africa”.</p>
+<p>Esto puede ser un problema dependiendo del tipo de análisis que queramos hacer.<br>
+Por ejemplo:</p>
+<ul>
+<li><p>¿Qué pasa si <strong>solo</strong> queremos comparar <strong>países</strong> individuales?</p></li>
+<li><p>¿O si, por el contrario, queremos hacer una comparación&nbsp;<strong>solo entre regiones</strong>?</p></li>
+</ul>
+<p>Bueno, podemos utilizar la variable&nbsp;<code>region</code>&nbsp;junto con una función muy útil del paquete&nbsp;<code>dplyr</code>: <code>filter()</code>.</p>
+<p>La función&nbsp;<code>filter()</code>&nbsp;nos permite seleccionar filas que cumplen con una condición específica.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/clipboard-1638975480.png" class="img-fluid figure-img"></p>
+<figcaption>Elaboración propia</figcaption>
+</figure>
+</div>
+<p>Filtrar solo países (quitar regiones agregadas)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(region <span class="sc">!=</span> <span class="st">"Aggregates"</span>) </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>También podemos hacer lo contrario: filtrar solo regiones agregadas</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>agr <span class="ot">=</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(region <span class="sc">==</span> <span class="st">"Aggregates"</span>) </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>¿Y si solo queremos los datos de un año específico?</strong></p>
+<p>Muchas veces, especialmente cuando queremos hacer&nbsp;<strong>comparaciones entre países o regiones</strong>, es útil&nbsp;<strong>quedarnos solo con un año</strong>.<br>
+Esto evita que se mezclen observaciones de distintos años y hace que los gráficos o análisis sean más claros.</p>
+<p>Por ejemplo, si queremos trabajar&nbsp;<strong>solo con datos del año 2022</strong>, podemos aplicar otro&nbsp;<code>filter()</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>df_22 <span class="ot">=</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2022</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>¿Es posible tener más de una condición? </strong></p>
+<p>¡Claro! Podríamos tener también solo las regiones agregadas para ese mismo año.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>agr_22 <span class="ot">=</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(region <span class="sc">==</span> <span class="st">"Aggregates"</span>, </span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>         year <span class="sc">==</span> <span class="dv">2022</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Ya filtramos la base para quedarnos solo con el año 2022, así que la variable year ya no tiene mucho sentido en este nuevo <code>data.frame</code>, ¿cierto? Todos los valores serían iguales.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>df_22 <span class="sc">%&gt;%</span> </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>         country year pib_capita esp_vida poblacion                     region
+1    Afghanistan 2022        357     65.6  40578842                 South Asia
+2        Albania 2022       6846     78.8   2777689      Europe &amp; Central Asia
+3        Algeria 2022       4962     76.1  45477389 Middle East &amp; North Africa
+4 American Samoa 2022      18017     72.8     48342        East Asia &amp; Pacific
+5        Andorra 2022      42414     84.0     79705      Europe &amp; Central Asia
+6         Angola 2022       2930     64.2  35635029         Sub-Saharan Africa
+               income
+1          Low income
+2 Upper middle income
+3 Upper middle income
+4         High income
+5         High income
+6 Lower middle income</code></pre>
+</div>
+</div>
+<p>Entonces, ¿por qué no quitarla directamente? Podemos hacerlo fácilmente con <code>select()</code> usando el signo menos (<code>-</code>) antes de la variable. Y lo encadenamos todo con pipes <code>%&gt;%</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>df_22 <span class="ot">=</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2022</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>year)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>df_22 <span class="sc">%&gt;%</span> </span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">3</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      country pib_capita esp_vida poblacion                     region
+1 Afghanistan        357     65.6  40578842                 South Asia
+2     Albania       6846     78.8   2777689      Europe &amp; Central Asia
+3     Algeria       4962     76.1  45477389 Middle East &amp; North Africa
+               income
+1          Low income
+2 Upper middle income
+3 Upper middle income</code></pre>
+</div>
+</div>
+<p>A veces queremos saber qué países tienen los valores más altos o más bajos de alguna variable, por ejemplo, el PIB per cápita o la esperanza de vida.</p>
+<p>Utilizamos la función <code>arrange()</code> para poder ordenar las observaciones (filas) que tengamos.</p>
+<p>Veamos un ejemplo ordenando de mayor a menor el PIB per cápita:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>df_22 <span class="sc">%&gt;%</span> </span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(pib_capita)) <span class="sc">%&gt;%</span> </span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">3</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        country pib_capita esp_vida poblacion                region      income
+1        Monaco     226052     85.7     38931 Europe &amp; Central Asia High income
+2 Liechtenstein     186822     84.1     39493 Europe &amp; Central Asia High income
+3    Luxembourg     123720     82.9    653103 Europe &amp; Central Asia High income</code></pre>
+</div>
+</div>
+<p>Y si queremos los países con el menor PIB per cápita, simplemente quitamos el <code>desc()</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>df_22 <span class="sc">%&gt;%</span> </span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(pib_capita) <span class="sc">%&gt;%</span> </span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">3</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                   country pib_capita esp_vida poblacion             region
+1                  Burundi        251     62.9  13321097 Sub-Saharan Africa
+2              Afghanistan        357     65.6  40578842         South Asia
+3 Central African Republic        467     18.8   5098039 Sub-Saharan Africa
+      income
+1 Low income
+2 Low income
+3 Low income</code></pre>
+</div>
+</div>
+<p>Hasta ahora, hemos trabajado filtrando o seleccionando información… Pero, ¿y si quisiéramos <strong>crear una nueva variable</strong> a partir de una que ya tenemos?</p>
+<p>Con <code>mutate()</code>, podemos agregar columnas nuevas a nuestra base de datos, calculadas a partir de otras columnas.</p>
+<p><img src="images/clipboard-1384461819.png" class="img-fluid"></p>
+<p>Un caso clásico es transformar el PIB per cápita.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>df_22 <span class="ot">=</span> df_22 <span class="sc">%&gt;%</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">log_pib =</span> <span class="fu">log</span>(pib_capita)</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>         )</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="¿Por qué usamos el logaritmo?">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+¿Por qué usamos el logaritmo?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Cuando una variable como el <strong>PIB per cápita</strong> tiene valores muy dispersos,<br>
+los países con ingresos altísimos pueden dominar los gráficos y análisis.<br>
+Aplicar una <strong>transformación logarítmica</strong> nos ayuda a:</p>
+<ul>
+<li><strong>Reducir la influencia de los valores extremos.</strong><br>
+</li>
+<li><strong>Visualizar mejor las diferencias entre países con ingresos bajos y medios.</strong><br>
+</li>
+<li><strong>Comparar proporciones en lugar de diferencias absolutas.</strong></li>
+</ul>
+</div>
+</div>
+<p>Esto crea una nueva columna llamada <code>log_pib</code>, donde hemos guardado el logaritmo del PIB per cápita.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>df_22 <span class="sc">%&gt;%</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(country, pib_capita, log_pib) <span class="sc">%&gt;%</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(pib_capita)) <span class="sc">%&gt;%</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">3</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        country pib_capita log_pib
+1        Monaco     226052    12.3
+2 Liechtenstein     186822    12.1
+3    Luxembourg     123720    11.7</code></pre>
+</div>
+</div>
+<p><code>reframe()</code> nos permite crear una nueva tabla desde una existente. Es ideal para generar resúmenes limpios o cálculos específicos sin necesidad de arrastrar otras columnas.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>df_22 <span class="sc">%&gt;%</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reframe</span>(<span class="at">media_pib =</span> <span class="fu">mean</span>(pib_capita, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  media_pib
+1     21008</code></pre>
+</div>
+</div>
+<p>Este código nos devuelve un data frame con una sola fila, que simplemente muestra el PIB per cápita promedio de todos los países juntos.</p>
+<p>Pero… ¿y si queremos calcularlo por región?</p>
+<p>Por ejemplo: ¿qué tal si queremos saber cuál es el PIB promedio de cada región del mundo?</p>
+<p>Agrupamos con <code>group_by()</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>df_22 <span class="sc">%&gt;%</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(region) <span class="sc">%&gt;%</span> </span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">3</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 7
+# Groups:   region [3]
+  country     pib_capita esp_vida poblacion region                income log_pib
+  &lt;chr&gt;            &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;                 &lt;chr&gt;    &lt;dbl&gt;
+1 Afghanistan       357.     65.6  40578842 South Asia            Low i…    5.88
+2 Albania          6846.     78.8   2777689 Europe &amp; Central Asia Upper…    8.83
+3 Algeria          4962.     76.1  45477389 Middle East &amp; North … Upper…    8.51</code></pre>
+</div>
+</div>
+<p>Esto no hace nada visible aún, pero le indica a R que <strong>toda operación posterior se aplique por separado a cada región</strong>.</p>
+<p>Podemos aplicar <code>reframe()</code> junto con <code>group_by</code> para obtener el promedio por cada región:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(region) <span class="sc">%&gt;%</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reframe</span>(<span class="at">media_pib =</span> <span class="fu">mean</span>(pib_capita, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 7 × 2
+  region                     media_pib
+  &lt;chr&gt;                          &lt;dbl&gt;
+1 East Asia &amp; Pacific           17334.
+2 Europe &amp; Central Asia         36010.
+3 Latin America &amp; Caribbean     14812.
+4 Middle East &amp; North Africa    17081.
+5 North America                 77112.
+6 South Asia                     3182.
+# ℹ 1 more row</code></pre>
+</div>
+</div>
+<div class="line-block">&nbsp;|</div>
+<p>|| | Por ejemplo, podríamos ver los dos países con mayor esperanza de vida en cada región: |</p>
+<p>Combinando <code>filter()</code>, <code>arrange()</code>, <code>select()</code> y <code>group_by()</code> ya podemos hacer consultas bastante útiles.</p>
+<p><strong>¿Cuáles son los 3 países con menor esperanza de vida en Europa y Asia Central?</strong></p>
+<p>Podemos combinar filtrado, ordenamiento y selección:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>df_22 <span class="sc">%&gt;%</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(region <span class="sc">==</span> <span class="st">"Europe &amp; Central Asia"</span>) <span class="sc">%&gt;%</span>      </span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(esp_vida) <span class="sc">%&gt;%</span>                        </span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(country, esp_vida) <span class="sc">%&gt;%</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">3</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       country esp_vida
+1 Turkmenistan     69.9
+2    Greenland     71.5
+3      Moldova     71.5</code></pre>
+</div>
+</div>
+<p><strong>¿Cuál es el país más poblado de cada región?</strong></p>
+<p>Ahora agrupamos por región, ordenamos dentro de cada grupo y usamos <code>slice_head()</code> para quedarnos con el primer país de cada región (el más poblado):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>df_22 <span class="sc">%&gt;%</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(region) <span class="sc">%&gt;%</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(poblacion), <span class="at">.by_group =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(region, country, poblacion) <span class="sc">%&gt;%</span> </span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(poblacion))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 7 × 3
+# Groups:   region [7]
+  region                    country             poblacion
+  &lt;chr&gt;                     &lt;chr&gt;                   &lt;dbl&gt;
+1 South Asia                India              1425423212
+2 East Asia &amp; Pacific       China              1412175000
+3 North America             United States       334017321
+4 Sub-Saharan Africa        Nigeria             223150896
+5 Latin America &amp; Caribbean Brazil              210306415
+6 Europe &amp; Central Asia     Russian Federation  144236933
+# ℹ 1 more row</code></pre>
+</div>
+</div>
+</section>
+<section id="descripción-de-variables" class="level1">
+<h1>Descripción de variables</h1>
+<p>A veces tenemos tantas columnas, tantos países, tantos años, que lo primero que necesitamos hacer es explorar, entender. Para eso nos sirve tener una fotografía inicial de los datos.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Dato">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Dato
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>R es, en esencia, una <strong>herramienta estadística</strong>. Y como tal, una de sus fortalezas más importantes está en poder describir datos de manera rápida, flexible y clara.</p>
+</div>
+</div>
+<p>El paquete <code>dlookr</code> nos da un resumen muy completo de nuestras variables, incluyendo cantidad de valores perdidos, medias, desviaciones estándar, percentiles y más.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dlookr)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>La función <code>diagnose()</code> nos devuelve una tabla muy completa con cada variable. Muy útil para detectar cosas como: Variables con muchos <code>NA</code>s y número de categorías</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">diagnose</span>(df_22)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 7 × 6
+  variables  types     missing_count missing_percent unique_count unique_rate
+  &lt;chr&gt;      &lt;chr&gt;             &lt;int&gt;           &lt;dbl&gt;        &lt;int&gt;       &lt;dbl&gt;
+1 country    character             0            0             216      1     
+2 pib_capita numeric               8            3.70          209      0.968 
+3 esp_vida   numeric               0            0             214      0.991 
+4 poblacion  numeric               0            0             216      1     
+5 region     character             0            0               7      0.0324
+6 income     character             0            0               5      0.0231
+# ℹ 1 more row</code></pre>
+</div>
+</div>
+<p>Podemos obtener un resumen estadístico general de todas las variables numéricas usando <code>diagnose_numeric()</code>. Seleccionamos solo algunas columnas (la media, mediana y si contiene valores atípicos) para simplificar la visualización.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">diagnose_numeric</span>(df_22) <span class="sc">%&gt;%</span> </span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(variables, mean, median, outlier)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   variables        mean     median outlier
+1 pib_capita    21008.30    7630.92      15
+2   esp_vida       73.08      74.15       1
+3  poblacion 36870339.60 6697551.50      23
+4    log_pib        9.01       8.94       0</code></pre>
+</div>
+</div>
+<p>Esto nos da una mirada rápida a tres cosas clave: el centro de los datos (media y mediana) y si hay valores que podrían ser extremos (outliers).</p>
+<p>De forma similar al caso anterior, con <code>diagnose_category()</code> podemos generar un resumen de las variables categóricas. A continuación, ordenamos las salidas por la frecuencia absoluta de la categoría más común (<code>freq</code>), para ver rápidamente cuáles son las variables más dominadas por una sola categoría. Mostramos solo las primeras 4 filas:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">diagnose_category</span>(df_22) <span class="sc">%&gt;%</span> </span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(freq)) <span class="sc">%&gt;%</span> </span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">4</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  variables                levels   N freq ratio rank
+1    income           High income 216   84  38.9    1
+2    region Europe &amp; Central Asia 216   58  26.9    1
+3    income   Upper middle income 216   54  25.0    2
+4    income   Lower middle income 216   51  23.6    3</code></pre>
+</div>
+</div>
+<p>El paquete <code>psych</code> nos permite obtener un resumen estadístico detallado de nuestras variables numéricas.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(psych)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Este resumen incluye:</p>
+<ul>
+<li><p><code>mean</code>: media,</p></li>
+<li><p><code>sd</code>: desviación estándar,</p></li>
+<li><p><code>median</code>,</p></li>
+<li><p><code>min</code>&nbsp;y&nbsp;<code>max</code>,</p></li>
+<li><p><code>range</code>,</p></li>
+<li><p><code>skew</code>: asimetría,</p></li>
+<li><p><code>kurtosis</code>: curtosis,</p></li>
+<li><p>&nbsp;<code>n</code>: número de observaciones válidas.</p></li>
+</ul>
+<p>Resumen para variables seleccionadas:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>df_22 <span class="sc">%&gt;%</span> </span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(pib_capita, esp_vida) <span class="sc">%&gt;%</span> </span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">describe</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(vars, mean, median, skew, kurtosis)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           vars    mean median  skew kurtosis
+pib_capita    1 21008.3 7630.9  3.03    12.68
+esp_vida      2    73.1   74.2 -1.71     8.57</code></pre>
+</div>
+</div>
+<p>La función <code>describeBy()</code> nos permite obtener estadísticas descriptivas para cada grupo de una variable categórica. En este caso, queremos ver cómo varía el PIB per cápita según la región. Para que la tabla sea más clara en la diapositiva, convertimos el resultado en un <code>data.frame</code>, y seleccionamos solo algunas columnas.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">describeBy</span>(df_22<span class="sc">$</span>pib_capita, <span class="at">group =</span> df_22<span class="sc">$</span>region, <span class="at">mat =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(group1, n, mean, sd, median, min, max) <span class="sc">%&gt;%</span> </span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(mean)) <span class="sc">%&gt;%</span> </span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">6</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>                        group1  n  mean    sd median   min    max
+X15              North America  3 85244 33298  77861 56257 121614
+X12      Europe &amp; Central Asia 57 40138 43903  25086  1052 226052
+X14 Middle East &amp; North Africa 21 19610 23861   4962   616  88701
+X11        East Asia &amp; Pacific 36 18211 20919   6616  1158  90299
+X13  Latin America &amp; Caribbean 37 16594 16478  11402  1761  92202
+X16                 South Asia  8  3398  3561   2532   357  11786</code></pre>
+</div>
+</div>
+<p>¿Tienen relación las variables numéricas entre sí? Una forma rápida de explorarlo es usando matrices de correlación. Con la función <code>corr.test()</code> del paquete psych, podemos ver cómo se relacionan entre sí el PIB per cápita, la esperanza de vida y la población:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>df_22 <span class="sc">%&gt;%</span> </span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(log_pib, esp_vida, poblacion) <span class="sc">%&gt;%</span> </span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">corr.test</span>()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:corr.test(x = .)
+Correlation matrix 
+          log_pib esp_vida poblacion
+log_pib      1.00     0.79     -0.06
+esp_vida     0.79     1.00      0.00
+poblacion   -0.06     0.00      1.00
+Sample Size 
+          log_pib esp_vida poblacion
+log_pib       208      208       208
+esp_vida      208      216       216
+poblacion     208      216       216
+Probability values (Entries above the diagonal are adjusted for multiple tests.) 
+          log_pib esp_vida poblacion
+log_pib      0.00     0.00      0.73
+esp_vida     0.00     0.00      0.95
+poblacion    0.37     0.95      0.00
+
+ To see confidence intervals of the correlations, print with the short=FALSE option</code></pre>
+</div>
+</div>
+<p>Esto nos da una tabla con:</p>
+<ul>
+<li><p>Coeficientes de correlación de Pearson entre cada par de variables</p></li>
+<li><p>Significancia estadística (p-values)</p></li>
+<li><p>Intervalos de confianza</p></li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled" title="¿Cómo leerlo?">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+¿Cómo leerlo?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Una correlación cercana a 1 o -1 indica una relación fuerte Una correlación cercana a 0 indica que no hay relación lineal</p>
+</div>
+</div>
+<p>Lo exploraremos con mayor detalle en la sesión 4.</p>
+<p>Además de los paquetes&nbsp;<code>dlookr</code>&nbsp;y&nbsp;<code>psych</code>, que ya vimos y nos permiten realizar diagnósticos y obtener estadísticas útiles, existen otros paquetes como&nbsp;<strong><code>skimr</code></strong>&nbsp;y&nbsp;<strong><code>summarytools</code></strong>&nbsp;que ofrecen&nbsp;<strong>resúmenes muy completos e intuitivos</strong>&nbsp;de nuestros datos.</p>
+<p>Estas herramientas están pensadas para el&nbsp;<strong>análisis exploratorio</strong>, y funcionan especialmente bien cuando queremos tener una&nbsp;<strong>visión rápida, organizada y sistemática</strong>&nbsp;de todas las variables. Lo único es que,&nbsp;<strong>aunque son excelentes para el análisis, sus salidas no siempre se adaptan bien al espacio visual limitado de una diapositiva</strong>. Aun así, son muy recomendables para trabajar en entornos más amplios, como informes en R Markdown o notebooks.</p>
+<p>El paquete&nbsp;<code>skimr</code>&nbsp;genera&nbsp;<strong>resúmenes estadísticos amigables y detallados</strong>, y lo interesante es que&nbsp;<strong>también incluye mini-histogramas de cada variable numérica</strong>, lo cual ayuda a ver de inmediato cómo se distribuyen los datos.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(skimr)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(df_22)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Esto genera una tabla con:</p>
+<ul>
+<li><p>Media, mediana, min, max y percentiles,</p></li>
+<li><p>Porcentaje de datos perdidos,</p></li>
+<li><p>Y un pequeño histograma de cada variable numérica.</p></li>
+</ul>
+<p>El paquete&nbsp;<code>summarytools</code> tiene una exclente función llamada <code>ctable()</code> para hacer&nbsp;<strong>tablas cruzadas</strong>&nbsp;de forma sencilla.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(summarytools)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ctable</span>(df_22<span class="sc">$</span>region, df_22<span class="sc">$</span>income)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tabla cruzada entre región y un corte en esperanza de vida</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>df_22 <span class="sc">%&gt;%</span></span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">grupo_vida =</span> <span class="fu">ifelse</span>(esp_vida <span class="sc">&gt;</span> <span class="dv">75</span>, </span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>                             <span class="st">"Alta"</span>, <span class="st">"Baja o media"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">with</span>(<span class="fu">ctable</span>(region, grupo_vida))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="eso-fue-todo-por-esta-sesión-gracias-por-su-atención" class="level1">
+<h1>Eso fue todo por esta sesión ¡Gracias por su atención!</h1>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copiado");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copiado");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

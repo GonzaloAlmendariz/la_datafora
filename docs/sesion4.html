@@ -1,0 +1,1759 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Sesión 4: Probabilidad, simulación, pruebas estadísticas y modelos de regresión – La Datafora</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Sin resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">La Datafora</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Buscar"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Navegación de palanca" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./about.html"> 
+<span class="menu-text">Inicio</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-curso-r" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Curso R</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-curso-r">    
+        <li>
+    <a class="dropdown-item" href="./sesion1.html">
+ <span class="dropdown-text">Sesión 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./sesion2.html">
+ <span class="dropdown-text">Sesión 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./sesion3.html">
+ <span class="dropdown-text">Sesión 3</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./sesion4.html">
+ <span class="dropdown-text">Sesión 4</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">En esta página</h2>
+   
+  <ul>
+  <li><a href="#fundamentos-de-probabilidad" id="toc-fundamentos-de-probabilidad" class="nav-link active" data-scroll-target="#fundamentos-de-probabilidad">Fundamentos de Probabilidad</a></li>
+  <li><a href="#la-probabilidad-como-frecuencia-relativa-a-largo-plazo" id="toc-la-probabilidad-como-frecuencia-relativa-a-largo-plazo" class="nav-link" data-scroll-target="#la-probabilidad-como-frecuencia-relativa-a-largo-plazo">La probabilidad como frecuencia relativa a largo plazo</a>
+  <ul class="collapse">
+  <li><a href="#probabilidad-experimental" id="toc-probabilidad-experimental" class="nav-link" data-scroll-target="#probabilidad-experimental">Probabilidad experimental</a></li>
+  </ul></li>
+  <li><a href="#distribución-normal" id="toc-distribución-normal" class="nav-link" data-scroll-target="#distribución-normal">Distribución Normal</a></li>
+  <li><a href="#introducción-a-funciones-de-distribución-en-r-rnorm-dnorm-pnorm-rbinom-runif" id="toc-introducción-a-funciones-de-distribución-en-r-rnorm-dnorm-pnorm-rbinom-runif" class="nav-link" data-scroll-target="#introducción-a-funciones-de-distribución-en-r-rnorm-dnorm-pnorm-rbinom-runif">Introducción a funciones de distribución en R: rnorm, dnorm, pnorm, rbinom, runif</a></li>
+  <li><a href="#demostración-del-teorema-del-límite-central" id="toc-demostración-del-teorema-del-límite-central" class="nav-link" data-scroll-target="#demostración-del-teorema-del-límite-central">Demostración del Teorema del Límite Central</a></li>
+  <li><a href="#contraste-de-hipótesis" id="toc-contraste-de-hipótesis" class="nav-link" data-scroll-target="#contraste-de-hipótesis">Contraste de hipótesis</a>
+  <ul class="collapse">
+  <li><a href="#pasos-del-contraste-de-hipótesis" id="toc-pasos-del-contraste-de-hipótesis" class="nav-link" data-scroll-target="#pasos-del-contraste-de-hipótesis">Pasos del Contraste de Hipótesis</a></li>
+  </ul></li>
+  <li><a href="#pruebas-estadísticas-comunes" id="toc-pruebas-estadísticas-comunes" class="nav-link" data-scroll-target="#pruebas-estadísticas-comunes">Pruebas estadísticas comunes</a>
+  <ul class="collapse">
+  <li><a href="#prueba-t-para-comparación-de-medias-entre-dos-grupos" id="toc-prueba-t-para-comparación-de-medias-entre-dos-grupos" class="nav-link" data-scroll-target="#prueba-t-para-comparación-de-medias-entre-dos-grupos">Prueba t para comparación de medias entre dos grupos</a></li>
+  <li><a href="#test-de-proporciones" id="toc-test-de-proporciones" class="nav-link" data-scroll-target="#test-de-proporciones">Test de proporciones</a></li>
+  <li><a href="#prueba-chi-cuadrado-para-asociación-entre-variables-categóricas" id="toc-prueba-chi-cuadrado-para-asociación-entre-variables-categóricas" class="nav-link" data-scroll-target="#prueba-chi-cuadrado-para-asociación-entre-variables-categóricas">Prueba chi-cuadrado para asociación entre variables categóricas</a></li>
+  <li><a href="#en-conclusión" id="toc-en-conclusión" class="nav-link" data-scroll-target="#en-conclusión">En conclusión</a></li>
+  <li><a href="#anova" id="toc-anova" class="nav-link" data-scroll-target="#anova">ANOVA</a></li>
+  </ul></li>
+  <li><a href="#regresión" id="toc-regresión" class="nav-link" data-scroll-target="#regresión">Regresión</a>
+  <ul class="collapse">
+  <li><a href="#regresión-lineal-simple-una-sola-variable-predictora" id="toc-regresión-lineal-simple-una-sola-variable-predictora" class="nav-link" data-scroll-target="#regresión-lineal-simple-una-sola-variable-predictora">Regresión lineal simple (una sola variable predictora)</a>
+  <ul class="collapse">
+  <li><a href="#ecuación-de-regresión-lineal" id="toc-ecuación-de-regresión-lineal" class="nav-link" data-scroll-target="#ecuación-de-regresión-lineal">Ecuación de regresión lineal</a></li>
+  <li><a href="#resumen-del-modelo-en-r-con-summary" id="toc-resumen-del-modelo-en-r-con-summary" class="nav-link" data-scroll-target="#resumen-del-modelo-en-r-con-summary">Resumen del modelo en R con <code>summary()</code></a></li>
+  </ul></li>
+  <li><a href="#regresión-múltiple" id="toc-regresión-múltiple" class="nav-link" data-scroll-target="#regresión-múltiple">Regresión múltiple</a>
+  <ul class="collapse">
+  <li><a href="#modelo-de-regresión-múltiple" id="toc-modelo-de-regresión-múltiple" class="nav-link" data-scroll-target="#modelo-de-regresión-múltiple">Modelo de regresión múltiple</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Otros formatos</h2><ul><li><a href="sesion4.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Sesión 4: Probabilidad, simulación, pruebas estadísticas y modelos de regresión</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="fundamentos-de-probabilidad" class="level1">
+<h1>Fundamentos de Probabilidad</h1>
+<p>Para analizar datos con criterio estadístico y formular conclusiones que vayan más allá de lo observado, es fundamental comprender qué implica hablar de <strong>probabilidad</strong>. Aunque su origen precede al desarrollo formal de la estadística, la probabilidad se ha convertido en uno de los pilares fundamentales para interpretar fenómenos aleatorios, cuantificar la incertidumbre y construir modelos que permitan realizar inferencias válidas a partir de una muestra.</p>
+<p>En su libro <em>Probability, Statistics, and Data: A Fresh Approach Using R</em>, Speegle (2021) propone una definición precisa:</p>
+<blockquote class="blockquote">
+<p>“La probabilidad de un evento es un número entre cero y uno que describe la proporción de veces que se espera que dicho evento ocurra.”</p>
+</blockquote>
+<p>Este enfoque es frecuentista, es decir: entiende la probabilidad como un valor que resume lo que se espera en el largo plazo si un experimento se repite muchas veces.</p>
+<p>Esta idea sugiere que hablar de la probabilidad de un evento es cuantificar <strong>cuán probable es su ocurrencia, comparada con todos los resultados posibles</strong>. Al lanzar una moneda, la probabilidad de obtener sello es de <span class="math inline">\(\frac{1}{2}\)</span>, lo que equivale a 0.5 o al 50%. Esta proporción puede visualizarse como una fracción de veces que se espera que ocurra el evento a lo largo de múltiples repeticiones del experimento.</p>
+<p>Podemos visualizar la probabilidad de este evento como una <strong>barra</strong> que representa el resultado del la moneda que nos interesa, en relación con el total de resultados posibles.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="sesion4_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Ambas barras representan la <strong>proporción</strong> del total de posibles resultados. En términos gráficos, la <strong>altura de la barra</strong> muestra la probabilidad de que ocurra cada resultado.</p>
+<p>Aquí es donde el concepto de <strong>área</strong> tiene relevancia. La probabilidad de cada número puede visualizarse como el <strong>área</strong> de la barra en un gráfico, en comparación con el área total que representan todos los posibles resultados. Para la moneda, la probabilidad de obtener un sello es <span class="math inline">\(\frac{1}{2}\)</span>, lo que significa que la barra para el resultado sello ocupa la mitad del área total del gráfico.</p>
+<p>Pero, ¿qué pasa cuando no estamos tratando con eventos discretos, como el lanzamiento de una modena, sino con variables que pueden tomar un <strong>rango infinito</strong> de valores? Por ejemplo, si quisiéramos saber la probabilidad de que la altura de una persona esté entre 160 cm y 170 cm, no podemos representar esta situación con barras, porque los valores posibles son infinitos (puede haber alturas de 160.1 cm, 160.2 cm, etc.).</p>
+<p>En estos casos, la probabilidad la representamos con una <strong>curva</strong>. Al igual que con las barras, el <strong>área bajo la curva</strong> nos muestra la probabilidad, pero en este caso, la probabilidad se calcula para un <strong>rango de valores</strong>. La idea sigue siendo la misma: la probabilidad es el área, pero ahora estamos mirando el área bajo una curva en lugar de barras separadas.</p>
+<p>Por ejemplo, si estamos interesados en la probabilidad de que una altura esté entre 160 cm y 170 cm, esa probabilidad sería el área bajo la curva entre esos dos puntos. Mientras que en el caso de las barras sabíamos exactamente cuántos resultados posibles había, en el caso de la curva no tenemos un número fijo de resultados, sino un rango, y el área debajo de ese rango nos da la probabilidad de que el valor caiga ahí.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="sesion4_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="la-probabilidad-como-frecuencia-relativa-a-largo-plazo" class="level1">
+<h1>La probabilidad como frecuencia relativa a largo plazo</h1>
+<p>En situaciones sencillas, el proceso es completamente conocido y la probabilidad puede estimarse de forma intuitiva. Imaginemos un escenario básico: un dado de seis caras numeradas del 1 al 6, y el objetivo es calcular la probabilidad de obtener un 3 al lanzarlo.</p>
+<p>Sabemos que el dado tiene seis caras y que cada una tiene la misma probabilidad de aparecer, asumiendo que no está cargado. Si definimos el evento de interés como “obtener un 3”, entonces existe <strong>una única cara favorable</strong> entre <strong>seis posibles resultados</strong>.</p>
+<p>Por tanto, la probabilidad de obtener un 3 en un solo lanzamiento de dado se puede calcular como:</p>
+<p><span class="math display">\[
+P(\text{Sacar un 3}) = \frac{\text{Número de resultados favorables}}{\text{Número total de resultados posibles}} = \frac{1}{6}
+\]</span></p>
+<p>Es decir…</p>
+<p><span class="math display">\[P(3) = \frac{1}{6} \approx 0.1667\]</span></p>
+<p>Cuando todas las opciones son igualmente probables y bien definidas, podemos calcular la probabilidad <strong>teóricamente</strong>:</p>
+<p><span class="math inline">\(P(3) = \frac{1}{6} \approx 0.1667\)</span></p>
+<p>Esto significa que, sin necesidad de lanzar el dado, <strong>ya sabemos</strong> que la chance de obtener un 3 es de una entre seis.</p>
+<p>Este razonamiento aplica también a otros casos simples:</p>
+<ul>
+<li>Moneda: <span class="math inline">\(\frac{1}{2}\)</span> chance de cara.</li>
+<li>Baraja: <span class="math inline">\(\frac{4}{52}\)</span> chance de sacar un as en la cartas.</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="sesion4_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Pero… <strong>¿y si el dado está alterado?</strong></p>
+<p>Si no sabemos si el dado es justo, <strong>no podemos asumir</strong> que cada cara tiene igual probabilidad.</p>
+<p>En esos casos, recurrimos a la <strong>probabilidad experimental</strong>, es decir, observamos cuántas veces ocurre un evento tras varios intentos.</p>
+<section id="probabilidad-experimental" class="level2">
+<h2 class="anchored" data-anchor-id="probabilidad-experimental">Probabilidad experimental</h2>
+<p>Veamos qué tan cerca está la frecuencia observada del valor teórico. Comenzamos con 10 lanzamientos:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>lanzamientos_10 <span class="ot">=</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="dv">10</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(lanzamientos_10 <span class="sc">==</span> <span class="dv">3</span>) <span class="sc">/</span> <span class="dv">10</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.3</code></pre>
+</div>
+</div>
+<p><strong>¿Qué ocurre si lanzamos el dado 100 veces?</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>lanzamientos_100 <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="dv">100</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(lanzamientos_100 <span class="sc">==</span> <span class="dv">3</span>) <span class="sc">/</span> <span class="dv">100</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.15</code></pre>
+</div>
+</div>
+<p><strong>¿Y con 10,000 lanzamientos?</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>lanzamientos_10000 <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="dv">10000</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(lanzamientos_10000 <span class="sc">==</span> <span class="dv">3</span>) <span class="sc">/</span> <span class="dv">10000</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.167</code></pre>
+</div>
+</div>
+<p><strong>A medida que aumenta el número de lanzamientos, la probabilidad experimental se aproxima al valor teórico</strong>: <span class="math display">\[P(3) = \frac{1}{6} \approx 0.1667\]</span></p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="sesion4_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="sesion4_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="sesion4_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="distribución-normal" class="level1">
+<h1>Distribución Normal</h1>
+<p>La <strong>distribución normal</strong>, también conocida como la “la campana de Gauss”, es una distribución continua que describe cómo se distribuyen los datos alrededor de un valor central (la media). Se caracteriza por ser simétrica alrededor de la media, con valores más probables cercanos a la media, y menos probables a medida que nos alejamos de ella. Es una de las distribuciones más importantes en estadística.</p>
+<p>La fórmula para la <strong>distribución normal</strong> es:</p>
+<p><span class="math display">\[
+f(x) = \frac{1}{\sigma \sqrt{2\pi}} e^{-\frac{(x - \mu)^2}{2\sigma^2}}
+\]</span></p>
+<p>Aquí tenemos dos valores que modifican el comportamiento de la distribución:</p>
+<ul>
+<li><p><span class="math inline">\(\mu\)</span> es la media de la distribución, donde se agrupan los datos.</p></li>
+<li><p><span class="math inline">\(\sigma\)</span> es la desviación estándar, que describe la dispersión de los valores con respecto a la media.</p></li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="sesion4_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="sesion4_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="introducción-a-funciones-de-distribución-en-r-rnorm-dnorm-pnorm-rbinom-runif" class="level1">
+<h1>Introducción a funciones de distribución en R: rnorm, dnorm, pnorm, rbinom, runif</h1>
+<p>Cuando realizamos análisis estadístico, es común trabajar con distribuciones de probabilidad para modelar fenómenos reales como:<br>
+La altura de las personas. El número de clientes que llegan a un restaurante. El número de éxitos en una serie de intentos.</p>
+<p>En R, usamos funciones con esta estructura:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 26%">
+<col style="width: 45%">
+<col style="width: 27%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Función</th>
+<th>Propósito</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>d***()</code></td>
+<td>Densidad en un punto específico</td>
+<td><code>dnorm(180, 175, 10)</code></td>
+</tr>
+<tr class="even">
+<td><code>p***()</code></td>
+<td>Probabilidad acumulada hasta un valor</td>
+<td><code>pnorm(180, 175, 10)</code></td>
+</tr>
+<tr class="odd">
+<td><code>q***()</code></td>
+<td>Cuantil o valor para una probabilidad dada</td>
+<td><code>qnorm(0.9, 175, 10)</code></td>
+</tr>
+<tr class="even">
+<td><code>r***()</code></td>
+<td>Simulación de datos aleatorios normales</td>
+<td><code>rnorm(100, 175, 10)</code></td>
+</tr>
+</tbody>
+</table>
+<p>En esta sección, nos centraremos en la distribución normal, pero ten en consideración que hay mas distribuciones de probabilidad. Nos centramos en la normal por su importancia en las pruebas estadísticas.</p>
+<p><strong>Supongamos que la altura de hombres adultos sigue una distribución normal con media 175cm y desviación estándar 10cm.</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>mean <span class="ot">=</span> <span class="dv">175</span> </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>sd <span class="ot">=</span> <span class="dv">10</span> </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><code>dnorm()</code>: Densidad en un punto específico</p>
+<p><strong>¿Qué tan común es medir 180cm? (dnorm)</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="dv">180</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dnorm</span>(x, <span class="at">mean =</span> mean, <span class="at">sd =</span> sd)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.0352</code></pre>
+</div>
+</div>
+<p>Esto da aproximadamente 0.035, una densidad más baja que la media (175cm). Lo visualizamos:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="sesion4_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><code>pnorm()</code>: Probabilidad acumulada hasta un valor</p>
+<p><strong>¿Qué porcentaje mide menos de 180m? (pnorm)</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(x, <span class="at">mean =</span> mean, <span class="at">sd =</span> sd)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.691</code></pre>
+</div>
+</div>
+<p>Esto da aproximadamente 0.6915, es decir, el 69.15% de los hombres miden 180cm o menos.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="sesion4_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><code>qnorm()</code>: Cuantil o valor para una probabilidad dada</p>
+<p><strong>¿Cuál es el percentil 90? (qnorm)</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.90</span>, <span class="at">mean =</span> mean, <span class="at">sd =</span> sd)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 188</code></pre>
+</div>
+</div>
+<p>El percentil 90 está en 188cm. Solo el 10% mide más que eso.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="sesion4_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Simular alturas reales (rnorm)</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>alturas <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> mean, <span class="at">sd =</span> sd)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(alturas)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 169 173 191 176 176 192</code></pre>
+</div>
+</div>
+</section>
+<section id="demostración-del-teorema-del-límite-central" class="level1">
+<h1>Demostración del Teorema del Límite Central</h1>
+<p>Este teorema es fundamental para entender los métodos inferenciales</p>
+<blockquote class="blockquote">
+<p>“<em>Si tomamos muchas muestras aleatorias de un mismo tamaño de una población (sea cual sea su distribución original), la distribución de sus estadísticos tenderá a una distribución normal a medida que el tamaño de las muestras aumente.”</em></p>
+</blockquote>
+<p>Por ejemplo, una distribución uniforme o binomial:</p>
+<p>Generamos una “población” no normal (distribución uniforme)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>poblacion <span class="ot">=</span> <span class="fu">runif</span>(<span class="dv">100000</span>, <span class="at">min =</span> <span class="dv">0</span>, <span class="at">max =</span> <span class="dv">100</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(poblacion, <span class="at">breaks =</span> <span class="dv">30</span>, </span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">"lightblue"</span>, </span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Distribución original"</span>, </span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Valores"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="sesion4_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Y calculamos la <strong>media de cada muestra</strong>.</p>
+<p>Simulamos 5000 muestras de tamaño 30</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>n_muestras <span class="ot">=</span> <span class="dv">5000</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>tamano_muestra <span class="ot">=</span> <span class="dv">30</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>medias <span class="ot">=</span> <span class="fu">replicate</span>(n_muestras, </span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">mean</span>(<span class="fu">sample</span>(poblacion, </span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>                               tamano_muestra, </span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>                               <span class="at">replace =</span> <span class="cn">TRUE</span>)))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="sesion4_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>A medida que aumentamos el tamaño de las muestras, las medias muestrales tienden a agruparse más cerca de la media poblacional. Esto ocurre porque el <strong>error estándar</strong> (la desviación estándar de la distribución de las medias muestrales) disminuye cuando el tamaño de muestra crece. En términos prácticos, esto significa que <strong>con muestras más grandes obtenemos estimaciones más precisas</strong> de la media verdadera de la población. Esta propiedad es fundamental en estadística inferencial y es una de las razones por las que el tamaño muestral importa tanto en los estudios empíricos.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="sesion4_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="contraste-de-hipótesis" class="level1">
+<h1>Contraste de hipótesis</h1>
+<p>El contraste de hipótesis es una herramienta estadística que nos permite decidir si un resultado observado en una muestra nos da suficiente evidencia para apoyar una afirmación sobre una población. Existen varias pruebas pero se caracterizan por ser todas un <strong>proceso organizado que nos ayuda a diferenciar entre resultados que podrían ocurrir solo por variación aleatoria y aquellos que son lo suficientemente inusuales como para indicar un efecto real</strong>.</p>
+<p>Aunque existen diversas pruebas, todas siguen un <strong>proceso estructurado y sistemático</strong> diseñado para diferenciar entre resultados que podrían ocurrir únicamente por variación aleatoria y aquellos que son <strong>estadísticamente significativos</strong>, es decir, lo suficientemente inusuales como para sugerir la presencia de un patrón o efecto real en la población.</p>
+<section id="pasos-del-contraste-de-hipótesis" class="level2">
+<h2 class="anchored" data-anchor-id="pasos-del-contraste-de-hipótesis">Pasos del Contraste de Hipótesis</h2>
+<p><strong>I. Planteamiento de Hipótesis</strong>:</p>
+<p>Comenzamos formulando dos hipótesis opuestas:</p>
+<ul>
+<li>La <strong>hipótesis nula</strong> (<span class="math inline">\(H_0\)</span>) representa la idea de “no hay efecto” o “no hay diferencia”. Es nuestra afirmación de partida y sugiere que cualquier variación que veamos es simplemente producto de la variación aleatoria inherente a nuestra muestra.<br>
+</li>
+<li>La <strong>hipótesis alternativa</strong> (<span class="math inline">\(H_1\)</span>) representa la afirmación que queremos evaluar. Indica que sí hay un efecto o diferencia en la población.</li>
+</ul>
+<p>La hipótesis nula nos da un punto de referencia neutral contra el cual comparamos nuestros resultados para evaluar si son suficientemente distintos como para sugerir algo real.</p>
+<p>Dependiendo de la dirección en la que buscamos evidencia contra <span class="math inline">\(H_0\)</span> el análisis puede ser:</p>
+<ul>
+<li><p><strong>Prueba bilateral (de dos colas):</strong> Se usa cuando queremos evaluar si hay una diferencia sin importar la dirección. Por ejemplo, si estudiamos el impacto de una nueva política pública en la tasa de empleo, <span class="math inline">\(H_1\)</span> indicaría que la política cambia la tasa de empleo, ya sea aumentándola o reduciéndola. En este caso, consideramos ambos extremos de la distribución para determinar si el efecto observado es lo suficientemente inusual como para rechazar <span class="math inline">\(H_0\)</span>.</p></li>
+<li><p><strong>Prueba unilateral (de una cola):</strong> Se usa cuando tenemos una expectativa clara sobre la dirección del efecto. Por ejemplo, si evaluamos si un programa de capacitación <strong>mejora</strong> las habilidades laborales, la hipótesis alternativa indicaría que el programa <strong>aumenta</strong> el nivel de habilidades (y no simplemente que lo cambia en cualquier dirección). Aquí, solo nos interesa una de las colas de la distribución.</p></li>
+</ul>
+<p><strong>II. Establecimiento de la Distribución Nula</strong></p>
+<p>Incluso si <span class="math inline">\(H_0\)</span> es cierta, los resultados de una muestra pueden fluctuar debido a la variación aleatoria. Sin embargo, estas fluctuaciones siguen un patrón: la mayoría de los valores observados estarán cerca de la media de la distribución nula, y conforme nos alejamos de esta media, los valores se vuelven menos probables. Esto significa que, en cualquier prueba de hipótesis, necesitamos un criterio que nos ayude a determinar <strong>cuándo un resultado es lo suficientemente diferente de lo esperado bajo</strong> <span class="math inline">\(H_0\)</span> <strong>como para considerarlo significativo</strong>. . Para hacer esta comparación, necesitamos una <strong>distribución de referencia</strong> que nos muestre cómo se comportaría nuestro estadístico (como la media o la proporción) <strong>si la hipótesis nula fuera verdadera</strong>.</p>
+<p>Al igual que podemos construir una distribución de posibles valores para el estadístico observado, podemos construir una <strong>distribución para la hipótesis nula</strong>. Recordando el Teorema del Límite Central (TLC), sabemos que, si tomamos muchas muestras de una población y calculamos su estadístico (como la media), los resultados tienden a seguir una distribución aproximadamente normal alrededor del valor supuesto por la hipótesis nula. Esta distribución para la hipótesis nula nos indica <strong>qué tan probable es obtener diferentes valores del estadístico bajo la suposición de que no hay efecto o diferencia real</strong>.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="sesion4_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>III. Nivel de confianza y definición de la zonas criticas:</strong></p>
+<p>La esencia de un contraste de hipótesis radica en evaluar <strong>qué tan diferente o extremo debe ser un valor observado</strong> para poder afirmar que no es probable si la hipótesis nula (<span class="math inline">\(H_0\)</span>) fuera cierta, incluso considerando la variabilidad natural que ocurre por azar. En otras palabras, el contraste de hipótesis busca determinar si el resultado obtenido se desvía tanto de lo esperado bajo <span class="math inline">\(H_0\)</span> que podemos justificar su rechazo. Este proceso nos permite distinguir entre variaciones que pueden explicarse simplemente por la aleatoriedad inherente al muestreo y aquellas que son lo suficientemente inusuales como para sugerir que existe un efecto real o una diferencia <strong>significativa</strong>.</p>
+<p>Para evaluar si un resultado es lo suficientemente extremo como para considerarlo evidencia en contra de <span class="math inline">\(H_0\)</span>, necesitamos definir un umbral que nos ayude a tomar esta decisión. Este umbral se establece a través del <strong>nivel de confianza</strong> y el <strong>nivel de significancia</strong> (<span class="math inline">\(\alpha\)</span>).</p>
+<p>Sabiendo que:</p>
+<p><span class="math display">\[ \text{Nivel de confianza} = 1 - \alpha \]</span></p>
+<p>El nivel de significancia <span class="math inline">\(\alpha\)</span> nos dice cuánto estamos dispuestos a aceptar el riesgo de cometer un <strong>Error Tipo I</strong> (rechazar <span class="math inline">\(H_0\)</span> cuando en realidad es cierta). Si elegimos <span class="math inline">\(\alpha = 0.05\)</span>, estamos definiendo que solo el 5% de los valores más extremos de la distribución nula serán considerados “demasiado improbables” bajo <span class="math inline">\(H_0\)</span>.</p>
+<p>Por ejemplo, si elegimos un nivel de confianza del <strong>95%</strong>, significa que queremos estar seguros en un <strong>95%</strong> de que la conclusión que tomemos será correcta y aceptamos un <strong>5% de riesgo</strong> de cometer un <strong>Error Tipo I</strong> (rechazar <span class="math inline">\(H_0\)</span> cuando en realidad es cierta). Esto implica que el <strong>nivel de significancia</strong> en este caso es:</p>
+<p><span class="math display">\[ \alpha = 0.05 \]</span></p>
+<p>El valor de <span class="math inline">\(\alpha\)</span> nos ayuda a definir las <strong>zonas críticas</strong> de la distribución nula, que son las regiones donde un resultado se considerará lo suficientemente improbable como para rechazar <span class="math inline">\(H_0\)</span>. La ubicación exacta de estas zonas depende del tipo de prueba que estemos realizando</p>
+<p>Si realizamos una <strong>prueba bilateral (de dos colas)</strong>, el nivel de significancia se divide en <strong>dos extremos</strong> de la distribución nula, dejando <span class="math inline">\(\frac{\alpha}{2}\)</span> <strong>en cada cola</strong>. Esto significa que rechazamos <span class="math inline">\(H_0\)</span> si el valor observado es <strong>demasiado grande o demasiado pequeño</strong> en comparación con lo que esperaríamos si <span class="math inline">\(H_0\)</span> fuera cierta.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="sesion4_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Si realizamos una <strong>prueba unilateral (de una cola)</strong>, todo el nivel de significancia <span class="math inline">\(\alpha\)</span> se coloca en una sola cola de la distribución, dependiendo de si estamos evaluando un efecto <strong>mayor</strong> o <strong>menor</strong>. En este caso, rechazamos <span class="math inline">\(H_0\)</span> solo si el resultado observado es <strong>significativamente mayor</strong> o <strong>significativamente menor</strong> de lo esperado bajo <span class="math inline">\(H_0\)</span>.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="sesion4_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Para determinar qué tan extremo debe ser un resultado para considerarlo estadísticamente significativo, usamos el <strong>valor crítico</strong> (<span class="math inline">\(z\)</span> crítico o <span class="math inline">\(t\)</span> crítico) que determina la distancia en errores estándar de la media de la distribución.</p>
+<p>Por ejemplo, en una prueba basada en la distribución normal estándar, el <span class="math inline">\(z\)</span> crítico para <span class="math inline">\(\alpha = 0.05\)</span> en una prueba bilateral es el 2.5% más extremo a cada lado, por lo que aproximadamente <span class="math inline">\(\pm1.96\)</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.975</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.96</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.025</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -1.96</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="sesion4_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Esto que significa que cualquier estadístico que caiga fuera de este rango se considera lo suficientemente improbable bajo <span class="math inline">\(H_0\)</span> como para rechazarla. Además, si la muestra es pequeña o la varianza es desconocida, usamos la distribución <span class="math inline">\(t\)</span> de Student, en cuyo caso el <span class="math inline">\(t\)</span> crítico dependerá del tamaño muestral y los grados de libertad.</p>
+<p><strong>IV. Comparación del Valor Observado con la Distribución Nula</strong></p>
+<p>Ya que escogimos <span class="math inline">\(\alpha = 0.05\)</span>, si el valor observado cae en el <strong>5% más extremo</strong> de la distribución nula (es decir, en las áreas menos probables), lo consideramos lo suficientemente inusual como para que no pueda explicarse únicamente por la variabilidad aleatoria bajo la hipótesis nula (<span class="math inline">\(H_0\)</span>). En este caso, rechazamos <span class="math inline">\(H_0\)</span> y favorecemos la hipótesis alternativa (<span class="math inline">\(H_1\)</span>).</p>
+<p>Si el valor observado está dentro del <strong>95%</strong> de la distribución nula, significa que se encuentra dentro del rango esperado por variación natural. No es lo suficientemente inusual, por lo que <strong>no rechazamos</strong> <span class="math inline">\(H_0\)</span>. En cambio, si el valor observado cae en el <strong>5% más extremo</strong> de la distribución, consideramos que es <strong>lo suficientemente improbable</strong> bajo <span class="math inline">\(H_0\)</span>, por lo que tenemos suficiente evidencia para rechazarla en favor de <span class="math inline">\(H_1\)</span>.</p>
+<p>Utilizamos el valor <span class="math inline">\(t\)</span> y el valor <span class="math inline">\(z\)</span> para evaluar cuán lejos está un valor observado de lo que esperaríamos bajo la hipótesis nula.</p>
+<ul>
+<li>Para pruebas sobre una media: <span class="math display">\[
+t = \frac{\bar{x} - \mu_0}{\text{Error estándar}}, \quad \text{donde } \mu_0 \text{ es la media bajo } H_0.
+\]</span></li>
+<li>Para pruebas sobre una proporción: <span class="math display">\[
+z = \frac{\hat{p} - p_0}{\text{Error estándar}}, \quad \text{donde } p_0 \text{ es la proporción bajo } H_0.
+\]</span> No olvidar que los valores <span class="math inline">\(z\)</span> y <span class="math inline">\(t\)</span> representan distancia (en errores estándar) con respecto al centro de la distribución.</li>
+</ul>
+<p><strong>V. Decisión Basada en el Nivel de Significancia (</strong><span class="math inline">\(\alpha\)</span><strong>) y el p-valor:</strong></p>
+<p>El contraste de hipótesis, en esencia, usa una distribución nula para comparar los resultados observados con lo que esperaríamos bajo la hipótesis nula. Esto permite hacer una evaluación objetiva, decidiendo si el resultado es suficientemente extremo como para ser significativo o si podría explicarse simplemente por la variabilidad natural en los datos. Por lo que utilizamos nuestro estadístico observado y evaluamos si se encuentra en la zona crítica expresada en valores <span class="math inline">\(t\)</span> o <span class="math inline">\(z\)</span>.</p>
+<p><span class="math display">\[
+  \text{Región de rechazo: } |t| &gt; t_{\text{crítico}} \quad \text{o} \quad |z| &gt; z_{\text{crítico}}
+\]</span></p>
+<p>El valor <span class="math inline">\(t\)</span> o <span class="math inline">\(z\)</span> observado puede estar tanto a la izquierda como a la derecha, por ello su valor absoluto.</p>
+<p>Hay que ser cautelosos ya que con este proceso es que no estamos diciendo que <span class="math inline">\(H_0\)</span> sea absolutamente falsa, sino que el resultado observado en nuestra muestra es <strong>lo suficientemente improbable</strong> como para justificar dudar de ella y considerar que <span class="math inline">\(H_1\)</span> es más plausible.</p>
+<p>Otra forma de evaluar si el resultado es suficientemente extremo es mediante el <strong>p-valor</strong>, que representa la <strong>probabilidad de obtener un estadístico de prueba igual o más extremo que el observado, bajo la suposición de que</strong> <span class="math inline">\(H_0\)</span> <strong>es verdadera</strong>.</p>
+<p>Ambos enfoques (comparar el estadístico con el valor crítico o utilizar el p-valor) son dos caras de la misma moneda y llevan a la misma conclusión. Mientras que la comparación con el valor crítico permite establecer de manera directa si un resultado cae dentro de la región de rechazo, el p-valor ofrece una medida de cuán improbable es el resultado bajo <span class="math inline">\(H_0\)</span>.</p>
+<p>Para tomar una decisión utilizando el p-valor:</p>
+<ul>
+<li>Si <span class="math inline">\(p \leq \alpha\)</span> → Se rechaza <span class="math inline">\(H_0\)</span> ya que el resultado es demasiado improbable bajo la hipótesis nula.<br>
+</li>
+<li>Si <span class="math inline">\(p &gt; \alpha\)</span> → No se rechaza <span class="math inline">\(H_0\)</span> ya que el resultado no es lo suficientemente extremo como para concluir que hay una diferencia significativa.</li>
+</ul>
+<p>Este enfoque es especialmente útil porque <strong>las pruebas estadísticas en R reportan automáticamente el p-valor</strong>.</p>
+<p>Recuerda que tenemos una <strong>hipótesis nula</strong> (<span class="math inline">\(H_0\)</span>) que representa la idea de que <em>no hay efecto</em>, <em>no hay diferencia</em>, o que <em>se debe al azar</em>. Por ejemplo, si comparamos dos tratamientos, la hipótesis nula podría ser que ambos tienen el mismo efecto.</p>
+<p>El <strong>p-valor</strong> es una forma de medir <strong>cuán compatibles son nuestros datos con esa hipótesis nula</strong>. Técnicamente, el p-valor es la <strong>probabilidad de obtener un resultado igual o más extremo que el observado, asumiendo que la hipótesis nula es verdadera</strong>.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Cuidado
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>el p-valor <strong>no</strong> te dice la probabilidad de que la hipótesis nula sea cierta. Más bien, te dice qué tan raros serían tus datos <strong>si</strong> la hipótesis nula fuera cierta. Esta decisión no prueba que <span class="math inline">\(H_0\)</span> sea verdadera o falsa, solo indica si hay evidencia suficiente, desde el punto de vista estadístico, para cuestionarla.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="pruebas-estadísticas-comunes" class="level1">
+<h1>Pruebas estadísticas comunes</h1>
+<p>Los <strong>tests estadísticos</strong> nos permiten contrastar afirmaciones sobre poblaciones a partir de muestras. Cada test evalúa si una diferencia o asociación observada es lo suficientemente grande como para <strong>no atribuirla al azar</strong>. Todas estas pruebas descansan sobre la misma lógica:</p>
+<ol type="1">
+<li>Planteamos una hipótesis nula (<span class="math inline">\(H_0\)</span>).</li>
+<li>Evaluamos cuánto se alejan los datos observados de lo esperado bajo <span class="math inline">\(H_0\)</span>.</li>
+<li>Calculamos un estadístico de prueba (como <span class="math inline">\(t\)</span>, <span class="math inline">\(z\)</span> o <span class="math inline">\(\chi^2\)</span>).</li>
+<li>Usamos una distribución de referencia para obtener el <strong>p-valor</strong>.</li>
+<li>Decidimos si rechazamos o no <span class="math inline">\(H_0\)</span>, en función del nivel de significancia (<span class="math inline">\(\alpha\)</span>).</li>
+</ol>
+<section id="prueba-t-para-comparación-de-medias-entre-dos-grupos" class="level2">
+<h2 class="anchored" data-anchor-id="prueba-t-para-comparación-de-medias-entre-dos-grupos">Prueba t para comparación de medias entre dos grupos</h2>
+<p>Esta prueba se usa cuando queremos saber si <strong>la media de un grupo difiere significativamente de la de otro grupo</strong>. Es especialmente útil en contextos de intervención o comparación.</p>
+<p>Ejemplo: Un programa de capacitación fue implementado en algunas municipalidades. Se evalúa si el ingreso promedio mensual cambió respecto a un grupo sin capacitación.</p>
+<ul>
+<li><span class="math inline">\(H_0\)</span>: la media del grupo tratado es igual a la del grupo control.\</li>
+<li><span class="math inline">\(H_1\)</span>: las medias son distintas (o, en una prueba unilateral, que una es mayor que la otra).</li>
+</ul>
+<p>El estadístico t se calcula como:</p>
+<p><span class="math display">\[
+t = \frac{\bar{x}_1 - \bar{x}_2}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}}
+\]</span></p>
+<p>Donde <span class="math inline">\(\bar{x}_1\)</span> y <span class="math inline">\(\bar{x}_2\)</span> son las medias de cada grupo, <span class="math inline">\(s_1^2\)</span> y <span class="math inline">\(s_2^2\)</span> las varianzas, y <span class="math inline">\(n_1\)</span>, <span class="math inline">\(n_2\)</span> los tamaños muestrales.</p>
+<p>Ejemplo:estamos investigando si existen diferencias en el tiempo de ocio semanal entre hombres y mujeres. Para ello, ha recolectado información sobre la cantidad de horas que cada persona dedica al ocio en una semana y desea comparar las medias de ambos grupos.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>ocio <span class="ot">=</span> <span class="fu">read_csv</span>(<span class="st">'horas_ocio.csv'</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(ocio)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 200
+Columns: 2
+$ genero     &lt;chr&gt; "hombre", "mujer", "hombre", "hombre", "mujer", "mujer", "m…
+$ horas_ocio &lt;dbl&gt; 15, 9, 13, 12, 13, 11, 13, 15, 14, 11, 14, 16, 10, 13, 13, …</code></pre>
+</div>
+</div>
+<p>Podemos utilizar <code>describeBy</code> del paquete <code>psych</code> para realizar los resúmenes numéricos pertinentes por cada nivel (categoría) de la variable <code>genero</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(psych)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">describeBy</span>(ocio<span class="sc">$</span>horas_ocio, ocio<span class="sc">$</span>genero)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ Descriptive statistics by group 
+group: hombre
+   vars   n mean   sd median trimmed  mad min max range skew kurtosis   se
+X1    1 100 15.7 2.47     15    15.6 2.97  11  24    13 0.58     0.35 0.25
+------------------------------------------------------------ 
+group: mujer
+   vars   n mean   sd median trimmed  mad min max range skew kurtosis   se
+X1    1 100 12.1 2.31     12    12.1 1.48   6  17    11    0    -0.39 0.23</code></pre>
+</div>
+</div>
+<p>Esto nos permite comparar cómo varían las horas de ocio entre ambos grupos, pero una manera aún más intuitiva de explorar estas diferencias es mediante una representación gráfica. Para ello, utilizamos un <strong>boxplot</strong>, que nos muestra la distribución del tiempo de ocio según el género.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>ocio <span class="sc">%&gt;%</span> </span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> genero, <span class="at">y =</span> horas_ocio, <span class="at">fill =</span> genero)) <span class="sc">+</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">'Horas de ocio semanal por género'</span>, </span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">'Cantidad de horas'</span>) <span class="sc">+</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="sesion4_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>El gráfico muestra una diferencia en la distribución entre los grupos. La clave aquí es <em>que tan diferentes</em> son como para poder afirmar que efectivamente el género influye o <em>explica</em> la <em>variación</em> en las horas de ocio.</p>
+<p>Podemos generar un resumen descriptivo con la media y la desviación estándar utilizando <code>dplyr</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>estadisticas <span class="ot">=</span> ocio <span class="sc">%&gt;%</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(genero) <span class="sc">%&gt;%</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">promedio =</span> <span class="fu">mean</span>(horas_ocio),</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd =</span> <span class="fu">sd</span>(horas_ocio),</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="fu">n</span>()</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>estadisticas</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 4
+  genero promedio    sd     n
+  &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;
+1 hombre     15.7  2.47   100
+2 mujer      12.1  2.31   100</code></pre>
+</div>
+</div>
+<hr>
+<p>Para cuantificar esta diferencia, necesitamos calcular un estadístico de comparación, que en este caso es la diferencia de medias muestrales, representada por <span class="math inline">\(\Delta\)</span> (Delta).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>diferencia <span class="ot">=</span> <span class="fu">diff</span>(estadisticas<span class="sc">$</span>promedio)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>diferencia</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -3.6</code></pre>
+</div>
+</div>
+<p>Por lo que la diferencia de medias <span class="math inline">\(\Delta \bar{x}\)</span> es: <span class="math display">\[
+\Delta \bar{x} = \bar{x}_{Hombres} - \bar{x}_{Mujeres} = 15.8 - 12.2 = 3.6
+\]</span></p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="sesion4_files/figure-html/unnamed-chunk-42-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Planteamiento de Hipótesis</strong></p>
+<p>El primer paso es formular nuestras hipótesis estadísticas:</p>
+<ul>
+<li><p>Hipótesis nula (<span class="math inline">\(H_0\)</span>): No existe diferencia entre las medias de las dos poblaciones. En otras palabras: <span class="math display">\[
+H_0: \mu_{Hombres} - \mu_{Mujeres} = 0
+\]</span></p></li>
+<li><p>Hipótesis alternativa (<span class="math inline">\(H_1\)</span>): Existe una diferencia significativa entre las medias de las dos poblaciones: <span class="math display">\[
+H_1: \mu_{Hombres} - \mu_{Mujeres} \neq 0
+\]</span></p></li>
+</ul>
+<p>El contraste de hipótesis nos permite evaluar si la diferencia observada en las horas de ocio promedio es lo suficientemente grande como para no atribuirse al azar. Bajo la hipótesis nula (<span class="math inline">\(H_0\)</span>), asumimos que <strong>el género no influye en las horas de ocio</strong>, es decir, que la diferencia de medias en la población es <strong>cero</strong> (<span class="math inline">\(\mu_1 = \mu_2\)</span>). Si rechazamos (<span class="math inline">\(H_0\)</span>), concluimos que el género sí tiene un efecto significativo.</p>
+<p>En nuestro caso, hemos planteado una <strong>prueba bilateral</strong>, donde la hipótesis alternativa (<span class="math inline">\(H_A\)</span>) simplemente indica que <strong>existe una diferencia entre los grupos</strong>, sin especificar la dirección:</p>
+<p><span class="math display">\[
+H_A: \mu_1 \neq \mu_2
+\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>prueba_t <span class="ot">=</span> <span class="fu">t.test</span>(horas_ocio <span class="sc">~</span> genero, </span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">data =</span> ocio, </span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">conf.level =</span> <span class="fl">0.95</span>)</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(prueba_t)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 10
+  estimate estimate1 estimate2 statistic  p.value parameter conf.low conf.high
+     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+1      3.6      15.7      12.1      10.7 3.04e-21      197.     2.93      4.27
+# ℹ 2 more variables: method &lt;chr&gt;, alternative &lt;chr&gt;</code></pre>
+</div>
+</div>
+<hr>
+<p><strong>Interpretación</strong>:</p>
+<ul>
+<li>Si <span class="math inline">\(t\)</span> es muy alto en valor absoluto (es decir, muy alejado del 0), y el <strong>p-valor</strong> &lt; <span class="math inline">\(\alpha\)</span> <strong>rechazamos</strong> <span class="math inline">\(H_0\)</span>.</li>
+<li>Esto indica que la diferencia de medias es suficientemente grande como para no atribuirse solo al azar.</li>
+</ul>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Importante
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Si las varianzas no son iguales, se usa la <strong>versión de Welch</strong>. La prueba <strong>asume normalidad</strong> o un tamaño muestral grande (por el TLC).</p>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="sesion4_files/figure-html/unnamed-chunk-45-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="test-de-proporciones" class="level2">
+<h2 class="anchored" data-anchor-id="test-de-proporciones">Test de proporciones</h2>
+<p>El contraste de hipótesis para la diferencia de proporciones entre dos grupos sigue una estructura similar al de medias, pero evalúa si la diferencia observada entre las proporciones muestrales es suficientemente extrema como para concluir que no se debe al azar.</p>
+<p>Ejemplo: Queremos saber si el <strong>30% de apoyo</strong> a una reforma educativa en una encuesta nacional difiere del <strong>50%</strong> que se espera históricamente.</p>
+<ul>
+<li><span class="math inline">\(H_0\)</span>: <span class="math inline">\(p = 0.5\)</span></li>
+<li><span class="math inline">\(H_1\)</span>: <span class="math inline">\(p \neq 0.5\)</span> (prueba bilateral)</li>
+</ul>
+<p>El estadístico es:</p>
+<p><span class="math display">\[
+z = \frac{\hat{p} - p_0}{\sqrt{\frac{p_0(1 - p_0)}{n}}}
+\]</span></p>
+<p>Donde:</p>
+<ul>
+<li><span class="math inline">\(\hat{p}\)</span> es la proporción observada,</li>
+<li><span class="math inline">\(p_0\)</span> es la proporción bajo <span class="math inline">\(H_0\)</span>,</li>
+<li><span class="math inline">\(n\)</span> es el tamaño muestral.</li>
+</ul>
+<p>Región 1: 80 de 100 personas aprueban Región 2: 70 de 100 personas aprueban</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.test</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">80</span>, <span class="dv">70</span>), </span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">n =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">100</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    2-sample test for equality of proportions with continuity correction
+
+data:  c(80, 70) out of c(100, 100)
+X-squared = 2, df = 1, p-value = 0.1
+alternative hypothesis: two.sided
+95 percent confidence interval:
+ -0.0292  0.2292
+sample estimates:
+prop 1 prop 2 
+   0.8    0.7 </code></pre>
+</div>
+</div>
+<p><strong>Interpretación</strong>:</p>
+<ul>
+<li>Si el valor <span class="math inline">\(z\)</span> cae fuera del intervalo crítico, o si el <strong>p-valor es menor a</strong> <span class="math inline">\(\alpha\)</span>, <strong>rechazamos</strong> <span class="math inline">\(H_0\)</span>.</li>
+</ul>
+<p>También puede aplicarse para comparar dos proporciones:</p>
+<p><span class="math display">\[
+z = \frac{\hat{p}_1 - \hat{p}_2}{\sqrt{\hat{p}(1 - \hat{p}) \left( \frac{1}{n_1} + \frac{1}{n_2} \right)}}
+\]</span></p>
+<p>Donde <span class="math inline">\(\hat{p}\)</span> es la proporción combinada.</p>
+</section>
+<section id="prueba-chi-cuadrado-para-asociación-entre-variables-categóricas" class="level2">
+<h2 class="anchored" data-anchor-id="prueba-chi-cuadrado-para-asociación-entre-variables-categóricas">Prueba chi-cuadrado para asociación entre variables categóricas</h2>
+<p>La prueba chi-cuadrado evalúa si <strong>dos variables categóricas están asociadas</strong> o si son independientes.</p>
+<p>Ejemplo: Queremos saber si la percepción de inseguridad (alta vs.&nbsp;baja) está asociada al sexo (hombre vs.&nbsp;mujer).</p>
+<ul>
+<li><span class="math inline">\(H_0\)</span>: las variables son independientes.</li>
+<li><span class="math inline">\(H_1\)</span>: hay asociación entre las variables.</li>
+</ul>
+<p>Construimos una <strong>tabla de contingencia</strong> con frecuencias observadas, y se compara con las frecuencias esperadas bajo la hipótesis de independencia.</p>
+<p>El estadístico se calcula así:</p>
+<p><span class="math display">\[
+\chi^2 = \sum \frac{(O_{ij} - E_{ij})^2}{E_{ij}}
+\]</span></p>
+<p>Donde <span class="math inline">\(O_{ij}\)</span> son las frecuencias observadas, y <span class="math inline">\(E_{ij}\)</span> las esperadas.</p>
+<p>Creamos una tabla de contingencia</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>tabla <span class="ot">=</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">60</span>, <span class="dv">40</span>, <span class="dv">30</span>, <span class="dv">70</span>), <span class="at">nrow =</span> <span class="dv">2</span>,</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">dimnames =</span> <span class="fu">list</span>(<span class="st">"Educación"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Universitario"</span>, </span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>                                                <span class="st">"No universitario"</span>),</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>                                <span class="st">"Empleo"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Formal"</span>, </span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>                                             <span class="st">"Informal"</span>)))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>tabla</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                  Empleo
+Educación         Formal Informal
+  Universitario        60       30
+  No universitario     40       70</code></pre>
+</div>
+</div>
+<hr>
+<p>Prueba chi-cuadrado</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(tabla)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pearson's Chi-squared test with Yates' continuity correction
+
+data:  tabla
+X-squared = 17, df = 1, p-value = 0.00004</code></pre>
+</div>
+</div>
+<p><strong>Interpretación</strong>:</p>
+<ul>
+<li>Un valor alto de <span class="math inline">\(\chi^2\)</span> indica que las diferencias entre observados y esperados son grandes → evidencia contra <span class="math inline">\(H_0\)</span>.</li>
+<li>Si el p-valor asociado es bajo, <strong>rechazamos</strong> <span class="math inline">\(H_0\)</span> → hay evidencia de asociación.</li>
+</ul>
+<p><strong>Precauciones</strong>:</p>
+<ul>
+<li>Las frecuencias esperadas no deben ser demasiado pequeñas (al menos 5 idealmente en cada celda).</li>
+<li>No mide <strong>fuerza</strong> de asociación, solo existencia.</li>
+</ul>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Importante
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Las frecuencias esperadas no deben ser demasiado pequeñas (al menos 5 idealmente en cada celda). No mide <strong>fuerza</strong> de asociación, solo existencia.</p>
+</div>
+</div>
+</section>
+<section id="en-conclusión" class="level2">
+<h2 class="anchored" data-anchor-id="en-conclusión">En conclusión</h2>
+<p>Todas estas pruebas siguen la <strong>misma lógica inferencial</strong>, que ya vimos con el Teorema Central del Límite y el valor p:</p>
+<ul>
+<li><strong>Si el estadístico de prueba cae en la zona crítica o el p-valor es pequeño</strong>, el resultado observado es <strong>demasiado raro</strong> bajo <span class="math inline">\(H_0\)</span>, por lo que la rechazamos.</li>
+<li>Cuanto mayor el tamaño de muestra, <strong>menor el error estándar</strong>, y más <strong>precisa</strong> será nuestra decisión.</li>
+</ul>
+</section>
+<section id="anova" class="level2">
+<h2 class="anchored" data-anchor-id="anova">ANOVA</h2>
+<p>Cuando comparamos variación en las medias de los dinstitnos grupos, la prueba de <strong>ANOVA (Análisis de Varianza)</strong> es la herramienta adecuada. Las pruebas ANOVA siguen la misma lógica e untición matemática vista en las anteriores pruebas pero los cálculos matemáticos son algo más complejas y están fuera del propósito del libro, aunque te animo a revisarlas por ti mismo.</p>
+<p>Imagina que estamos investigando si existe una <strong>diferencia en la satisfacción laboral</strong> entre distintos sectores económicos. Para ello, recopilamos datos de empleados en cinco sectores: <strong>Tecnología, Finanzas, Educación, Salud y Manufactura</strong>. Su objetivo es determinar si el nivel de satisfacción laboral varía significativamente entre los grupos.</p>
+<p>Para medir la satisfacción, cada empleado calificó su experiencia laboral en una escala de <strong>0 a 10</strong>, donde:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th><strong>Puntuación</strong></th>
+<th><strong>Nivel de Satisfacción</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0 - 2</td>
+<td>Muy insatisfecho</td>
+</tr>
+<tr class="even">
+<td>3 - 4</td>
+<td>Insatisfecho</td>
+</tr>
+<tr class="odd">
+<td>5 - 6</td>
+<td>Neutral</td>
+</tr>
+<tr class="even">
+<td>7 - 8</td>
+<td>Satisfecho</td>
+</tr>
+<tr class="odd">
+<td>9 - 10</td>
+<td>Muy satisfecho</td>
+</tr>
+</tbody>
+</table>
+<p>ANOVA nos permite comparar las <strong>medias de tres o más grupos</strong> y determinar si al menos uno de ellos es significativamente diferente de los demás. En lugar de realizar múltiples t-tests (lo que aumentaría el riesgo de error tipo I), ANOVA evalúa si la <strong>variabilidad entre los grupos</strong> es mayor que la <strong>variabilidad dentro de cada grupo</strong>, lo que indicaría que las diferencias observadas <strong>no se deben al azar</strong>.</p>
+<p>En pruebas anteriores vimos que, cuando comparamos <strong>dos grupos</strong>, usamos la <strong>distribución t</strong> para evaluar la diferencia entre sus medias. La distribución <span class="math inline">\(t\)</span> es útil para comparar dos muestras porque se basa en la diferencia de medias y la variabilidad dentro de cada grupo. En lugar de eso, ANOVA utiliza la <strong>distribución F</strong>, que compara la <strong>variabilidad entre los grupos</strong> con la <strong>variabilidad dentro de los grupos</strong> en una sola prueba.</p>
+<p>El <strong>estadístico F</strong> se define como:</p>
+<p><span class="math display">\[
+F = \frac{\text{Variabilidad entre grupos}}{\text{Variabilidad dentro de los grupos}}
+\]</span><br>
+</p>
+<hr>
+<p>¿Pero por qué nos interesa comparar la <strong>variabilidad entre los grupos</strong> con la <strong>variabilidad dentro de los grupos</strong>? Porque esto nos dice si las diferencias observadas son reales o simplemente producto del azar. Si la variabilidad entre los grupos es similar a la variabilidad dentro de ellos, significa que las diferencias en las medias no son mayores que las fluctuaciones normales que ocurren dentro de cada grupo. En otras palabras, aunque haya cierta dispersión en los datos, esta dispersión es comparable en todos los grupos, por lo que no hay razones para pensar que alguno de ellos sea realmente diferente.</p>
+<hr>
+<p>Sin embargo, si la variabilidad entre los grupos es mucho mayor que la variabilidad dentro de ellos, entonces estamos viendo diferencias que van más allá de la variación esperada dentro de cada grupo. Esto nos sugiere que al menos un grupo tiene una media que se aleja significativamente de los demás. Esa es la clave del ANOVA.</p>
+<p>La distribución F nos permite determinar qué tan extremo debe ser un valor F para rechazar la hipótesis nula. Valores bajos de F indican que las diferencias entre los grupos no son mayores que las diferencias dentro de ellos, mientras que valores altos sugieren que al menos un grupo es significativamente distinto. Por eso, en las pruebas ANOVA, cuando obtenemos un F suficientemente grande, podemos concluir que hay diferencias estadísticamente significativas entre los grupos analizados.</p>
+<p>El primer paso es formular nuestras hipótesis estadísticas:</p>
+<ul>
+<li><strong>Hipótesis nula</strong> (<span class="math inline">\(H_0\)</span>): No existe diferencia en la satisfacción laboral entre los sectores. Es decir:</li>
+</ul>
+<p><span class="math display">\[
+    H_0: \mu_1 = \mu_2 = \mu_3 = \mu_4 = \mu_5
+\]</span></p>
+<ul>
+<li><strong>Hipótesis alternativa</strong> (<span class="math inline">\(H_1\)</span>): Al menos un sector tiene una media de satisfacción diferente:</li>
+</ul>
+<p><span class="math display">\[
+    H_1: \text{Al menos un } \mu_i \text{ es diferente}
+\]</span></p>
+<p>Bajo (<span class="math inline">\(H_0\)</span>), los niveles de satisfacción en los distintos sectores son iguales. Si rechazamos (<span class="math inline">\(H_0\)</span>), concluimos que existe una diferencia significativa en la satisfacción laboral entre <strong>al menos un grupo</strong>.</p>
+<p>Cargamos los datos de la encuesta</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>satisfaccion <span class="ot">=</span> <span class="fu">read_csv</span>(<span class="st">'base_satisfaccion.csv'</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Antes de realizar la prueba ANOVA, exploramos las características de cada grupo:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Estadísticas descriptivas por sector</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>satisfaccion <span class="sc">%&gt;%</span></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sector) <span class="sc">%&gt;%</span></span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">media =</span> <span class="fu">mean</span>(nivel_satisfaccion),</span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">desviacion =</span> <span class="fu">sd</span>(nivel_satisfaccion),</span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="fu">n</span>()</span>
+<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 4
+  sector      media desviacion     n
+  &lt;chr&gt;       &lt;dbl&gt;      &lt;dbl&gt; &lt;int&gt;
+1 Educación    4.9        2.89    30
+2 Finanzas     4.03       2.74    30
+3 Manufactura  2.4        1.40    30
+4 Salud        5.97       2.46    30
+5 Tecnología   4.93       2.50    30</code></pre>
+</div>
+</div>
+<p>Para visualizar las diferencias en satisfacción laboral entre sectores, podemos utilizar un <strong>boxplot</strong>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(satisfaccion, <span class="fu">aes</span>(<span class="at">x =</span> sector, </span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">y =</span> nivel_satisfaccion, </span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">fill =</span> sector)) <span class="sc">+</span></span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribución de la satisfacción laboral por sector"</span>,</span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Sector Económico"</span>,</span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Nivel de Satisfacción"</span>) <span class="sc">+</span></span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="sesion4_files/figure-html/unnamed-chunk-54-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Utilizamos la función <code>aov()</code> que realiza un <strong>ANOVA</strong>. Esta función ajusta un modelo estadístico donde la variable repsuesta (satisfacción laboral) se compara entre los niveles de la variable explicativa (sector económico). Al ejecutar <code>summary()</code>, obtenemos una tabla con los resultados del análisis, incluyendo el <strong>estadístico F</strong> y su <strong>p-valor</strong>, que nos indican si existe una diferencia significativa entre los grupos. Fíjate en el Pr(&gt;F)</p>
+<p>Realizar ANOVA de una vía para comparar la satisfacción laboral entre sectores</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>anova_resultado <span class="ot">=</span> <span class="fu">aov</span>(nivel_satisfaccion <span class="sc">~</span> sector, </span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">data =</span> satisfaccion)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+<p>Mostrar el resumen del ANOVA con el estadístico F y el p-valor</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(anova_resultado)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>             Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+sector        4    213    53.3    8.85 0.000002 ***
+Residuals   145    874     6.0                     
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="regresión" class="level1">
+<h1>Regresión</h1>
+<p>En los apartados anteriores, vimos cómo realizar pruebas de significancia en variables tanto numéricas como categóricas. En este capítulo, nos enfocaremos en analizar la relación entre una variable respuesta numérica y una o más variables explicativas. Este tipo de análisis se conoce como <strong>análisis de regresión</strong>, uno de los métodos más utilizados en las ciencias sociales para interpretar y modelar situaciones de la realidad social.</p>
+<section id="regresión-lineal-simple-una-sola-variable-predictora" class="level2">
+<h2 class="anchored" data-anchor-id="regresión-lineal-simple-una-sola-variable-predictora">Regresión lineal simple (una sola variable predictora)</h2>
+<p>Ejemplo: Tenemos un conjunto de datos sobre precios de viviendas. Este conjunto contiene información sobre el precio de viviendas en Taiwan y su relación con otras variables como la distancia a la estación de METRO más cercana (<code>dist_to_mrt_m</code>, medida en metros) y el precio promedio por metro cuadrado (<code>price_twd_msq</code>, medido en dólares taiwaneses).</p>
+<p>Podemos utilizar un gráfico de dispersión para explorar cómo el precio de las viviendas podría variar según la proximidad al transporte público.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>casas <span class="ot">=</span> <span class="fu">read_csv</span>(<span class="st">'taiwan_casas.csv'</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(casas)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 414
+Columns: 4
+$ dist_to_mrt_m   &lt;dbl&gt; 84.9, 306.6, 562.0, 562.0, 390.6, 2175.0, 623.5, 287.6…
+$ n_convenience   &lt;dbl&gt; 10, 9, 5, 5, 5, 3, 7, 6, 1, 3, 1, 9, 5, 4, 4, 2, 6, 1,…
+$ house_age_years &lt;chr&gt; "30 to 45", "15 to 30", "0 to 15", "0 to 15", "0 to 15…
+$ price_twd_msq   &lt;dbl&gt; 11.47, 12.77, 14.31, 16.58, 13.04, 9.71, 12.19, 14.13,…</code></pre>
+</div>
+</div>
+<p>Utilizamos <code>geom_point</code>. Dado que hay una gran superposición entre los puntos, es recomendable ajustar el parámetro <code>alpha</code> para controlar la transparencia y así mejorar la visualización, permitiendo distinguir mejor la densidad de los datos.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>g_casa <span class="ot">=</span> casas <span class="sc">%&gt;%</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> dist_to_mrt_m, <span class="at">y =</span> price_twd_msq)) <span class="sc">+</span></span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.6</span>, <span class="co"># Útil para distinguir mejor la aglomeración</span></span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="st">"darkblue"</span>) <span class="sc">+</span>  <span class="co"># Puntos semitransparentes en azul</span></span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Relación entre distancia al Metro y precio por metro cuadrado"</span>,</span>
+<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Distancia al metro (metros)"</span>,</span>
+<span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Precio (TWD/m²)"</span></span>
+<span id="cb55-9"><a href="#cb55-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb55-10"><a href="#cb55-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()  </span>
+<span id="cb55-11"><a href="#cb55-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-12"><a href="#cb55-12" aria-hidden="true" tabindex="-1"></a>g_casa</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="sesion4_files/figure-html/unnamed-chunk-59-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="sesion4_files/figure-html/unnamed-chunk-60-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Podemos notar un tendencia negativa conforma la distancia de la vivienda es mayor a una estación de metro. Si nuestro objetivo es analizar cómo los valores de la variable respuesta (<span class="math inline">\(y\)</span>) cambian en función de la variable explicativa (<span class="math inline">\(x\)</span>). Al observar los gráficos de dispersión, podemos identificar un patrón: parece que hay una relación entre las variables, y esta relación muestra un comportamiento que, a simple vista, podríamos <strong>aproximar como lineal</strong>. Basándonos en esta observación, proponemos que la relación entre <span class="math inline">\(x\)</span> e <span class="math inline">\(y\)</span> sea <strong>lineal</strong>, es decir, que los cambios en la variable explicativa (<span class="math inline">\(x\)</span>) produzcan <strong>cambios proporcionales</strong> (constantes) en la variable respuesta (<span class="math inline">\(y\)</span>).</p>
+<section id="ecuación-de-regresión-lineal" class="level3">
+<h3 class="anchored" data-anchor-id="ecuación-de-regresión-lineal">Ecuación de regresión lineal</h3>
+<p>De hecho, podemos representar la linea recta que mejor represente esta relación entre las variables utilizando <code>geom_smooth</code> y definiendo un <strong>modelo lineal</strong> o linear model (lm).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>g_casa <span class="sc">+</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">'lm'</span>,</span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">color =</span> <span class="st">'red'</span>,</span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">se =</span> F)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="sesion4_files/figure-html/unnamed-chunk-62-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<hr>
+<p>Esta línea no es solo una herramienta visual, también nos permite <strong>aproximar</strong> cómo los cambios en una variable (la explicativa, <span class="math inline">\(x\)</span>) afectan a otra variable (la respuesta, <span class="math inline">\(y\)</span>) de forma intuitiva. Siendo una línea recta, <strong>podemos describirla con una fórmula matemática</strong>. La ecuación de la <strong>regresión lineal</strong> es la siguiente:</p>
+<p><span class="math display">\[y = \alpha + \beta X\]</span></p>
+<p>Donde:</p>
+<p><span class="math display">\[Y(\text{variable respuesta}) = \alpha + \beta X(\text{variable explicativa})\]</span></p>
+<hr>
+<p>En R podemos ajustar el modelo de regresión lineal y extraer los parametros de ecuación usando <code>lm()</code>. Su estructura básica sigue la lógica de una fórmula: <code>lm(y ~ x, data = ...)</code>, donde <code>y</code> representa la variable dependiente o respuesta, y <code>x</code> la variable independiente. El símbolo <code>~</code> se lee como “explicado por” o “en función de”, por lo que la expresión <code>y ~ x</code> indica que estamos tratando de explicar los valores de <code>y</code> a partir de los valores de <code>x</code>. El argumento <code>data = ...</code> especifica el nombre del data frame donde se encuentran esas variables.</p>
+<p>Ajustamos el modelo lineal</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>modelo <span class="ot">=</span> <span class="fu">lm</span>(price_twd_msq <span class="sc">~</span> dist_to_mrt_m, <span class="at">data =</span> casas)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Vemos los coeficientes (intercepto y pendiente)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(modelo)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  (Intercept) dist_to_mrt_m 
+      13.8734       -0.0022 </code></pre>
+</div>
+</div>
+<hr>
+<p>Con esta información, ya podemos escribir la ecuación del modelo muestral:</p>
+<p><span class="math display">\[
+\text{Precio de la vivienda} = 13.87 - 0.0022 \cdot \text{Distancia en }m^2
+\]</span></p>
+<p>Esto significa que, en base a la información que tenemos disponible sobre las viviendas, <strong>la pendiente del modelo</strong> es <span class="math inline">\(-0.0022\)</span>. Es decir, <strong>por cada metro adicional de distancia a la estación de metro</strong>, el precio promedio por metro cuadrado <strong>disminuye</strong> en alrededor de 0.0022 dólares taiwaneses. Por otro lado, <strong>el intercepto</strong> es <span class="math inline">\(13.87\)</span>, lo que indica que cuando la distancia a la estación es cero (es decir, en una vivienda ubicada justo al lado del metro, <span class="math inline">\(x=0\)</span>) el precio estimado por metro cuadrado sería de 13.87 dólares taiwaneses. Si bien en la práctica puede que no existan viviendas exactamente a cero metros del metro, este valor nos da una referencia inicial del modelo y completa la ecuación de la línea recta ajustada.</p>
+<hr>
+<p>Aunque esta <strong>representación matemática</strong> puede parecer un poco abstracta al principio, es simplemente una manera formal de expresar algo que podemos ver intuitivamente en el gráfico. La línea recta nos ayuda a simplificar y entender mejor los patrones en nuestros datos. Sin embargo, como toda <strong>simplificación</strong>, debemos ser conscientes de sus <strong>limitaciones</strong>: no todos los puntos se alinean perfectamente con la línea, por lo que la relación que estamos estableciendo es una <strong>aproximación</strong>. Todos los modelos son aproximaciones simples de la realidad. <strong>Un modelo es, en esencia, una representación simplificada de la relación entre variables en una población</strong>. Nos ayuda a interpretar patrones observados en los datos.</p>
+<hr>
+<p>Sin embargo, es fundamental destacar que este tipo de modelos <strong>no pretende capturar toda la complejidad de la realidad</strong>. Más bien, funcionan como una <strong>herramienta para aproximarnos a las relaciones observadas en los datos</strong>. Es crucial recordar que <strong>correlación no implica causalidad</strong>, y que la relación entre variables dentro de un modelo estadístico no siempre refleja un vínculo de causa y efecto.</p>
+<hr>
+</section>
+<section id="resumen-del-modelo-en-r-con-summary" class="level3">
+<h3 class="anchored" data-anchor-id="resumen-del-modelo-en-r-con-summary">Resumen del modelo en R con <code>summary()</code></h3>
+<p>En R podemos ajustar el modelo con <code>lm()</code>, y una vez que le asignamos un nombre, podemos usar <code>summary()</code> para obtener un <strong>resumen completo</strong> que incluye todos los elementos que hemos comentado hasta el momento y algunos más.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelo)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = price_twd_msq ~ dist_to_mrt_m, data = casas)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-10.710  -1.818  -0.362   1.462  22.234 
+
+Coefficients:
+               Estimate Std. Error t value            Pr(&gt;|t|)    
+(Intercept)   13.873352   0.197462    70.3 &lt;0.0000000000000002 ***
+dist_to_mrt_m -0.002197   0.000119   -18.5 &lt;0.0000000000000002 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 3.05 on 412 degrees of freedom
+Multiple R-squared:  0.454, Adjusted R-squared:  0.452 
+F-statistic:  342 on 1 and 412 DF,  p-value: &lt;0.0000000000000002</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="regresión-múltiple" class="level2">
+<h2 class="anchored" data-anchor-id="regresión-múltiple">Regresión múltiple</h2>
+<p>Como vimos, la regresión lineal simple busca ajustar un modelo lineal que describa la relación entre una variable respuesta cuantitativa y una sola variable explicativa. Sin embargo, en muchos casos, especialmente en ciencias sociales, esta relación no puede entenderse de forma aislada. La realidad suele estar influida por múltiples factores al mismo tiempo, por lo que se vuelve necesario ampliar el enfoque e incorporar más de una variable explicativa. Esto puede responder a razones teóricas, cuando distintas variables son relevantes para explicar un fenómeno, o a motivaciones analíticas, como explorar mejor la estructura de los datos o evitar interpretaciones sesgadas por omisión de variables importantes.</p>
+<hr>
+<p>Cuando establecemos un modelo de regresión con más de una variable explicativa, hablamos de una regresión lineal múltiple. En este tipo de modelos seguimos asumiendo que existe una relación lineal, es decir, de variación proporcional, entre cada variable explicativa y la respuesta <span class="math inline">\(y\)</span>, aunque ahora la línea se transforma en un plano o hiperplano, dependiendo del número de predictores. A diferencia del modelo simple, en la regresión múltiple ya no buscamos entender el efecto de una sola variable sobre <span class="math inline">\(y\)</span>, sino cómo varias variables, en conjunto, contribuyen a explicar su comportamiento.</p>
+<hr>
+<p>La representación gráfica del modelo múltiple no es tan directa. Más allá de tres variables, no podemos visualizar de forma intuitiva el espacio geométrico del modelo, por lo que el análisis visual se vuelve más abstracto y la atención se centra en la interpretación de sus coeficientes.</p>
+<hr>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="sesion4_files/figure-html/unnamed-chunk-66-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="modelo-de-regresión-múltiple" class="level3">
+<h3 class="anchored" data-anchor-id="modelo-de-regresión-múltiple">Modelo de regresión múltiple</h3>
+<p>Y entonces, ¿qué hay de la ecuación del modelo? Si ya entendimos cómo funciona la regresión lineal simple, ahora toca ver cómo se generaliza cuando agregamos más de una variable explicativa.</p>
+<hr>
+<p>En la regresión simple trabajamos con dos parámetros clave: el intercepto (<span class="math inline">\(\alpha\)</span>) y la pendiente (<span class="math inline">\(\beta\)</span>), donde <span class="math inline">\(\beta\)</span> representaba el <strong>cambio promedio en la variable respuesta</strong> <span class="math inline">\(y\)</span> <strong>por cada unidad adicional en la variable explicativa</strong> <span class="math inline">\(x\)</span>. La regresión múltiple toma esta lógica básica y la extiende, permitiéndonos incluir <strong>varias variables explicativas a la vez</strong>. Desde el punto de vista metodológico, esto significa que <strong>ya no estamos observando una relación aislada entre dos variables, sino que queremos entender cómo un conjunto de predictores contribuyen en conjunto a explicar la variación en</strong> <span class="math inline">\(y\)</span>.</p>
+<hr>
+<p>Este modelo se expresa de la siguiente manera:</p>
+<p><span class="math display">\[
+y_i = \alpha + \beta_1 x_{1i} + \beta_2 x_{2i} + \dots + \beta_p x_{pi}
+\]</span></p>
+<hr>
+<p>En R, ajustar un modelo de regresión lineal múltiple es tan sencillo como en el caso simple. La función <code>lm()</code> se utiliza de la misma manera, pero ahora incluimos más de una variable explicativa en la fórmula. Por ejemplo, si quisieramos queremos modelar el precio por metro cuadrado (<code>price_twd_msq</code>) como una función de la <strong>distancia a la estación de metro</strong> (<code>dist_to_mrt_m</code>) y ahora también del <strong>número de tiendas de conveniencia cercanas</strong> (<code>n_convenience</code>). El código sería el siguiente:</p>
+<hr>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>modelo_multiple <span class="ot">=</span> <span class="fu">lm</span>(price_twd_msq <span class="sc">~</span> dist_to_mrt_m <span class="sc">+</span> n_convenience, </span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">data =</span> casas)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelo_multiple)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = price_twd_msq ~ dist_to_mrt_m + n_convenience, data = casas)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-11.048  -1.774  -0.411   1.447  23.779 
+
+Coefficients:
+               Estimate Std. Error t value             Pr(&gt;|t|)    
+(Intercept)   11.837489   0.393194   30.11 &lt; 0.0000000000000002 ***
+dist_to_mrt_m -0.001688   0.000143  -11.80 &lt; 0.0000000000000002 ***
+n_convenience  0.362360   0.061291    5.91         0.0000000071 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 2.93 on 411 degrees of freedom
+Multiple R-squared:  0.497, Adjusted R-squared:  0.494 
+F-statistic:  203 on 2 and 411 DF,  p-value: &lt;0.0000000000000002</code></pre>
+</div>
+</div>
+
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copiado");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copiado");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

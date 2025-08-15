@@ -1,0 +1,651 @@
+---
+title: "Sesión 2: Manipulación de datos, transformación de variables y resúmenes estadísticos"
+author: "Gonzalo Almendariz Villanueva"
+lang: es                    
+format:
+  html:
+    theme: cosmo
+    toc: true
+    code-copy: true          
+    code-block-bg: "#f8f9fa"
+    code-block-border-left: "#2C3E50"
+    highlight-style: github
+  pdf:
+    documentclass: scrreprt
+    toc: true
+    number-sections: true
+    classoption: ["twoside"]
+    geometry: inner=3.2cm, outer=2.5cm, top=2.5cm, bottom=2.8cm, includeheadfoot
+    pdf-engine: pdflatex
+    include-in-header: tex/style-pdf.tex
+    output-file: sesion2.pdf
+execute:
+  echo: true
+  output: true
+  warning: false
+  message: false
+---
+
+```{r setup, echo=FALSE}
+# Chunk options
+knitr::opts_chunk$set(digits = 3)  # 3 cifras significativas para evitar truncamientos fuertes
+
+# Opciones de impresión en consola
+options(
+  digits = 3,         # Mantiene 3 cifras significativas
+  scipen = 999,       # Evita notación científica
+  pillar.sigfig = 3,  # Tibble muestra con 3 cifras significativas
+  dplyr.print_min = 6,
+  dplyr.print_max = 6
+)
+```
+
+## Objetivos de la sesión de hoy
+
+Aprender a transformar, organizar y resumir datos utilizando las herramientas del paquete `dplyr`. Incorporar principios estadísticos básicos para la descripción de variables. Reconocer patrones, errores y estructuras dentro de los datos.
+
+# El Tidyverse
+
+# Base de datos: World Development Indicators (WDI)
+
+El análisis de datos en ciencias sociales requiere acceder a fuentes confiables, comparables y actualizadas. Una de las más utilizadas a nivel global es la **World Development Indicators (WDI)** del Banco Mundial. Gracias al paquete `WDI` en R, podemos acceder directamente a esta base de forma automatizada.
+
+```{r}
+library(WDI)
+```
+
+
+
+En este ejemplo trabajaremos con tres indicadores esenciales para describir y comparar el desarrollo de distintos países:
+
+-   PIB per cápita (NY.GDP.PCAP.CD)
+
+-   Esperanza de vida (SP.DYN.LE00.IN)
+
+-   Población total (SP.POP.TOTL)
+
+
+
+La base descargada contiene diversas variables. Para este análisis introductorio, nos centraremos en las siguientes:
+
+| Variable | Descripción |
+|--------------------------|----------------------------------------------|
+| `country` | Nombre del país |
+| `iso2c` / `iso3c` | Códigos de país (ISO 2 y 3 letras) |
+| `pib_per_capita` | PIB per cápita en dólares actuales (indicador económico) |
+| `esperanza_vida` | Esperanza de vida al nacer (indicador de salud) |
+| `poblacion_total` | Población total (indicador demográfico) |
+| `region` | Región del país según clasificación del Banco Mundial |
+| `income` | Nivel de ingreso del país (bajo, medio, alto, etc.) |
+
+
+
+```{r}
+df = WDI(
+  country = "all",
+  indicator = c(
+    pib_capita = "NY.GDP.PCAP.CD",
+    esp_vida = "SP.DYN.LE00.IN",
+    poblacion = "SP.POP.TOTL"
+  ),
+  start = 2014, end = 2024, extra = T
+)
+```
+
+::: {.callout-note title="Carga de la base de datos"}
+Para acceder a los datos, usamos la función `WDI()` especificando los indicadores deseados:
+:::
+
+# Manipulación con dplyr
+
+La manipulación de datos consiste en transformar y preparar los datos para su análisis, lo que puede incluir la creación de nuevas variables, el filtrado de observaciones o la omisión de alguna variable. Para ello, usaremos el paquete `dplyr` del tidyverse.
+
+`dplyr` es un paquete del tidyverse diseñado específicamente para la manipulación de datos. Proporciona un conjunto de funciones que permiten seleccionar, filtrar, ordenar, resumir y transformar datos en `data.frames`.
+
+
+
+Una de las características más importantes de `dplyr` es su uso del *pipe operator* (`%>%`), que permite encadenar múltiples operaciones de manera secuencial, pasando el resultado de una función directamente como entrada a la siguiente. Esto hace que el código sea más fácil de leer y mantener.
+
+El atajo del teclado para el pipe operator (`%>%`) es:
+
+-   Ctrl + Shift + M (Windows)
+
+-   Cmd + Shift + M (Mac)
+
+
+
+**Un sistema de tuberías**
+
+Para poder realizar múltiples acciones en secuencia conectando cada acción con la siguiente a través de "tuberías" debemos utilizar lo que se llama el *pipe operator* (`%>%`).
+
+![](images/clipboard-3784925606.png)
+
+
+
+::: {.callout-note title="Dato"}
+Para poder sacarle el máximo provecho a `dplyr` debemos conocer las principales funciones:
+
+-   `filter()`: Filtra filas de un dataframe según una condición específica.
+-   `select()`: Selecciona columnas específicas de un dataframe.
+-   `mutate()`: Crea nuevas columnas o modifica las existentes en un dataframe.
+-   `summarize()`: Resumen estadístico de las columnas de un dataframe.
+-   `arrange()`: Ordena las filas de un dataframe según una o más variables.
+-   `group_by()`: Agrupa un dataframe por una o más variables, preparándolo para operaciones de resumen.
+:::
+
+
+
+Para empezar a trabajar con `dplyr` recuerda primero cargarlo:
+
+```{r, eval=FALSE}
+# En caso no esté instalado aún
+install.packages('dplyr')
+```
+
+```{r, warning=FALSE}
+library(dplyr)
+```
+
+
+
+A continuación vemos la data completa con todas sus variable usando `glimpse()`
+
+
+
+```{r, echo=FALSE}
+df %>% glimpse()
+```
+
+
+
+Como puedes ver, el conjunto de dato tiene mas variables de las que necesitamos, pero eso tiene solución...
+
+
+
+Utilizamos la función `select()` para filtrar por las columnas que son de nuestro interés.
+
+![](images/clipboard-4017595068.png)
+
+
+
+Seleccionamos únicamente las variables requeridas para nuestro análisis, sobreescribimos el objeto para modificar el original.
+
+```{r}
+df = df %>% 
+  select(country, year, pib_capita, 
+         esp_vida, poblacion, region, income)
+```
+
+
+
+**Esto selecciona solo las variables que hemos especificado**
+
+```{r}
+glimpse(df)
+```
+
+
+
+Echemos un vistazo a la variable `$country`.
+
+```{r, eval= F}
+head(unique(df$country), 10)
+```
+
+::: {.callout-note title="¿Qué hace este código?"}
+-   `unique()` nos permite obtener los valores únicos de una variable, eliminando los repetidos. En este caso, los nombres de países sin duplicados.
+
+-   `head()` ya la conoces, nos muestra los primeros valores de un vector o tabla. Si le decimos `n = 15`, nos devuelve solo los primeros 15 (lo limitamos a 15 únicamente por estética de la presentación, lo ideal es que revises todas las categorías posibles)
+
+Al combinarlas, estamos diciendo: *Muéstrame los primeros 15 países distintos que aparecen en la columna country*.
+:::
+
+
+
+```{r, echo= F}
+head(unique(df$country), 15)
+```
+
+
+
+Notaremos que algunos de los "países" listados no son países en sentido estricto, sino **regiones agregadas**, como "East Asia & Pacific" o "Sub-Saharan Africa".
+
+Esto puede ser un problema dependiendo del tipo de análisis que queramos hacer.\
+Por ejemplo:
+
+-   ¿Qué pasa si **solo** queremos comparar **países** individuales?
+
+-   ¿O si, por el contrario, queremos hacer una comparación **solo entre regiones**?
+
+Bueno, podemos utilizar la variable `region` junto con una función muy útil del paquete `dplyr`: `filter()`.
+
+
+
+La función `filter()` nos permite seleccionar filas que cumplen con una condición específica.
+
+![Elaboración propia](images/clipboard-1638975480.png)
+
+
+
+Filtrar solo países (quitar regiones agregadas)
+
+```{r}
+df = df %>%
+  filter(region != "Aggregates") 
+```
+
+
+
+También podemos hacer lo contrario: filtrar solo regiones agregadas
+
+```{r}
+agr = df %>%
+  filter(region == "Aggregates") 
+```
+
+
+
+**¿Y si solo queremos los datos de un año específico?**
+
+Muchas veces, especialmente cuando queremos hacer **comparaciones entre países o regiones**, es útil **quedarnos solo con un año**.\
+Esto evita que se mezclen observaciones de distintos años y hace que los gráficos o análisis sean más claros.
+
+Por ejemplo, si queremos trabajar **solo con datos del año 2022**, podemos aplicar otro `filter()`:
+
+```{r}
+df_22 = df %>%
+  filter(year == 2022)
+```
+
+
+
+**¿Es posible tener más de una condición? **
+
+¡Claro! Podríamos tener también solo las regiones agregadas para ese mismo año.
+
+```{r}
+agr_22 = df %>%
+  filter(region == "Aggregates", 
+         year == 2022)
+```
+
+
+
+Ya filtramos la base para quedarnos solo con el año 2022, así que la variable year ya no tiene mucho sentido en este nuevo `data.frame`, ¿cierto? Todos los valores serían iguales.
+
+```{r, eval = FALSE}
+df_22 %>% 
+  head()
+```
+
+----
+
+```{r, echo=FALSE}
+df_22 %>% 
+  head()
+```
+
+
+
+Entonces, ¿por qué no quitarla directamente? Podemos hacerlo fácilmente con `select()` usando el signo menos (`-`) antes de la variable. Y lo encadenamos todo con pipes `%>%`:
+
+```{r}
+df_22 = df %>%
+  filter(year == 2022) %>% 
+  select(-year)
+```
+
+
+
+```{r}
+df_22 %>% 
+  head(3)
+```
+
+
+
+A veces queremos saber qué países tienen los valores más altos o más bajos de alguna variable, por ejemplo, el PIB per cápita o la esperanza de vida.
+
+Utilizamos la función `arrange()` para poder ordenar las observaciones (filas) que tengamos.
+
+
+
+Veamos un ejemplo ordenando de mayor a menor el PIB per cápita:
+
+```{r}
+df_22 %>% 
+  arrange(desc(pib_capita)) %>% 
+  head(3)
+```
+
+
+
+Y si queremos los países con el menor PIB per cápita, simplemente quitamos el `desc()`:
+
+```{r}
+df_22 %>% 
+  arrange(pib_capita) %>% 
+  head(3)
+```
+
+
+
+Hasta ahora, hemos trabajado filtrando o seleccionando información… Pero, ¿y si quisiéramos **crear una nueva variable** a partir de una que ya tenemos?
+
+
+
+Con `mutate()`, podemos agregar columnas nuevas a nuestra base de datos, calculadas a partir de otras columnas.
+
+![](images/clipboard-1384461819.png)
+
+
+
+Un caso clásico es transformar el PIB per cápita.
+
+```{r}
+df_22 = df_22 %>%
+  mutate(
+    log_pib = log(pib_capita)
+         )
+```
+
+
+
+::: {.callout-note title="¿Por qué usamos el logaritmo?"}
+Cuando una variable como el **PIB per cápita** tiene valores muy dispersos,\
+los países con ingresos altísimos pueden dominar los gráficos y análisis.\
+Aplicar una **transformación logarítmica** nos ayuda a:
+
+-   **Reducir la influencia de los valores extremos.**\
+-   **Visualizar mejor las diferencias entre países con ingresos bajos y medios.**\
+-   **Comparar proporciones en lugar de diferencias absolutas.**
+:::
+
+
+
+Esto crea una nueva columna llamada `log_pib`, donde hemos guardado el logaritmo del PIB per cápita.
+
+```{r}
+df_22 %>%
+  select(country, pib_capita, log_pib) %>%
+  arrange(desc(pib_capita)) %>%
+  head(3)
+```
+
+
+
+`reframe()` nos permite crear una nueva tabla desde una existente. Es ideal para generar resúmenes limpios o cálculos específicos sin necesidad de arrastrar otras columnas.
+
+```{r}
+df_22 %>%
+  reframe(media_pib = mean(pib_capita, na.rm = TRUE))
+```
+
+Este código nos devuelve un data frame con una sola fila, que simplemente muestra el PIB per cápita promedio de todos los países juntos.
+
+
+
+Pero... ¿y si queremos calcularlo por región?
+
+Por ejemplo: ¿qué tal si queremos saber cuál es el PIB promedio de cada región del mundo?
+
+
+
+Agrupamos con `group_by()`
+
+```{r}
+df_22 %>%
+  group_by(region) %>% 
+  head(3)
+```
+
+Esto no hace nada visible aún, pero le indica a R que **toda operación posterior se aplique por separado a cada región**.
+
+
+
+Podemos aplicar `reframe()` junto con `group_by` para obtener el promedio por cada región:
+
+```{r}
+df %>%
+  group_by(region) %>%
+  reframe(media_pib = mean(pib_capita, na.rm = TRUE))
+```
+
+|  |
+||
+| Por ejemplo, podríamos ver los dos países con mayor esperanza de vida en cada región: |
+
+Combinando `filter()`, `arrange()`, `select()` y `group_by()` ya podemos hacer consultas bastante útiles.
+
+
+
+**¿Cuáles son los 3 países con menor esperanza de vida en Europa y Asia Central?**
+
+Podemos combinar filtrado, ordenamiento y selección:
+
+```{r}
+df_22 %>%
+  filter(region == "Europe & Central Asia") %>%      
+  arrange(esp_vida) %>%                        
+  select(country, esp_vida) %>%
+  head(3)
+```
+
+
+
+**¿Cuál es el país más poblado de cada región?**
+
+Ahora agrupamos por región, ordenamos dentro de cada grupo y usamos `slice_head()` para quedarnos con el primer país de cada región (el más poblado):
+
+```{r, eval=FALSE}
+df_22 %>%
+  group_by(region) %>%
+  arrange(desc(poblacion), .by_group = TRUE) %>%
+  slice_head(n = 1) %>%
+  select(region, country, poblacion) %>% 
+  arrange(desc(poblacion))
+```
+
+
+
+```{r, echo=FALSE}
+df_22 %>%
+  group_by(region) %>%
+  arrange(desc(poblacion), .by_group = TRUE) %>%
+  slice_head(n = 1) %>%
+  select(region, country, poblacion) %>% 
+  arrange(desc(poblacion))
+```
+
+# Descripción de variables
+
+A veces tenemos tantas columnas, tantos países, tantos años, que lo primero que necesitamos hacer es explorar, entender. Para eso nos sirve tener una fotografía inicial de los datos.
+
+::: {.callout-note title="Dato"}
+R es, en esencia, una **herramienta estadística**. Y como tal, una de sus fortalezas más importantes está en poder describir datos de manera rápida, flexible y clara.
+:::
+
+
+
+El paquete `dlookr` nos da un resumen muy completo de nuestras variables, incluyendo cantidad de valores perdidos, medias, desviaciones estándar, percentiles y más.
+
+```{r, warning = F}
+library(dlookr)
+```
+
+
+
+La función `diagnose()` nos devuelve una tabla muy completa con cada variable. Muy útil para detectar cosas como: Variables con muchos `NA`s y número de categorías
+
+```{r}
+diagnose(df_22)
+```
+
+
+
+Podemos obtener un resumen estadístico general de todas las variables numéricas usando `diagnose_numeric()`. Seleccionamos solo algunas columnas (la media, mediana y si contiene valores atípicos) para simplificar la visualización.
+
+```{r}
+diagnose_numeric(df_22) %>% 
+  select(variables, mean, median, outlier)
+```
+
+Esto nos da una mirada rápida a tres cosas clave: el centro de los datos (media y mediana) y si hay valores que podrían ser extremos (outliers).
+
+
+
+De forma similar al caso anterior, con `diagnose_category()` podemos generar un resumen de las variables categóricas. A continuación, ordenamos las salidas por la frecuencia absoluta de la categoría más común (`freq`), para ver rápidamente cuáles son las variables más dominadas por una sola categoría. Mostramos solo las primeras 4 filas:
+
+```{r}
+diagnose_category(df_22) %>% 
+  arrange(desc(freq)) %>% 
+  head(4)
+```
+
+
+
+El paquete `psych` nos permite obtener un resumen estadístico detallado de nuestras variables numéricas.
+
+```{r}
+library(psych)
+```
+
+
+
+Este resumen incluye:
+
+-   `mean`: media,
+
+-   `sd`: desviación estándar,
+
+-   `median`,
+
+-   `min` y `max`,
+
+-   `range`,
+
+-   `skew`: asimetría,
+
+-   `kurtosis`: curtosis,
+
+-    `n`: número de observaciones válidas.
+
+
+
+Resumen para variables seleccionadas:
+
+```{r}
+df_22 %>% 
+  select(pib_capita, esp_vida) %>% 
+  describe() %>% 
+  select(vars, mean, median, skew, kurtosis)
+```
+
+
+
+La función `describeBy()` nos permite obtener estadísticas descriptivas para cada grupo de una variable categórica. En este caso, queremos ver cómo varía el PIB per cápita según la región. Para que la tabla sea más clara en la diapositiva, convertimos el resultado en un `data.frame`, y seleccionamos solo algunas columnas.
+
+```{r, eval = FALSE}
+describeBy(df_22$pib_capita, group = df_22$region, mat = TRUE) %>% 
+  as.data.frame() %>% 
+  select(group1, n, mean, sd, median, min, max) %>% 
+  arrange(desc(mean)) %>% 
+  head(6)
+```
+
+
+
+```{r, echo = FALSE}
+describeBy(df_22$pib_capita, group = df_22$region, mat = TRUE) %>% 
+  as.data.frame() %>% 
+  select(group1, n, mean, sd, median, min, max) %>% 
+  arrange(desc(mean)) %>% 
+  head(6)
+```
+
+
+
+¿Tienen relación las variables numéricas entre sí? Una forma rápida de explorarlo es usando matrices de correlación. Con la función `corr.test()` del paquete psych, podemos ver cómo se relacionan entre sí el PIB per cápita, la esperanza de vida y la población:
+
+```{r, eval=FALSE}
+df_22 %>% 
+  select(log_pib, esp_vida, poblacion) %>% 
+  corr.test()
+```
+
+
+
+```{r, echo = FALSE}
+df_22 %>% 
+  select(log_pib, esp_vida, poblacion) %>% 
+  corr.test()
+```
+
+
+
+Esto nos da una tabla con:
+
+-   Coeficientes de correlación de Pearson entre cada par de variables
+
+-   Significancia estadística (p-values)
+
+-   Intervalos de confianza
+
+::: {.callout-note title="¿Cómo leerlo?"}
+Una correlación cercana a 1 o -1 indica una relación fuerte Una correlación cercana a 0 indica que no hay relación lineal
+:::
+
+Lo exploraremos con mayor detalle en la sesión 4.
+
+
+
+
+Además de los paquetes `dlookr` y `psych`, que ya vimos y nos permiten realizar diagnósticos y obtener estadísticas útiles, existen otros paquetes como **`skimr`** y **`summarytools`** que ofrecen **resúmenes muy completos e intuitivos** de nuestros datos.
+
+Estas herramientas están pensadas para el **análisis exploratorio**, y funcionan especialmente bien cuando queremos tener una **visión rápida, organizada y sistemática** de todas las variables. Lo único es que, **aunque son excelentes para el análisis, sus salidas no siempre se adaptan bien al espacio visual limitado de una diapositiva**. Aun así, son muy recomendables para trabajar en entornos más amplios, como informes en R Markdown o notebooks.
+
+
+
+El paquete `skimr` genera **resúmenes estadísticos amigables y detallados**, y lo interesante es que **también incluye mini-histogramas de cada variable numérica**, lo cual ayuda a ver de inmediato cómo se distribuyen los datos.
+
+```{r}
+library(skimr)
+```
+
+
+
+```{r, eval =FALSE}
+skim(df_22)
+```
+
+Esto genera una tabla con:
+
+-   Media, mediana, min, max y percentiles,
+
+-   Porcentaje de datos perdidos,
+
+-   Y un pequeño histograma de cada variable numérica.
+
+
+
+El paquete `summarytools` tiene una exclente función llamada `ctable()` para hacer **tablas cruzadas** de forma sencilla.
+
+```{r}
+library(summarytools)
+```
+
+
+
+```{r, eval=FALSE}
+ctable(df_22$region, df_22$income)
+```
+
+```{r, eval=FALSE}
+# Tabla cruzada entre región y un corte en esperanza de vida
+df_22 %>%
+  mutate(grupo_vida = ifelse(esp_vida > 75, 
+                             "Alta", "Baja o media")) %>%
+  with(ctable(region, grupo_vida))
+```
+
+# Eso fue todo por esta sesión ¡Gracias por su atención!
