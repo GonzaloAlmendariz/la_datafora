@@ -26,17 +26,17 @@ website:
             file: summary.qmd
           - text: "Fundamentos"
             file: fundamentos.qmd
-          - text: "Fundamentos de R"
+          - text: "Fundamentos en R"
             file: fundamentosR.qmd
           - text: "Integración"
             file: integración.qmd
           - text: "Estadística descriptiva"
             file: statdesc.qmd
-          - text: "Probabilidades"
+          - text: "Probabilidad"
             file: prob.qmd
           - text: "Inferencia"
             file: inf.qmd
-          - text: "Comparaciones"
+          - text: "Computación"
             file: comp.qmd
           - text: "Regresión"
             file: regr.qmd
@@ -46,6 +46,7 @@ website:
             file: solucionario.qmd
           - text: "Referencias"
             file: references.qmd
+
 
 
 format:

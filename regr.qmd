@@ -1,13 +1,18 @@
 ---
-execute:
-  warning: false
-  message: false
+lang: es                    
+format:
+  html:
+    theme: cosmo
+    toc: true
+    code-copy: true          
+    code-block-bg: "#f8f9fa"
+    code-block-border-left: "#2C3E50"
+    highlight-style: github
 ---
 
 # Regresión
 
 En los capítulos anteriores, vimos cómo realizar estimaciones y pruebas de significancia en variables tanto numéricas como categóricas. En este capítulo, nos enfocaremos en analizar la relación entre una variable respuesta numérica y una o más variables explicativas. Este tipo de análisis se conoce como **análisis de regresión**, uno de los métodos más utilizados en las ciencias sociales para interpretar y modelar situaciones de la realidad social.
-
 
 ## Regresión lineal simple
 
@@ -1139,7 +1144,7 @@ Esta estructura común tiene tres componentes clave:
 3.  **Una función de enlace** (*link function*): que conecta el valor esperado de $Y$ con el predictor lineal.
 
 | Tipo de regresión | Distribución de $Y$ | Enlace (link) | Contexto común en ciencias sociales |
-|----|----|----|----|
+|------------------|------------------|------------------|------------------|
 | Lineal | Normal | Identidad $\mu = \eta$ | Predicción de ingresos, satisfacción, etc. |
 | Logística | Binomial | Logit $\log(\mu / (1-\mu)) = \eta$ | Participación, afiliación, apoyo político |
 | Poisson | Poisson | Log $\log(\mu) = \eta$ | Conteo de eventos: marchas, reuniones, crímenes |

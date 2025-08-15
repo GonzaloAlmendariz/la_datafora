@@ -1,7 +1,13 @@
 ---
-execute:
-  warning: false
-  message: false
+lang: es                    
+format:
+  html:
+    theme: cosmo
+    toc: true
+    code-copy: true          
+    code-block-bg: "#f8f9fa"
+    code-block-border-left: "#2C3E50"
+    highlight-style: github
 ---
 
 # Fundamentos de R
@@ -248,7 +254,7 @@ Las funciones son fundamentales para trabajar en R, son la columna vertebral del
 Por eso, aquí tienes una tabla con una clasificación que te ayudará a explorarlas:
 
 | **Categoría** | **Función** | **Descripción** |
-|----|----|----|
+|------------------------|------------------------|------------------------|
 | **Matemáticas y Estadísticas** |  |  |
 | Realizan cálculos matemáticos o análisis estadísticos sobre los datos. | `sum()` | Suma todos los valores proporcionados. |
 |  | `mean()` | Calcula el promedio de un conjunto de datos. |
@@ -388,7 +394,7 @@ y <- "Colombia"
 ```
 
 | **Tipo de Variable** | **Definición** | **En R** |
-|----|----|----|
+|------------------------|------------------------|------------------------|
 | **Numéricas Continuas** | Valores dentro de un rango continuo, como altura, peso, temperatura. | **Numeric**: Representa decimales o reales. |
 | **Numéricas Discretas** | Valores enteros que representan conteos, como número de personas o hijos. | **Integer**: Representa números enteros, sin decimales. |
 | **Categóricas Nominales** | Categorías sin un orden inherente, como colores o géneros. | **Character**: Representa texto (e.g., "rojo", "azul"). |

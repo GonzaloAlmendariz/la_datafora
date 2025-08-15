@@ -1,7 +1,13 @@
 ---
-execute:
-  warning: false
-  message: false
+lang: es                    
+format:
+  html:
+    theme: cosmo
+    toc: true
+    code-copy: true          
+    code-block-bg: "#f8f9fa"
+    code-block-border-left: "#2C3E50"
+    highlight-style: github
 ---
 
 # Comparando grupos
@@ -1160,7 +1166,6 @@ ggplot(satisfaccion, aes(x = sector,
   theme_minimal()
 ```
 
-
 Vemos que los niveles de satisfacción varían entre los sectores, pero ¿son estas diferencias lo suficientemente grandes como para concluir que el sector influye en la satisfacción laboral? En otras palabras, ¿la variabilidad en la satisfacción está asociada al sector o varía de forma independiente? En ANOVA, el concepto de **independencia** significa que, si no hay relación entre el sector y la satisfacción laboral, la variabilidad en los niveles de satisfacción sería similar tanto dentro de cada sector como entre ellos. En este caso, diríamos que la satisfacción laboral es **independiente** del sector, ya que pertenecer a uno u otro no influye en la percepción de satisfacción.
 
 Por el contrario, si los niveles de satisfacción son muy distintos entre sectores pero relativamente homogéneos dentro de cada uno, significa que la satisfacción **depende** del sector económico. Es decir, el sector en el que una persona trabaja influye en su nivel de satisfacción laboral, y las diferencias observadas no pueden atribuirse únicamente al azar.
@@ -1439,7 +1444,7 @@ tidy(
 ```
 
 | **Situación** | **Prueba Paramétrica** | **Alternativa No Paramétrica** |
-|----|----|----|
+|------------------------|------------------------|------------------------|
 | Media en una muestra | t-test para una muestra | Wilcoxon Signed-Rank Test |
 | Medias entre dos grupos | t-test para muestras independientes | Mann-Whitney U (Wilcoxon Rank-Sum) |
 | Medias entre más de dos grupos | ANOVA | Kruskal-Wallis Test + Prueba de Dunn |
