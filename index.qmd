@@ -1,11 +1,19 @@
 ---
-title: "Web_Datafora"
+title: "Bienvenido a La Datáfora"
 ---
 
-This is a Quarto website.
+Te doy la bienvenida a **La Datafora**, un espacio creado para compartir mi trabajo, reflexiones y recursos sobre análisis de datos aplicados a las ciencias sociales. Aquí podrás encontrar publicaciones, materiales didácticos, ejemplos en R y Python, y avances de mis proyectos en curso.
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
 
-```{r}
-1 + 1
-```
+# Libro: R para el Análisis de Datos
+
+Entiende los conceptos más importantes de la estadística descriptiva e inferencial a través de 9 capítulos estructurados que combinan teoría y práctica con R, el lenguaje de programación más demandado en la academia.
+
+
+# Sobre el autor
+
+Bachiller en Ciencia Política por la Universidad Nacional Mayor de San Marcos, con un fuerte interés en la enseñanza, la divulgación y la estadística. Me especializo en el análisis de datos aplicado a las ciencias sociales y disfruto hacer la estadística accesible y comprensible para todos. He enseñado programación estadística en R, enfocándome en su aplicación para el análisis de datos y la visualización.
+
+# Sígueme en Redes Sociales
+
+Si te interesa la teoría estadística, descubrir lecturas relevantes, aprender programación en R de forma clara y accesible o simplemente quieres interactuar conmigo, te invito a seguirme en Instagram y TikTok. Comparto videos donde explico conceptos de manera sencilla y hablo de mi vida.
