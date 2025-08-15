@@ -1,7 +1,13 @@
 ---
-execute:
-  warning: false
-  message: false
+lang: es                    
+format:
+  html:
+    theme: cosmo
+    toc: true
+    code-copy: true          
+    code-block-bg: "#f8f9fa"
+    code-block-border-left: "#2C3E50"
+    highlight-style: github
 ---
 
 ```{r, echo=FALSE, warning=FALSE}
@@ -1317,8 +1323,6 @@ Pero, ¿qué tan cerca está realmente $\bar{x}$ de $\mu$ en cada caso? Para res
 $$
 \text{Error estándar} = \frac{\sigma}{\sqrt{n}}
 $$
-
-
 
 si conocemos la desviación estándar de la población ($\sigma$).
 
