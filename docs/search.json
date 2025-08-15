@@ -327,5 +327,12 @@
     "title": "Sesión 2: Manipulación de datos, transformación de variables y resúmenes estadísticos",
     "section": "",
     "text": "Aprender a transformar, organizar y resumir datos utilizando las herramientas del paquete dplyr. Incorporar principios estadísticos básicos para la descripción de variables. Reconocer patrones, errores y estructuras dentro de los datos."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Web_Datafora",
+    "section": "",
+    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\n1 + 1\n\n[1] 2"
   }
 ]
