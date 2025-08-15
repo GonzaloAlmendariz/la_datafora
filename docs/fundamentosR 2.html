@@ -54,27 +54,7 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -191,7 +171,7 @@ div.csl-indent {
  <span class="dropdown-text">Fundamentos en R</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./integración.html">
+    <a class="dropdown-item" href="./integración.qmd">
  <span class="dropdown-text">Integración conceptual</span></a>
   </li>  
         <li>
@@ -291,7 +271,7 @@ div.csl-indent {
 <section id="fundamentos-de-r" class="level1">
 <h1>Fundamentos de R</h1>
 <p>En el capitulo anterior establecimos la importancia de la ciencia estadística para la investigación. Hacer análisis estadístico implica necesariamente realizar numerosos cálculos matemáticos, organizar los resultados y crear gráficos que representen adecuadamente los hallazgos de nuestra investigación. Para ello, han surgido numerosos programas de análisis estadístico, cada uno con enfoques y características particulares. Una de esas herramientas es <strong>R</strong>, el lenguaje de programación que utilizaremos en esta guía para explorar los fundamentos de la estadística.</p>
-<p>R es un lenguaje de programación y un entorno de software <strong>creado específicamente para el análisis estadístico y la representación gráfica</strong>. Fue desarrollado en la década de 1990 por los estadísticos Ross Ihaka y Robert Gentleman <span class="citation" data-cites="datacampAllAboutR">(<a href="#ref-datacampAllAboutR" role="doc-biblioref">DataCamp 2023</a>)</span> . El lenguaje R fue desarrolado como un esfuerzo por diseñar una herramienta que facilite la aplicación de métodos estadísticos desde básicos hasta avanzados y que sea lo suficientemente flexible para adaptarse a diversas necesidades de investigación y análisis.</p>
+<p>R es un lenguaje de programación y un entorno de software <strong>creado específicamente para el análisis estadístico y la representación gráfica</strong>. Fue desarrollado en la década de 1990 por los estadísticos Ross Ihaka y Robert Gentleman <span class="citation" data-cites="datacampAllAboutR">[@datacampAllAboutR]</span> . El lenguaje R fue desarrolado como un esfuerzo por diseñar una herramienta que facilite la aplicación de métodos estadísticos desde básicos hasta avanzados y que sea lo suficientemente flexible para adaptarse a diversas necesidades de investigación y análisis.</p>
 <p>La mayor ventaja de R radica en que es un software de código abierto y gratuito, lo que significa que no existen barreras económicas, cualquiera puede descargarlo y usarlo sin costo alguno. Esto ha asegurado que tenga una comunidad activa que continuamente expande sus capacidades inclso fuera del análsis estadístico.</p>
 <p>Por lo tanto, R es una herramienta sumamente útil para realizar una gran conjuto de tareas, muchas de ellas necesarias para responder a las preguntas planteadas en nuestra investigación. Estas tareas incluyen:</p>
 <ul>
@@ -1667,15 +1647,10 @@ c) <code>mi_vector[5 &amp; 15]</code><br>
 d) <code>subset(mi_vector &gt; 5 &amp; mi_vector &lt; 15)</code></p>
 
 
-
 </section>
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">Referencias</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-datacampAllAboutR" class="csl-entry" role="listitem">
-DataCamp. 2023. <span>«All About R: A Popular Language for Data Science»</span>. <a href="https://www.datacamp.com/blog/all-about-r">https://www.datacamp.com/blog/all-about-r</a>.
-</div>
-</div></section></div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

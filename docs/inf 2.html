@@ -54,27 +54,7 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -220,7 +200,7 @@ window.Quarto = {
  <span class="dropdown-text">Fundamentos en R</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./integración.html">
+    <a class="dropdown-item" href="./integración.qmd">
  <span class="dropdown-text">Integración conceptual</span></a>
   </li>  
         <li>
@@ -344,7 +324,7 @@ window.Quarto = {
 <li><p><strong>Estimación</strong>: Nos permite aproximar valores poblacionales desconocidos, como la media o la proporción, basándonos en una muestra (estadístico observado). La estimación esta conformada por un intervalo de confianza, que indica el rango dentro del cual esperamos que se encuentre el valor real de la población (parámetro).</p></li>
 <li><p><strong>Contraste de hipótesis</strong>: Nos permite evaluar afirmaciones o suposiciones sobre la población. Para ello, planteamos una hipótesis inicial (la hipótesis nula) y la comparamos con una hipótesis alternativa. Usamos los datos de nuestra muestra (estadístico observado) para decidir si tenemos evidencia suficiente para rechazar la hipótesis nula en favor de la alternativa.</p></li>
 </ul>
-<p>Ambos métodos aprovechan la idea de la distribución muestral. Gracias al Teorema del Límite Central, sabemos que al recolectar los estadísticos de múltiples muestras estos siguen una distribución aproximadamente normal, bajo ciertas condiciones <span class="citation" data-cites="casella2024inference">(<a href="#ref-casella2024inference" role="doc-biblioref">Casella y Berger 2024</a>)</span>. En este capítulo, exploraremos cómo aplicar estas técnicas para extraer conclusiones sobre una población basándonos en una muestra aleatoria representativa.</p>
+<p>Ambos métodos aprovechan la idea de la distribución muestral. Gracias al Teorema del Límite Central, sabemos que al recolectar los estadísticos de múltiples muestras estos siguen una distribución aproximadamente normal, bajo ciertas condiciones <span class="citation" data-cites="casella2024inference">[@casella2024inference]</span>. En este capítulo, exploraremos cómo aplicar estas técnicas para extraer conclusiones sobre una población basándonos en una muestra aleatoria representativa.</p>
 <section id="estimación" class="level2">
 <h2 class="anchored" data-anchor-id="estimación">Estimación</h2>
 <p>La estimación es el proceso mediante el cual <strong>intentamos aproximarnos al verdadero valor de un parámetro poblacional</strong>, como la media o la proporción, utilizando los estadísticos de una muestra. Dado que rara vez es posible observar a toda la población, la estimación nos permite hacer inferencias sobre sus características con base en una parte representativa de ella, la muestra. Gracias al Teorema del Límite Central, sabemos que, aunque los estadísticos obtenidos en distintas muestras pueden variar, con una muestra suficientemente grande, estos tienden a aproximarse al parámetro poblacional, siguiendo una distribución normal. Esta propiedad es fundamental en la estadística inferencial, ya que nos permite no solo obtener una estimación del parámetro desconocido, sino también <strong>medir la incertidumbre asociada a dicha estimación</strong>.</p>
@@ -1365,15 +1345,10 @@ D) Depende del nivel de confianza.</p>
 </ol>
 
 
-
 </section>
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">Referencias</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-casella2024inference" class="csl-entry" role="listitem">
-Casella, George, y Roger W. Berger. 2024. <em>Statistical Inference</em>. CRC Press.
-</div>
-</div></section></div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

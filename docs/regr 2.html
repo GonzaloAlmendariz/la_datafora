@@ -54,27 +54,7 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -220,7 +200,7 @@ window.Quarto = {
  <span class="dropdown-text">Fundamentos en R</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./integración.html">
+    <a class="dropdown-item" href="./integración.qmd">
  <span class="dropdown-text">Integración conceptual</span></a>
   </li>  
         <li>
@@ -603,7 +583,7 @@ $ price_twd_msq   &lt;dbl&gt; 11.467474, 12.768533, 14.311649, 16.580938, 13.040
 <h3 class="anchored" data-anchor-id="la-correlación-y-la-pendiente">La correlación y la pendiente</h3>
 <p>Para poder evaluar la calidad del ajuste del modelo podemos utilizar una métrica que ya hemos visto previamente: el coeficiente de correlación de Pearson. Como discutimos en el capítulo de estadística descriptiva, este indicador no solo mide la fuerza y la dirección de la relación entre las variables, sino que también nos da una idea de qué tan lineal es dicha relación. Una correlación cercana a 1 o -1 indica que los puntos están cerca de la línea de regresión, mientras que valores más bajos sugieren mayor dispersión alrededor de la línea.</p>
 <p>Sabemos que la pendiente (<span class="math inline">\(\beta\)</span>) de la línea de regresión nos dice en qué dirección va la relación (positiva o negativa) y cuánto cambia la variable dependiente (<span class="math inline">\(y\)</span>) por cada unidad de cambio en la variable independiente (<span class="math inline">\(x\)</span>). Sin embargo, debemos ser cuidadosos al interpretar la pendiente como una medida de la fuerza de la relación. La razón de esto es que el valor numérico de la pendiente depende de las unidades en las que estén medidas las variables.</p>
-<p><span class="citation" data-cites="agresti2018">Agresti (<a href="#ref-agresti2018" role="doc-biblioref">2018</a>)</span>, en <em>Statistical Methods for the Social Sciences</em>, ilustra claramente cómo <span class="math inline">\(\beta\)</span> depende de las unidades de medición. Supongamos que <span class="math inline">\(y\)</span> representa la tasa de homicidios por cada 100,000 habitantes y <span class="math inline">\(x\)</span> es el porcentaje de personas que viven bajo la línea de pobreza. En este caso, una ecuación de regresión podría ser:</p>
+<p><span class="citation" data-cites="agresti2018">@agresti2018</span>, en <em>Statistical Methods for the Social Sciences</em>, ilustra claramente cómo <span class="math inline">\(\beta\)</span> depende de las unidades de medición. Supongamos que <span class="math inline">\(y\)</span> representa la tasa de homicidios por cada 100,000 habitantes y <span class="math inline">\(x\)</span> es el porcentaje de personas que viven bajo la línea de pobreza. En este caso, una ecuación de regresión podría ser:</p>
 <p><span class="math display">\[
 \hat{y} = -0.86 + 0.58x
 \]</span></p>
@@ -1694,15 +1674,10 @@ glm(satisfaccion ~ ingreso + zona, data = datos, family = gaussian)</code></pre>
 </ol>
 
 
-
 </section>
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">Referencias</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-agresti2018" class="csl-entry" role="listitem">
-Agresti, Alan. 2018. <em>Statistical methods for the social sciences</em>. Fifth edition. Boston: Pearson.
-</div>
-</div></section></div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

@@ -20,7 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -137,7 +157,7 @@ ul.task-list li input[type="checkbox"] {
  <span class="dropdown-text">Fundamentos en R</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./integración.qmd">
+    <a class="dropdown-item" href="./integración.html">
  <span class="dropdown-text">Integración conceptual</span></a>
   </li>  
         <li>
@@ -222,7 +242,7 @@ ul.task-list li input[type="checkbox"] {
 <p>La estadística tiene una presencia constante en nuestra vida, aunque rara vez le prestemos atención. Está en las decisiones que tomamos, en las recomendaciones que recibimos y en cómo entendemos el mundo que nos rodea.</p>
 <p>Hoy existimos inmersos en datos: cada visita al médico, cada interacción en línea o compra registrada por un dispositivo móvil produce información que alimenta sistemas sobre quiénes somos y qué deseamos. Este flujo constante de datos ha hecho que la estadística sea una herramienta poderosa en varios campos de nuestra sociedad. En salud, por ejemplo, se utilizan estadísticas para medir riesgos, evaluar el efecto de tratamientos y diseñar estrategias para prevenir enfermedades. El análisis estadístico sustenta los ensayos clínicos que prueban nuevos medicamentos, con el objetivo de confirmar su seguridad y eficacia. En deportes, se aplica para estudiar la efectividad de jugadores y equipos, lo que puede optimizar estrategias que son el factor decisivo entre perder o ganar un partido. En educación, las estadísticas son críticas en la evaluación del rendimiento académico, identificando áreas que necesitan un atención y adaptando métodos de enseñanza a las necesidades de los estudiantes.</p>
 <p>Incluso en nuestras vidas digitales, las estadísticas son la base de los algoritmos que personalizan lo que vemos en las redes sociales, sugieren qué película ver o qué ruta tomar para evitar un atasco de tráfico. Realizamos, incluso en situaciones cotidianas y sin ser plenamente conscientes de ello, pequeños análisis estadísticos: comparando precios mientras compramos, calculando promedios en nuestros gastos mensuales o verificando si debemos abrigarnos, según el pronóstico del tiempo del tiempo.</p>
-<p>Y es que la base de la estadística es la capacidad de recolectar, organizar, analizar, interpretar y presentar datos. Sin embargo, en este libro nos enfocaremos en explorar la Ciencia Estadística en su sentido más riguroso y estructurado. La Ciencia Estadística es un conjunto metódico de herramientas y técnicas que nos permite no solo recolectar datos, sino también analizarlos con profundidad e inferir conclusiones significativas <span class="citation" data-cites="agresti2023">[@agresti2023]</span>. Desde el diseño de experimentos hasta la interpretación de resultados, esta disciplina busca comprender la incertidumbre inherente a la realidad para tomar decisiones informadas en diversos campos como la economía, la medicina, la ingeniería y, en particular, las ciencias sociales, que serán nuestro enfoque principal.</p>
+<p>Y es que la base de la estadística es la capacidad de recolectar, organizar, analizar, interpretar y presentar datos. Sin embargo, en este libro nos enfocaremos en explorar la Ciencia Estadística en su sentido más riguroso y estructurado. La Ciencia Estadística es un conjunto metódico de herramientas y técnicas que nos permite no solo recolectar datos, sino también analizarlos con profundidad e inferir conclusiones significativas <span class="citation" data-cites="agresti2023">(<a href="#ref-agresti2023" role="doc-biblioref">Agresti, Franklin, and Klingenberg 2023</a>)</span>. Desde el diseño de experimentos hasta la interpretación de resultados, esta disciplina busca comprender la incertidumbre inherente a la realidad para tomar decisiones informadas en diversos campos como la economía, la medicina, la ingeniería y, en particular, las ciencias sociales, que serán nuestro enfoque principal.</p>
 <section id="la-estadística-y-las-ciencias-sociales" class="level2">
 <h2 class="anchored" data-anchor-id="la-estadística-y-las-ciencias-sociales">La estadística y las ciencias sociales</h2>
 <p>Como investigador social, te enfrentas al desafío de comprender la realidad social, un reto que involucra la interacción de las personas, las instituciones y los sistemas que las estructuran. Nuestro objeto de estudio no son solo los números, sino las experiencias humanas, los comportamientos y las estructuras que dan forma a nuestras sociedades.</p>
@@ -234,8 +254,8 @@ ul.task-list li input[type="checkbox"] {
 <figcaption>Flor te da la bienvenida</figcaption>
 </figure>
 </div>
-<p>La ciencia estadística brinda un conjunto de herramientas para comprender una realidad caracterizada por la incertidumbre. Pero, ¿a qué herramientas nos referimos? <span class="citation" data-cites="agresti2018">@agresti2018</span> divide los métodos en tres categorías: diseño, descripción e inferencia.</p>
-<p>El <strong>diseño</strong> es generalmente el primer paso en la investigación. Se refiere a planificar un estudio para recopilar y analizar pruebas empíricas de manera que el investigador pueda responder a las preguntas planteadas <span class="citation" data-cites="ragin2007construccion">[@ragin2007construccion]</span>. Por ejemplo, en una encuesta, el diseño determina cómo seleccionar a las personas que se entrevistarán y cómo elaborar el cuestionario que se administrará.</p>
+<p>La ciencia estadística brinda un conjunto de herramientas para comprender una realidad caracterizada por la incertidumbre. Pero, ¿a qué herramientas nos referimos? <span class="citation" data-cites="agresti2018">Agresti (<a href="#ref-agresti2018" role="doc-biblioref">2018</a>)</span> divide los métodos en tres categorías: diseño, descripción e inferencia.</p>
+<p>El <strong>diseño</strong> es generalmente el primer paso en la investigación. Se refiere a planificar un estudio para recopilar y analizar pruebas empíricas de manera que el investigador pueda responder a las preguntas planteadas <span class="citation" data-cites="ragin2007construccion">(<a href="#ref-ragin2007construccion" role="doc-biblioref">Ragin 2007</a>)</span>. Por ejemplo, en una encuesta, el diseño determina cómo seleccionar a las personas que se entrevistarán y cómo elaborar el cuestionario que se administrará.</p>
 <p>La <strong>descripció</strong>n implica resumir los datos para facilitar su comprensión y permitir extraer información útil. Los datos en bruto, como una lista completa de observaciones persona por persona, son difíciles de interpretar. Por ello, usamos herramientas como gráficos, tablas o medidas resumen (como promedios y porcentajes) para condensar la información.</p>
 <p>Por ejemplo, si realizamos una encuesta sobre la opinión pública respecto a una política gubernamental, en lugar de listar cada respuesta individual, podríamos presentar los resultados mediante un gráfico de barras que muestre el porcentaje de personas a favor, en contra o neutrales. Estos resúmenes visuales y numéricos se denominan <strong>estadísticas descriptivas</strong>. Utilizamos las estadísticas descriptivas para simplificar los datos a una forma más manejable y comprensible para describir el comportamiento de nuestros datos y explorar posibles asociaciones importantes.</p>
 <p>La <strong>inferencia</strong> es el proceso de usar datos para sacar conclusiones sobre algo más amplio. Nos ayuda a entender y generalizar sobre aquello que está sucediendo en el presente y también nos permite predecir cómo podrían comportarse los datos en el futuro o bajo diferentes condiciones. Este enfoque es especialmente útil cuando no podemos observar todas los casos posibles, pero contamos con una muestra representativa.</p>
@@ -323,7 +343,7 @@ ul.task-list li input[type="checkbox"] {
 <p>Para asegurar la representatividad, nuestra selección para la muestra debe ser lo más imparcial posible, y aquí es donde la aleatoriedad juega un papel crucial. Al seleccionar individuos al azar, se minimiza el sesgo. La <strong>aleatoriedad</strong> ayuda a que cada individuo tenga la misma oportunidad de ser seleccionado, aumentando la probabilidad de que la muestra refleje las características de toda la población. Por ejemplo, si la población tiene un 60% de adultos jóvenes y un 40% de adultos mayores, la aleatoriedad tiende a garantizar que la muestra tenga una proporción similar de ambos grupos. De esta manera, logramos que la muestra sea representativa y que las conclusiones obtenidas puedan ser aplicadas al resto de la población con mayor confianza.</p>
 <section id="tipos-de-muestreo" class="level3">
 <h3 class="anchored" data-anchor-id="tipos-de-muestreo">Tipos de muestreo</h3>
-<p>Como ya vimos, la representatividad de una muestra es crucial para extrapolar los resultados obtenidos en esta a una población más amplia. Una muestra representativa permite que los resultados sean generalizables a la población accesible y, a partir de esta, a la población objetivo. Una muestra será representativa si todos los sujetos de la población tienen la misma posibilidad de ser seleccionados y si el tamaño de la muestra refleja adecuadamente las características de la población en términos de la distribución de las variables estudiadas. <span class="citation" data-cites="otzen2017muestreo">@otzen2017muestreo</span> establecen una clara disntinción:</p>
+<p>Como ya vimos, la representatividad de una muestra es crucial para extrapolar los resultados obtenidos en esta a una población más amplia. Una muestra representativa permite que los resultados sean generalizables a la población accesible y, a partir de esta, a la población objetivo. Una muestra será representativa si todos los sujetos de la población tienen la misma posibilidad de ser seleccionados y si el tamaño de la muestra refleja adecuadamente las características de la población en términos de la distribución de las variables estudiadas. <span class="citation" data-cites="otzen2017muestreo">Otzen and Manterola (<a href="#ref-otzen2017muestreo" role="doc-biblioref">2017</a>)</span> establecen una clara disntinción:</p>
 <p><strong>Técnicas de muestreo probabilístico</strong></p>
 <p>En el muestreo probabilístico, cada individuo de la población tiene una probabilidad conocida y no nula de ser seleccionado. Esto garantiza que la muestra sea representativa y que las conclusiones puedan generalizarse a la población total.</p>
 <ul>
@@ -530,10 +550,24 @@ c) Ordinal<br>
 d) Nominal</p>
 
 
+
 </section>
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-agresti2018" class="csl-entry" role="listitem">
+Agresti, Alan. 2018. <em>Statistical Methods for the Social Sciences</em>. Fifth edition. Boston: Pearson.
+</div>
+<div id="ref-agresti2023" class="csl-entry" role="listitem">
+Agresti, Alan, Christine A. Franklin, and Bernhard Klingenberg. 2023. <em>Statistics: the art and science of learning from data</em>. Fifth edition, global edition. Harlow, United Kingdom: Pearson.
+</div>
+<div id="ref-otzen2017muestreo" class="csl-entry" role="listitem">
+Otzen, Tamara, and Carlos Manterola. 2017. <span>“Técnicas de Muestreo Sobre Una Población a Estudio.”</span> <em>International Journal of Morphology</em> 35 (1): 227–32. <a href="https://doi.org/10.4067/s0717-95022017000100037">https://doi.org/10.4067/s0717-95022017000100037</a>.
+</div>
+<div id="ref-ragin2007construccion" class="csl-entry" role="listitem">
+Ragin, Charles C. 2007. <em>Construcción de La Investigación Social: Introducción a Los Métodos y Su Diversidad</em>. Bogotá, Colombia: Siglo del Hombre Editores.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

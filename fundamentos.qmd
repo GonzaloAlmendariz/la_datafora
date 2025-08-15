@@ -148,7 +148,7 @@ En el muestreo no probabilístico, la selección de participantes no sigue un pr
 ### Comparación de métodos de muestreo
 
 | **Método** | **Probabilístico** | **Ventajas** | **Limitaciones** |
-|------------------|------------------|------------------|------------------|
+|----|----|----|----|
 | **Aleatorio simple** | Probabilístico | Igualdad en la probabilidad de inclusión, sencillo. | Puede no representar subgrupos pequeños o diversos. |
 | **Estratificado** | Probabilístico | Representación garantizada de subgrupos importantes. | Requiere información previa sobre los estratos. |
 | **Sistemático** | Probabilístico | Eficiente y fácil de aplicar. | Introduce sesgo si hay patrones en la lista. |

@@ -54,27 +54,7 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -147,10 +127,10 @@ div.csl-indent {
 <span class="menu-text">Inicio</span></a>
   </li>  
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-curso-en-r" role="link" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">Curso en R</span>
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-curso-r" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Curso R</span>
     </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-curso-en-r">    
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-curso-r">    
         <li>
     <a class="dropdown-item" href="./sesion1.html">
  <span class="dropdown-text">Sesión 1</span></a>
@@ -170,29 +150,29 @@ div.csl-indent {
     </ul>
   </li>
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-libro-de-estadística" role="link" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">Libro de Estadística</span>
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-libro" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Libro</span>
     </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-libro-de-estadística">    
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-libro">    
         <li>
     <a class="dropdown-item" href="./intro.html">
  <span class="dropdown-text">Introducción</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./summary.html">
- <span class="dropdown-text">Resumen general</span></a>
+ <span class="dropdown-text">Resumen</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./fundamentos.html">
- <span class="dropdown-text">Fundamentos teóricos</span></a>
+ <span class="dropdown-text">Fundamentos</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./fundamentosR.html">
  <span class="dropdown-text">Fundamentos en R</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./integración.html">
- <span class="dropdown-text">Integración conceptual</span></a>
+    <a class="dropdown-item" href="./integración.qmd">
+ <span class="dropdown-text">Integración</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./statdesc.html">
@@ -204,11 +184,11 @@ div.csl-indent {
   </li>  
         <li>
     <a class="dropdown-item" href="./inf.html">
- <span class="dropdown-text">Inferencia estadística</span></a>
+ <span class="dropdown-text">Inferencia</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./comp.html">
- <span class="dropdown-text">Computación aplicada</span></a>
+ <span class="dropdown-text">Computación</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./regr.html">
@@ -224,7 +204,7 @@ div.csl-indent {
   </li>  
         <li>
     <a class="dropdown-item" href="./references.html">
- <span class="dropdown-text">Referencias bibliográficas</span></a>
+ <span class="dropdown-text">Referencias</span></a>
   </li>  
     </ul>
   </li>
@@ -1911,7 +1891,7 @@ Attaching package: 'mice'</code></pre>
 <span id="cb193-2"><a href="#cb193-2" aria-hidden="true" tabindex="-1"></a>gm_07 <span class="ot">=</span> gapminder <span class="sc">%&gt;%</span> <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2007</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol type="1">
-<li><code>ggsci</code><span class="citation" data-cites="ggsci">(<a href="#ref-ggsci" role="doc-biblioref">Xiao 2024</a>)</span></li>
+<li><code>ggsci</code><span class="citation" data-cites="ggsci">[@ggsci]</span></li>
 </ol>
 <p>Este paquete proporciona paletas de colores inspiradas en publicaciones científicas reconocidas como <em>Nature</em>, <em>JAMA</em>, <em>Lancet</em>, <em>NEJM</em>, entre otras. Es útil cuando se busca una estética profesional y reconocible, especialmente para presentaciones o publicaciones.</p>
 <p>La funciones principales son: <code>scale_fill_nejm()</code>, <code>scale_fill_lancet()</code>, <code>scale_fill_jama()</code> permiten aplicar directamente estas paletas en gráficos con <code>fill</code>.</p>
@@ -2030,7 +2010,7 @@ Attaching package: 'mice'</code></pre>
 </div>
 <p>Puede consultar las paletas usando <code>?scale_fill_viridis</code></p>
 <ol start="3" type="1">
-<li><code>patchwork</code> <span class="citation" data-cites="patchwork">(<a href="#ref-patchwork" role="doc-biblioref">Pedersen 2024</a>)</span></li>
+<li><code>patchwork</code> <span class="citation" data-cites="patchwork">[@patchwork]</span></li>
 </ol>
 <p>Este paquete permite combinar múltiples gráficos generados con <code>ggplot2</code> de forma intuitiva mediante operadores aritméticos. Es especialmente útil para mostrar comparaciones o construir narrativas visuales. - Los gráficos se combinan con <code>/</code> (vertical), <code>|</code> (horizontal), y <code>+</code> para anotaciones conjuntas. - No requiere transformar los gráficos en objetos de grid. Basta con construir gráficos individuales y luego combinarlos directamente.</p>
 <div class="cell">
@@ -2078,7 +2058,7 @@ Attaching package: 'mice'</code></pre>
 </div>
 </div>
 <ol start="4" type="1">
-<li><code>ggthemes</code> <span class="citation" data-cites="ggthemes">(<a href="#ref-ggthemes" role="doc-biblioref">Arnold 2024</a>)</span></li>
+<li><code>ggthemes</code> <span class="citation" data-cites="ggthemes">[@ggthemes]</span></li>
 </ol>
 <p>Proporciona temas visuales inspirados en medios de comunicación como <em>The Economist</em>, <em>Wall Street Journal</em> o <em>FiveThirtyEight</em>. Estos temas cambian fondo, ejes, tipografía y estilo general del gráfico. Son ideales para producir gráficos estilizados sin necesidad de personalizar manualmente cada elemento gráfico.</p>
 <div class="cell">
@@ -2121,7 +2101,7 @@ Attaching package: 'mice'</code></pre>
 </div>
 </div>
 <ol start="5" type="1">
-<li><code>ggtext</code> <span class="citation" data-cites="ggtext">(<a href="#ref-ggtext" role="doc-biblioref">Wilke y Wiernik 2022</a>)</span></li>
+<li><code>ggtext</code> <span class="citation" data-cites="ggtext">[@ggtext]</span></li>
 </ol>
 <p>Este paquete permite utilizar etiquetas enriquecidas con HTML y Markdown dentro de <code>ggplot2</code>. Esto incluye títulos con colores, negritas, saltos de línea y estilos diferenciados por palabra.</p>
 <ul>
@@ -2183,7 +2163,7 @@ Attaching package: 'mice'</code></pre>
 </div>
 </div>
 <ol start="6" type="1">
-<li><code>scales</code> <span class="citation" data-cites="scales">(<a href="#ref-scales" role="doc-biblioref">Wickham, Pedersen, y Seidel 2023</a>)</span></li>
+<li><code>scales</code> <span class="citation" data-cites="scales">[@scales]</span></li>
 </ol>
 <p>Ofrece herramientas para transformar y dar formato a valores numéricos en los ejes o leyendas de <code>ggplot2</code>. Muy útil para mostrar cifras monetarias, porcentajes o unidades más legibles.</p>
 <ul>
@@ -2260,7 +2240,7 @@ Attaching package: 'scales'</code></pre>
 </div>
 </div>
 <ol start="7" type="1">
-<li><code>gghighlight</code> <span class="citation" data-cites="gghighlight">(<a href="#ref-gghighlight" role="doc-biblioref">Yutani 2023</a>)</span></li>
+<li><code>gghighlight</code> <span class="citation" data-cites="gghighlight">[@gghighlight]</span></li>
 </ol>
 <p>Facilita la tarea de destacar subconjuntos de datos directamente en los gráficos sin tener que filtrar manualmente. Ideal para llamar la atención sobre casos atípicos, valores extremos o categorías específicas. - <code>gghighlight()</code> se añade como capa dentro del <code>ggplot</code> y permite condicionar el resaltado a una expresión lógica. - Argumentos útiles: - <code>label_key</code> permite mostrar etiquetas automáticas para los datos resaltados. - <code>use_direct_label = TRUE</code> mejora la legibilidad de gráficos con muchos elementos.</p>
 <div class="cell">
@@ -2515,30 +2495,10 @@ Attaching package: 'dlookr'</code></pre>
 </div>
 
 
-
 </section>
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">Referencias</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-ggthemes" class="csl-entry" role="listitem">
-Arnold, Jeffrey B. 2024. <span>«ggthemes: Extra Themes, Scales and Geoms for ’ggplot2’»</span>. <a href="https://CRAN.R-project.org/package=ggthemes">https://CRAN.R-project.org/package=ggthemes</a>.
-</div>
-<div id="ref-patchwork" class="csl-entry" role="listitem">
-Pedersen, Thomas Lin. 2024. <span>«patchwork: The Composer of Plots»</span>. <a href="https://CRAN.R-project.org/package=patchwork">https://CRAN.R-project.org/package=patchwork</a>.
-</div>
-<div id="ref-scales" class="csl-entry" role="listitem">
-Wickham, Hadley, Thomas Lin Pedersen, y Dana Seidel. 2023. <span>«scales: Scale Functions for Visualization»</span>. <a href="https://CRAN.R-project.org/package=scales">https://CRAN.R-project.org/package=scales</a>.
-</div>
-<div id="ref-ggtext" class="csl-entry" role="listitem">
-Wilke, Claus O., y Brenton M. Wiernik. 2022. <span>«ggtext: Improved Text Rendering Support for ’ggplot2’»</span>. <a href="https://CRAN.R-project.org/package=ggtext">https://CRAN.R-project.org/package=ggtext</a>.
-</div>
-<div id="ref-ggsci" class="csl-entry" role="listitem">
-Xiao, Nan. 2024. <span>«ggsci: Scientific Journal and Sci-Fi Themed Color Palettes for ’ggplot2’»</span>. <a href="https://CRAN.R-project.org/package=ggsci">https://CRAN.R-project.org/package=ggsci</a>.
-</div>
-<div id="ref-gghighlight" class="csl-entry" role="listitem">
-Yutani, Hiroaki. 2023. <span>«gghighlight: Highlight Lines and Points in ’ggplot2’»</span>. <a href="https://CRAN.R-project.org/package=gghighlight">https://CRAN.R-project.org/package=gghighlight</a>.
-</div>
-</div></section></div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
