@@ -48,6 +48,8 @@ website:
             file: references.qmd
       - text: "La Datáfora Interactiva"
         file: dataforaint.qmd
+      - text: "Proyectos"
+        file: main_proyectos.qmd
       
 
 format:
